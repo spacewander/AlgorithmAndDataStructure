@@ -13,6 +13,9 @@ Notice 2: should not directly call a function in standard library to implement i
 For example, `set_difference(set1, set2)` is equal to `set1 - set2` in ruby, 
 but according to this rule, I can't use `set1 - set2` to implement `set_difference`.
 
+Notice 3: Since some languages don't have generics or just have a weak support to generics, 
+those languages can just make sure the algorithms work with int type.
+
 The list of these algorithms:
 
 ### Non-modifying sequence operations
