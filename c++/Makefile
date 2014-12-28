@@ -3,7 +3,7 @@ SRC = $(wildcard *.cpp)
 LIBGTEST = libgtest.a
 
 test:
-	@g++ -isystem . -pthread $(SRC) $(LIBGTEST)
+	@$(CC) -isystem . -pthread  -std=c++11 $(SRC) $(LIBGTEST)
 	@./a.out
 
 .PHONY: test
