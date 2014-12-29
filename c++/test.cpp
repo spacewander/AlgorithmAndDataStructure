@@ -2,7 +2,7 @@
 #include <vector>
 #include <functional>
 
-#include "gtest.h"
+#include "../lib/gtest.h"
 #include "myalgorithm.hpp"
 
 using namespace std;

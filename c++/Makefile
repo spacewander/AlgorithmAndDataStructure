@@ -1,9 +1,9 @@
 CC = clang++
 SRC = $(wildcard *.cpp)
-LIBGTEST = libgtest.a
+LIBGTEST = ../lib/libgtest.a
 
 test:
-	@$(CC) -isystem . -pthread  -std=c++11 $(SRC) $(LIBGTEST)
+	@$(CC) -isystem ../lib -pthread  -std=c++11 $(SRC) $(LIBGTEST)
 	@./a.out
 
 .PHONY: test
