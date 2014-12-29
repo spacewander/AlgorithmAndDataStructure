@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <vector>
 #include <functional>
+#include <iterator>
 
 #include "../lib/gtest.h"
 #include "myalgorithm.hpp"
@@ -10,7 +11,7 @@ using namespace std;
 class NonModifyingSequence : public ::testing::Test 
 {
 protected:
-  vector<int> v{10, 5, 4, 3, 20, 190};
+    vector<int> v{10, 5, 4, 3, 20, 190};
 };
 
 TEST(Algorithm, testifWorks)
@@ -135,4 +136,65 @@ TEST_F(NonModifyingSequence, searchs)
             *(v.end() - 1), equal_to<int>()) != v.end();
     ASSERT_TRUE(has_2);
     ASSERT_FALSE(has_3);
+}
+
+class ModifyingSequence : public ::testing::Test
+{
+protected:
+    virtual void SetUp()
+    {
+        v2.resize(v.size());
+    }
+    vector<int> v{10, 5, 4, 3, 20, 190};
+    vector<int> v2;
+};
+
+TEST_F(ModifyingSequence, copys)
+{
+    my::copy(v.begin(), v.end(), v2.begin());
+    ASSERT_EQ(v[0], v2[0]);
+
+    v2.clear();
+    my::copy_if(v.begin(), v.end(), back_inserter(v2), 
+            [](int x){ return x > 5; });
+    ASSERT_EQ(3, v2.size());
+    ASSERT_EQ(v[0], v2[0]);
+
+    v2.clear();
+    my::copy_n(v.begin(), 2, back_inserter(v2));
+    ASSERT_EQ(2, v2.size());
+    ASSERT_EQ(v[1], v2[1]);
+    ASSERT_EQ(v[0], v2[0]);
+
+    v2.resize(v.size());
+    my::copy_backward(v.begin(), v.end(), v2.end());
+    ASSERT_EQ(v, v2);
+}
+
+TEST_F(ModifyingSequence, moves)
+{
+    my::move(v.begin(), v.end(), v2.begin());
+    ASSERT_EQ(v[0], v2[0]);
+
+    --v2[0];
+    my::move_backward(v.begin(), v.end(), v2.end());
+    ASSERT_EQ(v, v2);
+}
+
+TEST_F(ModifyingSequence, fills)
+{
+    my::fill(v2.begin(), v2.end(), 1);
+    ASSERT_EQ(1, v2[0]);
+    ASSERT_EQ(1, v2.at(v2.size() - 1));
+
+    my::fill_n(v2.begin(), 2, 2);
+    ASSERT_EQ(2, v2[0]);
+    ASSERT_EQ(2, v2[1]);
+}
+
+TEST_F(ModifyingSequence, transform)
+{
+    my::transform(v.begin(), v.end(), v.begin(), [](int &x){ return ++x; });
+    vector<int> vectorplusOne{11, 6, 5, 4, 21, 191};
+    ASSERT_EQ(vectorplusOne, v);
 }

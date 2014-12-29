@@ -214,5 +214,93 @@ ForwordIt search_n(ForwordIt start, ForwordIt end, const int count,
 
 }
 
+// Modifying sequence
+template<typename InputIt, typename OutputIt>
+OutputIt copy(InputIt start, InputIt end, OutputIt outStart)
+{
+    while (start != end) {
+        *outStart++ = *start++;
+    }
+    return outStart;
+}
+
+template<typename InputIt, typename OutputIt, typename UnaryPredicate>
+OutputIt copy_if(InputIt start, InputIt end, OutputIt outStart, 
+        UnaryPredicate f)
+{
+    while (start != end) {
+        if (f(*start)) {
+            *outStart++ = *start;
+        }
+        start++;
+    }
+    return outStart;
+}
+
+template<typename InputIt, typename OutputIt>
+OutputIt copy_n(InputIt start, const int count, OutputIt result)
+{
+    for (int i = 0; i < count; ++i) {
+        *result++ = *start++;
+    }
+    return result;
+}
+
+template<typename BidirIt1, typename BidirIt2>
+BidirIt2 copy_backward(BidirIt1 start, BidirIt1 end, BidirIt2 outEnd)
+{
+    while (start != end) {
+        *(--outEnd) = *(--end);
+    }
+    return outEnd;
+}
+
+// std::move is defined in <utility> and isn't an algorithm, 
+// so there is no cheat.
+template<typename InputIt, typename OutputIt>
+OutputIt move(InputIt start, InputIt end, OutputIt outStart)
+{
+    while (start != end) {
+        *outStart++ = std::move(*start++);
+    }
+    return outStart;
+}
+
+template<typename BidirIt1, typename BidirIt2>
+BidirIt2 move_backward(BidirIt1 start, BidirIt1 end, BidirIt2 outEnd)
+{
+    while (start != end) {
+        *(--outEnd) = std::move(*(--end));
+    }
+    return outEnd;
+}
+
+template<typename ForwordIt, typename T>
+void fill(ForwordIt start, ForwordIt end, const T &value)
+{
+    while (start != end) {
+        *start++ = value;
+    }
+}
+
+template<typename OutputIt, typename T>
+void fill_n(OutputIt start, const int count, const T &value)
+{
+    for (int i = 0; i < count; ++i) {
+        *start++ = value;
+    }
+}
+    
+template<typename InputIt, typename OutputIt, typename UnaryOperation>
+OutputIt transform(InputIt start, InputIt end, OutputIt outStart, 
+        UnaryOperation op)
+{
+    while (start != end) {
+        *outStart++ = op(*start++);
+    }
+    return outStart;
+}
+
+
 }
 #endif /* MYALGORITHM_H */
