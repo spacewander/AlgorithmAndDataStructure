@@ -222,7 +222,6 @@ copies and rotate a range of elements
 
 ---
 
-**random_shuffle**
 **shuffle**
    
  

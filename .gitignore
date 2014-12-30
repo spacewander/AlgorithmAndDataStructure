@@ -27,3 +27,7 @@
 *.out
 *.app
 
+# maybe you need to install gtest to run the test for C/C++
+./lib/gtest/*
+./lib/gtest.h
+./lib/libgtest.a

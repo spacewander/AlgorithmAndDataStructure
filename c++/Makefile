@@ -1,9 +1,15 @@
 CC = clang++
-SRC = $(wildcard *.cpp)
 LIBGTEST = ../lib/libgtest.a
+GTESTHEADERS = ../lib
+
+# `make TEST=nonModifyingSequence` will run nonModifyingSequenceTest, and so on.
+ifdef TEST
+	SRC = $(TEST)Test.cpp main.cpp
+else
+	SRC = $(wildcard *.cpp)
+endif
 
 test:
-	@$(CC) -isystem ../lib -pthread  -std=c++11 $(SRC) $(LIBGTEST)
+	@$(CC) -isystem $(GTESTHEADERS) -pthread  -std=c++11 $(SRC) $(LIBGTEST)
 	@./a.out
 
-.PHONY: test
