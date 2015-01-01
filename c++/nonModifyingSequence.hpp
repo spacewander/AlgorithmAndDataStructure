@@ -142,7 +142,7 @@ ForwordIt find_first_of(InputIt start, InputIt end,
 {
     for (; start != end; ++start) {
         for (ForwordIt it = subStart; it != subEnd; ++it) {
-            if (f(*it, *start)) {
+            if (f(*start, *it)) {
                 return start;
             }
         }
