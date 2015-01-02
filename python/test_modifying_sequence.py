@@ -13,6 +13,10 @@ def set_x():
 def dict_x():
     return dict([(1, '1'), (2, '2')])
 
+@pytest.fixture
+def duplicate():
+    return [1, 2, 2, 2, 4]
+
 def test_copy(ary):
     assert [i for i in copy(ary, 0, 3)] == ary[:3]
 
@@ -89,3 +93,42 @@ def test_replace_copy(ary, set_x):
 def test_replace_copy_if(ary):
     a = replace_copy_if(ary, lambda x: x < 3, 1)
     assert a == [1, 1, 3, 4, 5]
+
+def test_swap(ary):
+    another_ary = [5, 4, 3, 2, 1]
+    after_swap_ary = another_ary[:]
+    after_swap_another_ary = ary[:]
+    ary, another_ary = swap(ary, another_ary)
+    assert ary == after_swap_ary
+    assert another_ary == after_swap_another_ary
+
+def test_swap_range(ary):
+    another_ary = [5, 4, 3]
+    swap_range(ary, another_ary, 0, 3)
+    assert ary == [5, 4, 3, 4, 5]
+    assert another_ary == [1, 2, 3]
+
+def test_reverse(ary):
+    reverse(ary)
+    assert ary == [5, 4, 3, 2, 1]
+
+def test_reverse_copy():
+    tp = (1, 2, 3)
+    tp = tuple(reverse_copy(tp))
+    assert tp == (3, 2, 1)
+
+def test_rotate(ary):
+    rotate(ary, 3)
+    assert ary == [4, 5, 1, 2, 3]
+
+def test_rotate_copy(ary):
+    assert rotate_copy(ary, 3) == [4, 5, 1, 2, 3]
+
+def test_shuffle(ary):
+    shuffle(ary)
+
+def test_unique(duplicate):
+    assert [i for i in unique(duplicate)] == [1, 2, 4]
+
+def test_unique_copy(duplicate):
+    assert unique_copy(duplicate) == [1, 2, 4]
