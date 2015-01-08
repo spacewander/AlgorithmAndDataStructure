@@ -13,7 +13,7 @@ else
 endif
 
 OBJS := $(SRC:.cpp=.o)
-DEPS := $(DEPS:.cpp=.d)
+DEPS := $(SRC:.cpp=.d)
 
 test: $(TARGETS)
 	@./$(TARGETS)
@@ -22,7 +22,7 @@ $(TARGETS): $(OBJS)
 	@$(CC) $(OBJS) $(LDLIBS) -o $(TARGETS)
 
 %.o : %.cpp
-	@$(CC) -c $(CCFLAGS) $*.cpp -o $*.o
+	$(CC) -c $(CCFLAGS) $< -o $@
 
 -include $(DEPS)
 
