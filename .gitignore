@@ -36,3 +36,7 @@
 # for python
 */*.pyc
 python/__pycache__/*
+
+# for javascript
+javascript/node_modules
+javascript/coverage
