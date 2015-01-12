@@ -75,4 +75,57 @@ describe('Non-modifying sequence algorithms', function(){
     var ary2 = [1, 3, 4];
     algos.mismatch(ary(), ary2).should.be.equal(1);
   });
+
+  it('equal', function(){
+    algos.equal(ary(), [1, 2, 3, 4, 5]).should.be.equal(true);
+  });
+
+  it('find', function(){
+    algos.find(map(), 1).should.be.equal('a');
+  });
+
+  it('find_if', function(){
+    algos.find_if(map(), function(e){
+      return e === 1;
+    }).should.be.equal('a');
+  });
+
+  it('find_if_not', function(){
+    algos.find_if_not(map(), function(e){
+      return e !== 1;
+    }).should.be.equal('a');
+  });
+
+  it('find_end', function(){
+    var ary = [1, 2, 1, 2, 3];
+    var sub = [1, 2];
+    var nonExistedSubsequence = [2, 4];
+    algos.find_end(ary, [1]).should.be.equal(2);
+    algos.find_end(ary, [2]).should.be.equal(3);
+    algos.find_end(ary, sub).should.be.equal(2);
+    algos.find_end(ary, nonExistedSubsequence).should.be.equal(-1);
+  });
+
+  it('find_first_of', function(){
+    algos.find_first_of(ary(), [10, 2, 3]).should.be.equal(1);
+    algos.find_first_of(ary(), [10, 20]).should.be.equal(-1);
+  });
+
+  it('search', function(){
+    algos.search(ary(), [3, 4], function(a, b){
+      return a === b;
+    }).should.be.equal(2);
+    algos.search(ary(), [3, 4, 2], function(a, b){
+      return a === b;
+    }).should.be.equal(-1);
+  });
+
+  it('search_n', function(){
+    algos.search_n(ary(), 2, 3, function(a, b){
+      return a === b;
+    }).should.be.equal(-1);
+    algos.search_n(ary(), 1, 3, function(a, b){
+      return a === b;
+    }).should.be.equal(2);
+  });
 });
