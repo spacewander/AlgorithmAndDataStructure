@@ -1,0 +1,14 @@
+{
+  "name": "AlgorithmAndDataStructure",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/spacewander/AlgorithmAndDataStructure.git"
+  },
+  "license": "WTFL",
+  "devDependencies": {
+    "chai": "~1.9.2"
+  }
+}
