@@ -1,20 +1,15 @@
 var all_of = function(ary, cb) {
-  var ok = true;
-  if (Array.isArray(ary))
   for (var i = 0; i < ary.length; i++) {
-    ok = cb(ary[i]);
-    if (!ok) break;
+    if (!cb(ary[i])) return false;
   }
-  return ok;
+  return true;
 };
 
 var any_of = function(ary, cb) {
-  var ok = true;
   for (var i = 0; i < ary.length; i++) {
-    ok = cb(ary[i]);
-    if (ok) break;
+    if (cb(ary[i])) return true;
   }
-  return ok;
+  return false;
 };
 
 var none_of = function(ary, cb) {
