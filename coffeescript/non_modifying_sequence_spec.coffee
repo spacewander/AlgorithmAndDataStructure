@@ -56,3 +56,53 @@ describe 'Non-modifying Sequence', ->
         e != 1
       .should.be.equal 1
 
+  it 'mismatch', ->
+    ary2 = [1, 3, 4]
+    Algos.mismatch(Ary(), ary2).should.be.equal 1
+
+  it 'equal', ->
+    Algos.equal(Ary(), [1, 2, 3, 4, 5]).should.be.equal true
+
+  it 'find', ->
+    Algos.find(Map(), 1).should.be.equal 'a'
+
+  it 'find_if', ->
+    Algos.find_if Map(), (e) ->
+      e == 1
+    .should.be.equal 'a'
+
+  it 'find_if_not', ->
+    Algos.find_if_not Map(), (e) ->
+      e != 1
+    .should.be.equal 'a'
+
+  it 'find_end', ->
+    ary = [1, 2, 1, 2, 3]
+    sub = [1, 2]
+    nonExistedSubsequence = [2, 4]
+    Algos.find_end(ary, [1]).should.be.equal 2
+    Algos.find_end(ary, [2]).should.be.equal 3
+    Algos.find_end(ary, sub).should.be.equal 2
+    Algos.find_end(ary, nonExistedSubsequence).should.be.equal -1
+
+  it 'find_first_of', ->
+    Algos.find_first_of(Ary(), [10, 2, 3]).should.be.equal 1
+    Algos.find_first_of(Ary(), [10, 20]).should.be.equal -1
+
+  it 'search', ->
+    Algos.search Ary(), [3, 4], (a, b) ->
+      a == b
+    .should.be.equal 2
+    Algos.search Ary(), [3, 4, 2], (a, b) ->
+      a == b
+    .should.be.equal -1
+
+  it 'search_n', ->
+    Algos.search_n Ary(), 2, 3, (a, b) ->
+      a == b
+    .should.be.equal -1
+    Algos.search_n Ary(), 1, 3, (a, b) ->
+      a == b
+    .should.be.equal 2
+
+

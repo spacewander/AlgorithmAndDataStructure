@@ -121,12 +121,8 @@ var search = function(ary, sub, cb) {
         break;
       }
     }
-    if (!mismatch) {
-      return start;
-    }
-    else {
-      start = Array.prototype.indexOf.call(ary, sub[0], start + 1);
-    }
+    if (!mismatch) return start;
+    start = Array.prototype.indexOf.call(ary, sub[0], start + 1);
   }
   return -1;
 };
