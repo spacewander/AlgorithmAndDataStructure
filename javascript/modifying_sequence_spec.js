@@ -90,6 +90,12 @@ describe('Modifying sequence algorithms', function(){
     JSON.stringify(ary).should.be.equal(JSON.stringify([3, 3, null]));
   });
 
+  it('remove', function(){
+    var ary = [1, 2, 3];
+    Algos.remove(ary, 3);
+    JSON.stringify(ary).should.be.equal(JSON.stringify([1, 2]));
+  });
+
   it('remove_if', function(){
     var ary = [1, 2, 3];
     Algos.remove_if(ary, function(e){
@@ -101,5 +107,62 @@ describe('Modifying sequence algorithms', function(){
       return e != 1;
     });
     JSON.stringify(hash).should.be.equal(JSON.stringify({'a': 1}));
+  });
+
+  it('remove_copy', function(){
+    var ary = [1, 2, 3];
+    JSON.stringify(Algos.remove_copy(ary, 3))
+      .should.be.equal(JSON.stringify([3]));
+  });
+
+  it('remove_copy_if', function(){
+    var ary = [1, 2, 3];
+    ary = Algos.remove_copy_if(ary, function(e){
+      return e < 2;
+    });
+    JSON.stringify(ary).should.be.equal(JSON.stringify([1]));
+    var hash = {'a': 1, 'b': 2};
+    hash = Algos.remove_copy_if(hash, function(e){
+      return e != 1;
+    });
+    JSON.stringify(hash).should.be.equal(JSON.stringify({'b': 2}));
+  });
+
+  it('replace', function(){
+    var ary = [1, 2, 3, 3];
+    Algos.replace(ary, 3, 2);
+    JSON.stringify(ary).should.be.equal(JSON.stringify([1, 2, 2, 2]));
+  });
+
+  it('replace_if', function(){
+    var ary = [1, 2, 3];
+    Algos.replace_if(ary, function(e){
+      return e < 2;
+    }, 2);
+    JSON.stringify(ary).should.be.equal(JSON.stringify([2, 2, 3]));
+    var hash = {'a': 1, 'b': 2};
+    Algos.replace_if(hash, function(e){
+      return e != 2;
+    }, 2);
+    JSON.stringify(hash).should.be.equal(JSON.stringify({'a': 2, 'b': 2}));
+  });
+
+  it('replace_copy', function(){
+    var ary = [1, 2, 3, 3];
+    JSON.stringify(Algos.replace_copy(ary, 3, 2))
+      .should.be.equal(JSON.stringify([1, 2, 2, 2]));
+  });
+
+  it('replace_copy_if', function(){
+    var ary = [1, 2, 3];
+    ary = Algos.replace_copy_if(ary, function(e){
+      return e < 2;
+    }, 2);
+    JSON.stringify(ary).should.be.equal(JSON.stringify([2, 2, 3]));
+    var hash = {'a': 1, 'b': 2};
+    hash = Algos.replace_copy_if(hash, function(e){
+      return e != 2;
+    }, 2);
+    JSON.stringify(hash).should.be.equal(JSON.stringify({'a': 2, 'b': 2}));
   });
 });

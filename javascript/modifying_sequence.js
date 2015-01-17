@@ -88,6 +88,86 @@ var remove_if = function(coll, cb) {
   }
 };
 
+var remove = function(ary, value) {
+  remove_if(ary, function(e){
+    return e === value;
+  });
+};
+
+var remove_copy_if = function(coll, cb) {
+  var i;
+  var copy = coll.constructor();
+  if (coll.hasOwnProperty('length')) {
+    var j = 0;
+    for (i = 0; i < coll.length; i++) {
+      if (cb(coll[i]))
+        copy[j++] = coll[i];
+    }
+    copy.length = j;
+  }
+  else {
+    for (i in coll) {
+      if (coll.hasOwnProperty(i) && cb(coll[i]))
+        copy[i] = coll[i];
+    }
+  }
+  return copy;
+};
+
+var remove_copy = function(ary, value) {
+  return remove_copy_if(ary, function(e){
+    return e === value;
+  });
+};
+
+var replace_if = function(coll, cb, after) {
+  if (coll.hasOwnProperty('length')) {
+    for (var i = 0; i < coll.length; i++) {
+      if (cb(coll[i]))
+        coll[i] = after;
+    }
+  }
+  else {
+    for (var j in coll) {
+      if (coll.hasOwnProperty(j) && cb(coll[j]))
+        coll[j] = after;
+    }
+  }
+};
+
+var replace = function(coll, before, after) {
+  replace_if(coll, function(e){
+    return e === before;
+  }, after);
+};
+
+var replace_copy_if = function(coll, cb, after) {
+  var copy = coll.constructor();
+  if (coll.hasOwnProperty('length')) {
+    for (var i = 0; i < coll.length; i++) {
+      if (cb(coll[i]))
+        copy[i] = after;
+      else
+        copy[i] = coll[i];
+    }
+  }
+  else {
+    for (var j in coll) {
+      if (coll.hasOwnProperty(j) && cb(coll[j]))
+        copy[j] = after;
+      else
+        copy[j] = coll[j];
+    }
+  }
+  return copy;
+};
+
+var replace_copy = function(coll, before, after) {
+  return replace_copy_if(coll, function(e){
+    return e === before;
+  }, after);
+};
+
 module.exports = {
   copy: copy,
   copy_if: copy_if,
@@ -100,5 +180,12 @@ module.exports = {
   transform: transform,
   generate: generate,
   generate_n: generate_n,
-  remove_if: remove_if
+  remove: remove,
+  remove_if: remove_if,
+  remove_copy: remove_copy,
+  remove_copy_if: remove_copy_if,
+  replace: replace,
+  replace_if: replace_if,
+  replace_copy: replace_copy,
+  replace_copy_if: replace_copy_if
 };
