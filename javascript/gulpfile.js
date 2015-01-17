@@ -12,7 +12,9 @@ gulp.task('test', function (cb) {
     .pipe(plugins.istanbul()) // Covering files
     .on('finish', function () {
       gulp.src(paths.tests)
-      .pipe(plugins.mocha());
+        .pipe(plugins.mocha())
+        // Creating the reports after tests runned
+        .pipe(plugins.istanbul.writeReports()); 
     });
 });
 
