@@ -185,6 +185,21 @@ describe('Modifying sequence algorithms', function(){
       should.be.equal(Ary().reverse().toString());
   });
 
+  it('shuffle', function(){
+    Algos.shuffle(Ary());
+  });
+
+  it('rotate', function(){
+    var ary = [1, 2, 3, 4];
+    Algos.rotate(ary, 2);
+    ary.toString().should.be.equal([3, 4, 1, 2].toString());
+  });
+
+  it('rotate_copy', function(){
+    Algos.rotate_copy(Ary(), 2).toString()
+      .should.be.equal([3, 4, 5, 1, 2].toString());
+  });
+
   it('unique', function(){
     var duplicate = [1, 1, 2, 3, 3];
     Algos.unique(duplicate);

@@ -200,6 +200,30 @@ var reverse_copy = function(ary) {
   return res;
 };
 
+var shuffle = function(ary) {
+  var length = ary.length;
+  for (var i = 0; i < length; i++) {
+    random = Math.floor(Math.random() * length);
+    var tmp = ary[i];
+    ary[i] = ary[random];
+    ary[random] = ary[i];
+  }
+};
+
+var rotate = function(ary, pivot) {
+  Array.prototype.push.apply(ary, Array.prototype.splice.call(ary, 0, pivot));
+};
+
+var rotate_copy = function(ary, pivot) {
+  var res = new Array(ary.length);
+  var i, j = 0;
+  for (i = pivot; i < ary.length; i++, j++)
+    res[j] = ary[i];
+  for (i = 0; i < pivot; i++, j++)
+    res[j] = ary[i];
+  return res;
+};
+
 var unique = function(ary) {
   var copy = ary.constructor();
   var i, j = 1;
@@ -252,6 +276,9 @@ module.exports = {
   swap_range: swap_range,
   reverse: reverse,
   reverse_copy: reverse_copy,
+  shuffle: shuffle,
+  rotate: rotate,
+  rotate_copy: rotate_copy,
   unique: unique,
   unique_copy: unique_copy
 };
