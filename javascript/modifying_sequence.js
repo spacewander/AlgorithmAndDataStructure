@@ -103,7 +103,6 @@ var remove_copy_if = function(coll, cb) {
       if (cb(coll[i]))
         copy[j++] = coll[i];
     }
-    copy.length = j;
   }
   else {
     for (i in coll) {
@@ -168,6 +167,68 @@ var replace_copy = function(coll, before, after) {
   }, after);
 };
 
+// can we implement swap function in javascript? SEE ALSO:
+// http://stackoverflow.com/questions/18817810/is-it-possible-to-write-a-numeric-swap-function-in-javascript
+
+var swap_range = function(a, b, start, end) {
+  if (start < 0 || end > a.length || end > b.length)
+    return;
+  var tmp;
+  for (var i = start; i < end; i++) {
+    tmp = a[i];
+    a[i] = b[i];
+    b[i] = tmp;
+  }
+};
+
+var reverse = function(ary) {
+  var middle = ary.length / 2;
+  for (var i = 0; i < middle; i++) {
+    var tmp = ary[ary.length - i - 1];
+    ary[ary.length - i - 1] = ary[i];
+    ary[i] = tmp;
+  }
+};
+
+var reverse_copy = function(ary) {
+  var length = ary.length;
+  if (length <= 1) return ary;
+  var res = new Array(length);
+  for (var i = length - 1; i >= 0; i--) {
+    res[length - i - 1] = ary[i];
+  }
+  return res;
+};
+
+var unique = function(ary) {
+  var copy = ary.constructor();
+  var i, j = 1;
+  var preValue = copy[0] = ary[0];
+  for (i = 1; i < ary.length; i++) {
+    if (ary[i] != preValue) {
+      copy[j++] = ary[i];
+      preValue = ary[i];
+    }
+  }
+  while (i-- > j)
+    Array.prototype.shift.call(ary);
+  for (i = 0; i < j; i++)
+    ary[i] = copy[i];
+};
+
+var unique_copy = function(ary) {
+  var copy = ary.constructor();
+  var i, j = 1;
+  var preValue = copy[0] = ary[0];
+  for (i = 1; i < ary.length; i++) {
+    if (ary[i] != preValue) {
+      copy[j++] = ary[i];
+      preValue = ary[i];
+    }
+  }
+  return copy;
+};
+
 module.exports = {
   copy: copy,
   copy_if: copy_if,
@@ -187,5 +248,10 @@ module.exports = {
   replace: replace,
   replace_if: replace_if,
   replace_copy: replace_copy,
-  replace_copy_if: replace_copy_if
+  replace_copy_if: replace_copy_if,
+  swap_range: swap_range,
+  reverse: reverse,
+  reverse_copy: reverse_copy,
+  unique: unique,
+  unique_copy: unique_copy
 };

@@ -165,4 +165,35 @@ describe('Modifying sequence algorithms', function(){
     }, 2);
     JSON.stringify(hash).should.be.equal(JSON.stringify({'a': 2, 'b': 2}));
   });
+
+  it('swap_range', function(){
+    var a = [1, 2, 3, 4];
+    var b = [4, 3, 2, 1];
+    Algos.swap_range(a, b, 1, 3);
+    JSON.stringify(a).should.be.equal(JSON.stringify([1, 3, 2, 4]));
+    JSON.stringify(b).should.be.equal(JSON.stringify([4, 2, 3, 1]));
+  });
+
+  it('reverse', function(){
+    var ary = [1, 2, 3];
+    Algos.reverse(ary);
+    ary.toString().should.be.equal([3, 2, 1].toString());
+  });
+
+  it('reverse_copy', function(){
+    Algos.reverse_copy(Ary()).toString().
+      should.be.equal(Ary().reverse().toString());
+  });
+
+  it('unique', function(){
+    var duplicate = [1, 1, 2, 3, 3];
+    Algos.unique(duplicate);
+    JSON.stringify(duplicate).should.be.equal(JSON.stringify([1, 2, 3]));
+  });
+
+  it('unique_copy', function(){
+    var duplicate = [1, 1, 2, 3, 3]; 
+    JSON.stringify(Algos.unique_copy(duplicate))
+      .should.be.equal(JSON.stringify([1, 2, 3]));
+  });
 });
