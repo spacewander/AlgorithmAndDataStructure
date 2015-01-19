@@ -1,46 +1,4 @@
-### C++ ###
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-*.d
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-
 # maybe you need to install gtest to run the test for C/C++
-./lib/gtest/*
-./lib/gtest.h
-./lib/libgtest.a
-
-# for python
-*/*.pyc
-python/__pycache__/*
-
-# for javascript
-javascript/node_modules
-javascript/coverage
-
-# for coffeescript
-coffeescript/node_modules
-coffeescript/*.js
+lib/gtest/*
+lib/gtest.h
+lib/libgtest.a
