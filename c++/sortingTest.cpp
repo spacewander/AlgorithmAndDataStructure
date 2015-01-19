@@ -53,3 +53,36 @@ TEST_F(Sorting, partial_sort)
     EXPECT_EQ(3, v[0]);
     EXPECT_EQ(4, v[1]);
 }
+
+TEST_F(Sorting, partial_sort_copy)
+{
+    // case: outEnd - outStart >= end - start
+    vector<int> v2(2);
+    my::partial_sort_copy(v.begin(), v.begin() + 2, 
+            v2.begin(), v2.end(), less<int>());
+    EXPECT_EQ(5, v2[0]);
+    EXPECT_EQ(20, v2[1]);
+
+    // case: end - start >= outEnd - outStart
+    vector<int> v3(2);
+    my::partial_sort_copy(v.begin(), v.begin() + 3,
+            v3.begin(), v3.end(), less<int>());
+    EXPECT_EQ(4, v3[0]);
+    EXPECT_EQ(5, v3[1]);
+}
+
+TEST_F(Sorting, nth_element)
+{
+    // case : nth - start < (end - start) / 2
+    my::nth_element(v.begin(), std::next(v.begin(), 2), v.end(), 
+            greater<int>());
+    EXPECT_EQ(190, v[0]);
+    EXPECT_EQ(20, v[1]);
+
+
+    // case : nth - start >= (end - start) / 2
+    my::nth_element(v.begin(), std::next(v.begin(), 3), v.end(), 
+            greater<int>());
+    EXPECT_EQ(190, v[0]);
+    EXPECT_EQ(20, v[1]);
+}

@@ -71,6 +71,45 @@ void partial_sort(RandomIt start, RandomIt border, RandomIt end, Compare cp)
     std::sort_heap(start, border, cp);
 }
 
+template<typename InputIt, typename RandomIt, typename Compare>
+void partial_sort_copy(InputIt start, InputIt end,
+        RandomIt outStart, RandomIt outEnd, Compare cp)
+{
+    size_t outRange = std::distance(outStart, outEnd);
+    size_t inRange = std::distance(start, end);
+    if (inRange <= outRange) {
+        std::copy(start, end, outStart);
+        std::partial_sort(outStart, outStart + inRange, outEnd, cp);
+    }
+    else {
+        using T = typename std::iterator_traits<RandomIt>::value_type;
+        T* space = new T[inRange];
+        std::copy(start, end, space);
+        std::partial_sort(space, space + inRange, space + outRange, cp);
+        std::copy(space, space + outRange, outStart);
+        delete[] space;
+    }
+}
+
+// FIXME: this is a bad implementation!
+template<typename RandomIt, typename Compare>
+void nth_element(RandomIt start, RandomIt nth, RandomIt end, Compare cp)
+{
+    if (nth == end)
+        return ;
+    if (nth - start < (end - start) / 2 ) {
+        for (RandomIt i = start; i <= nth; i++) {
+            std::iter_swap(i, std::min_element(i, end, cp));
+        }
+    }   
+    else {
+        for (RandomIt i = end - 1; i >= nth; i--) {
+            std::iter_swap(i, std::max_element(start, i + 1, cp));
+        }
+    }
+
+}
+
 }
 
 #endif /* SORTING_H */
