@@ -2,7 +2,6 @@
 #define SORTING_H
 
 #include <algorithm>
-#include <stdlib.h>
 
 namespace my {
 
@@ -107,7 +106,6 @@ void nth_element(RandomIt start, RandomIt nth, RandomIt end, Compare cp)
             std::iter_swap(i, std::max_element(start, i + 1, cp));
         }
     }
-
 }
 
 }
