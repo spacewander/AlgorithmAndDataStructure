@@ -19,11 +19,10 @@ var copy_n = function(dest, n, value) {
 };
 
 var copy_backward = function(src, dest) {
-  var j = 0;
-  for (var i = src.length - dest.length; i >= 0 && i < src.length; i++, j++) {
-    src[i] = dest[j];
-  }
-  return src.length - dest.length >= 0 ? src.length - dest.length : -1;
+  var gap = src.length - dest.length;
+  for (var i = 0; gap >= 0 && i < dest.length; i++)
+    src[i + gap] = dest[i];
+  return gap < 0 ? -1 : gap;
 };
 
 var move = function(src, dest) {
@@ -33,11 +32,10 @@ var move = function(src, dest) {
 };
 
 var move_backward = function(src, dest) {
-  var j = 0;
-  for (var i = src.length - dest.length; i >= 0 && i < src.length; i++, j++) {
-    src[i] = dest[j];
-  }
-  return src.length - dest.length >= 0 ? src.length - dest.length : -1;
+  var gap = src.length - dest.length;
+  for (var i = 0; gap >= 0 && i < dest.length; i++)
+    src[i + gap] = dest[i];
+  return gap < 0 ? -1 : gap;
 };
 
 var fill = function(ary, value) {
