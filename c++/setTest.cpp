@@ -62,3 +62,20 @@ TEST_F(Set, set_intersection)
     vector<int> intersection{3, 4};
     EXPECT_EQ(intersection, c);
 }
+
+TEST_F(Set, set_symmetric_difference)
+{
+    vector<int> c(4);
+    my::set_symmetric_difference(a.begin(), a.end(), 
+            b.begin(), b.end(), c.begin());
+    vector<int> symmetric_difference{1, 2, 5, 6};
+    EXPECT_EQ(symmetric_difference, c);
+}
+
+TEST_F(Set, set_union)
+{
+    vector<int> c(6);
+    my::set_union(a.begin(), a.end(), b.begin(), b.end(), c.begin());
+    vector<int> ab{1, 2, 3, 4, 5, 6};
+    EXPECT_EQ(ab, c);
+}

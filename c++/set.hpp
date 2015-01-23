@@ -96,6 +96,47 @@ OutputIt set_intersection(InputIt1 start1, InputIt1 end1,
     }
     return outStart;
 }
+
+template<typename InputIt1, typename InputIt2, typename OutputIt>
+OutputIt set_symmetric_difference(InputIt1 start1, InputIt1 end1,
+        InputIt2 start2, InputIt2 end2, OutputIt outStart)
+{
+    while (start1 != end1) {
+        if (start2 == end2)
+            return std::copy(start1, end1, outStart);
+        if (*start1 < *start2) {
+            *outStart++ = *start1++;
+        }
+        else {
+            if (*start2 < *start1)
+                *outStart++ = *outStart;
+            else
+                ++start1;
+            ++start2;
+        }
+    }
+    return std::copy(start2, end2, outStart);
+}
+
+template<typename InputIt1, typename InputIt2, typename OutputIt>
+OutputIt set_union(InputIt1 start1, InputIt1 end1,
+        InputIt2 start2, InputIt2 end2, OutputIt outStart)
+{
+    while (start1 != end1) {
+        if (start2 == end2)
+            return std::copy(start1, end1, outStart);
+        if (*start2 < *start1) {
+            *outStart++ = *start2++;
+        }
+        else {
+            *outStart++ = *start1;
+            if (!(*start1 < *start2))
+                ++start2;
+            ++start1;
+        }
+    }
+    return std::copy(start2, end2, outStart);
+}
 }
 
 #endif /* SET_H */
