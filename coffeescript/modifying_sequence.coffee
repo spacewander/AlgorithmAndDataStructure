@@ -98,6 +98,62 @@ replace_copy = (coll, before, after) ->
     e == before
   , after
 
+swap_range = (a, b, start, end) ->
+  return if start < 0 or end > a.length or end > b.length
+  for i in [start...end]
+    [a[i], b[i]] = [b[i], a[i]]
+
+reverse = (ary) ->
+  middle = ary.length / 2
+  len = ary.length - 1
+  for i in [0...middle]
+    [ary[i], ary[len - i]] = [ary[len - i], ary[i]]
+
+reverse_copy = (ary) ->
+  len = ary.length - 1
+  return ary if len <= 0
+  res = new Array(len)
+  res[i] = ary[len - i] for i in [0..len]
+
+shuffle = (ary) ->
+  len = ary.length
+  for i in [0...len]
+    random = Math.floor(Math.random() * len)
+    [ary[i], ary[random]] = [ary[random], ary[i]]
+
+rotate = (ary, pivot) ->
+  Array.prototype.push.apply(ary, Array.prototype.splice.call(ary, 0, pivot))
+
+rotate_copy = (ary, pivot) ->
+  res = Array.prototype.concat.call ary[pivot..], ary[...pivot]
+
+unique = (ary) ->
+  copy = ary.constructor()
+  j = 1
+  preValue = copy[0] = ary[0]
+  for i in ary
+    if i isnt preValue
+      preValue = copy[j] = i
+      j++
+  len = ary.length
+  while len > j
+    Array.prototype.shift.call ary
+    len -= 1
+  for i in [0...j]
+    ary[i] = copy[i]
+  
+
+unique_copy = (ary) ->
+  copy = ary.constructor()
+  j = 1
+  preValue = copy[0] = ary[0]
+  for i in [1...ary.length]
+    if ary[i] isnt preValue
+      preValue = copy[j] = ary[i]
+      j++
+  return copy
+
+
 module.exports =
   copy: copy
   copy_if: copy_if
@@ -118,3 +174,11 @@ module.exports =
   replace_if: replace_if
   replace_copy: replace_copy
   replace_copy_if: replace_copy_if
+  swap_range: swap_range
+  reverse: reverse
+  reverse_copy: reverse_copy
+  shuffle: shuffle
+  rotate: rotate
+  rotate_copy: rotate_copy
+  unique: unique
+  unique_copy: unique_copy

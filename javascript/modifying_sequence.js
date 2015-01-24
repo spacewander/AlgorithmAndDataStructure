@@ -213,13 +213,9 @@ var rotate = function(ary, pivot) {
 };
 
 var rotate_copy = function(ary, pivot) {
-  var res = new Array(ary.length);
-  var i, j = 0;
-  for (i = pivot; i < ary.length; i++, j++)
-    res[j] = ary[i];
-  for (i = 0; i < pivot; i++, j++)
-    res[j] = ary[i];
-  return res;
+  return Array.prototype.concat.call(
+    Array.prototype.slice.call(ary, pivot, ary.length),
+    Array.prototype.slice.call(ary, 0, pivot));
 };
 
 var unique = function(ary) {
@@ -228,8 +224,8 @@ var unique = function(ary) {
   var preValue = copy[0] = ary[0];
   for (i = 1; i < ary.length; i++) {
     if (ary[i] != preValue) {
-      copy[j++] = ary[i];
-      preValue = ary[i];
+      preValue = copy[j] = ary[i];
+      j++;
     }
   }
   while (i-- > j)
@@ -244,8 +240,8 @@ var unique_copy = function(ary) {
   var preValue = copy[0] = ary[0];
   for (i = 1; i < ary.length; i++) {
     if (ary[i] != preValue) {
-      copy[j++] = ary[i];
-      preValue = ary[i];
+      preValue = copy[j] = ary[i];
+      j++;
     }
   }
   return copy;
