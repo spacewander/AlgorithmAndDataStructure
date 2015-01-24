@@ -41,6 +41,63 @@ generate = (ary, g) ->
 generate_n = (ary, n, g) ->
   ary[i] = g() for i in [0...n]
 
+remove_if = (coll, cb) ->
+  if coll.hasOwnProperty 'length'
+    copy = coll.constructor()
+    j = 0
+    copy[j++] = i for i in coll when not cb i
+    while i-- > j
+      Array.prototype.shift.call coll
+    coll[i] = copy[i] for i in [0...j]
+  else
+    delete coll[k] for k, v of coll when coll.hasOwnProperty(k) and cb(v)
+    
+remove = (ary, value) ->
+  remove_if ary, (e) ->
+    e == value
+
+remove_copy_if = (coll, cb) ->
+  copy = coll.constructor()
+  if coll.hasOwnProperty 'length'
+    j = 0
+    copy[j++] = i for i in coll when cb i
+  else
+    copy[k] = coll[k] for k, v of coll when coll.hasOwnProperty(k) and cb(v)
+  return copy
+
+remove_copy = (ary, value) ->
+  remove_copy_if ary, (e) ->
+    e == value
+    
+replace_if = (coll, cb, after) ->
+  if coll.hasOwnProperty 'length'
+    coll[i] = after for i in [0...coll.length] when cb coll[i]
+  else
+    coll[k] = after for k, v of coll when coll.hasOwnProperty(k) and cb(v)
+
+replace = (coll, before, after) ->
+  replace_if coll, (e) ->
+    e == before
+  , after
+
+replace_copy_if = (coll, cb, after) ->
+  copy = coll.constructor()
+  if coll.hasOwnProperty 'length'
+    for i in [0...coll.length]
+      copy[i] = if cb coll[i] then after else coll[i]
+  else
+    for j of coll
+      if coll.hasOwnProperty(j) and cb coll[j]
+        copy[j] = after
+      else
+        copy[j] = coll[j]
+  return copy
+
+replace_copy = (coll, before, after) ->
+  replace_copy_if coll, (e) ->
+    e == before
+  , after
+
 module.exports =
   copy: copy
   copy_if: copy_if
@@ -53,3 +110,11 @@ module.exports =
   transform: transform
   generate: generate
   generate_n: generate_n
+  remove: remove
+  remove_if: remove_if
+  remove_copy: remove_copy
+  remove_copy_if: remove_copy_if
+  replace: replace
+  replace_if: replace_if
+  replace_copy: replace_copy
+  replace_copy_if: replace_copy_if
