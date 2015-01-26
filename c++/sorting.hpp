@@ -100,7 +100,7 @@ void nth_element(RandomIt start, RandomIt nth, RandomIt end, Compare cp)
         for (RandomIt i = start; i <= nth; i++) {
             std::iter_swap(i, std::min_element(i, end, cp));
         }
-    }   
+    }
     else {
         for (RandomIt i = end - 1; i >= nth; i--) {
             std::iter_swap(i, std::max_element(start, i + 1, cp));
