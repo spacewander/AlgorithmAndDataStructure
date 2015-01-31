@@ -35,7 +35,7 @@ ForwordIt upper_bound(ForwordIt start, ForwordIt end, const T& value)
         it = start;
         step = count / 2;
         std::advance(it, step);
-        if (*it <= value) {
+        if (*it >= value) {
             start = ++it;
             count -= step + 1;
         }
