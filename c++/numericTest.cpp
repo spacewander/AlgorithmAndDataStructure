@@ -16,9 +16,9 @@ TEST_F(Numeric, itoa)
     EXPECT_EQ(res, v);
 }
 
-TEST_F(Numeric, accumalate)
+TEST_F(Numeric, accumulate)
 {
-    int res = my::accumalate(v.begin(), v.end(), 1, std::multiplies<int>());
+    int res = my::accumulate(v.begin(), v.end(), 1, std::multiplies<int>());
     EXPECT_EQ(24, res);
 }
 

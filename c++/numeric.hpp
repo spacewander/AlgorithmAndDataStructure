@@ -15,7 +15,7 @@ void itoa(ForwordIt start, ForwordIt end, T v)
 }
 
 template<typename InputIt, typename T, typename BinaryOperation>
-T accumalate(InputIt start, InputIt end, T init, BinaryOperation op)
+T accumulate(InputIt start, InputIt end, T init, BinaryOperation op)
 {
     while (start != end) {
         init = op(init, *start);
