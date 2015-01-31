@@ -16,6 +16,19 @@ TEST_F(BinarySearch, lower_bound)
 
     lower = my::lower_bound(v.begin(), v.end(), 1);
     EXPECT_EQ(1, *lower);
+
+    lower = my::lower_bound(v.begin(),v.end(), 3);
+    EXPECT_EQ(4, *lower);
+
+    lower = my::lower_bound(v.begin(), v.end(), 17);
+    EXPECT_EQ(v.end(), lower);
+
+    vector<int> v2{1, 2, 3, 4};
+    lower = my::lower_bound(v2.begin(), v2.end(), 3);
+    EXPECT_EQ(3, *lower);
+
+    lower = my::lower_bound(v2.begin(), v2.end(), 2);
+    EXPECT_EQ(2, *lower);
 }
 
 TEST_F(BinarySearch, upper_bound)
@@ -23,8 +36,21 @@ TEST_F(BinarySearch, upper_bound)
     auto upper = my::upper_bound(v.begin(), v.end(), 4);
     EXPECT_EQ(8, *upper);
 
+    upper = my::upper_bound(v.begin(), v.end(), 5);
+    EXPECT_EQ(8, *upper);
+
     upper = my::upper_bound(v.begin(), v.end(), 16);
     EXPECT_EQ(v.end(), upper);
+
+    upper = my::upper_bound(v.begin(), v.end(), 0);
+    EXPECT_EQ(1, *upper);
+
+    vector<int> v2{1, 2, 3, 4};
+    upper = my::upper_bound(v2.begin(), v2.end(), 3);
+    EXPECT_EQ(4, *upper);
+
+    upper = my::upper_bound(v2.begin(), v2.end(), 2);
+    EXPECT_EQ(3, *upper);
 }
 
 TEST_F(BinarySearch, binary_search)

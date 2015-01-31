@@ -5,6 +5,7 @@
 
 namespace my {
 
+// return iterator points to the first element which is not less than value
 template<typename ForwordIt, typename T>
 ForwordIt lower_bound(ForwordIt start, ForwordIt end, const T& value)
 {
@@ -25,6 +26,7 @@ ForwordIt lower_bound(ForwordIt start, ForwordIt end, const T& value)
     return start;
 }
 
+// return iterator points to the first element which is greater than value
 template<typename ForwordIt, typename T>
 ForwordIt upper_bound(ForwordIt start, ForwordIt end, const T& value)
 {
@@ -35,7 +37,7 @@ ForwordIt upper_bound(ForwordIt start, ForwordIt end, const T& value)
         it = start;
         step = count / 2;
         std::advance(it, step);
-        if (*it >= value) {
+        if (*it <= value) {
             start = ++it;
             count -= step + 1;
         }
