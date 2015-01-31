@@ -2,7 +2,6 @@
 #define HEAP_H
 
 #include <algorithm>
-#include <cmath>
 
 namespace my {
 
@@ -46,6 +45,7 @@ void push_heap(RandomIt start, RandomIt end)
 template<typename RandomIt>
 void make_heap(RandomIt start, RandomIt end)
 {
+    if (start == end || start + 1 == end) return;
     RandomIt cur = start + (end - start) / 2 - 1;
     while (cur >= start) {
         while (true) {
