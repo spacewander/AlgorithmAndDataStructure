@@ -10,7 +10,7 @@ var Hash = function() {
 };
 
 describe('Modifying sequence algorithms', function(){
-  
+
   it('copy', function(){
     var hash = {};
     Algos.copy(Hash(), hash);
@@ -207,7 +207,7 @@ describe('Modifying sequence algorithms', function(){
   });
 
   it('unique_copy', function(){
-    var duplicate = [1, 1, 2, 3, 3]; 
+    var duplicate = [1, 1, 2, 3, 3];
     JSON.stringify(Algos.unique_copy(duplicate))
       .should.be.equal(JSON.stringify([1, 2, 3]));
   });

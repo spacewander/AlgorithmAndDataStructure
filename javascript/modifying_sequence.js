@@ -2,7 +2,7 @@ var NonModifyingSequence = require('./non_modifying_sequence');
 
 var copy = function(src, dest) {
   for (var i in src)
-    if (dest[i] === undefined) 
+    if (dest[i] === undefined)
       dest[i] = src[i];
 };
 
@@ -27,7 +27,7 @@ var copy_backward = function(src, dest) {
 
 var move = function(src, dest) {
   for (var i in src)
-    if (dest[i] === undefined) 
+    if (dest[i] === undefined)
       dest[i] = src[i];
 };
 

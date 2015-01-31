@@ -22,7 +22,7 @@ describe('Non-modifying sequence algorithms', function(){
       return e < 3;
     }).should.be.equal(true);
   });
-  
+
   it('none_of', function(){
     algos.none_of(ary(), function(e) {
       return e < 3;
