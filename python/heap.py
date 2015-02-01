@@ -27,10 +27,11 @@ def push_heap(seq, value):
     heapify(seq)
 
 def pop_heap(seq):
-    heapify(seq[1:])
-    return seq.pop(0)
+    tmp = seq.pop(0)
+    heapify(seq)
+    return tmp
 
-# the heap made by heapq.heapify is a min-heap, so we contruct a min-heap here
+# the heap made by heapq.heapify is a min-heap, so we construct a min-heap here
 def make_heap(seq):
     heap_size = len(seq)
     for cur in range(int(heap_size / 2) - 1, -1, -1) :
