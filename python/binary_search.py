@@ -31,7 +31,7 @@ def upper_bound(seq, value):
 
 def binary_search(seq, value):
     i = lower_bound(seq, value)
-    return not (i == len(seq)) and value >= seq[i]
+    return not (i == len(seq)) and value == seq[i]
 
 def equal_range(seq, value):
     return (lower_bound(seq, value), upper_bound(seq, value))

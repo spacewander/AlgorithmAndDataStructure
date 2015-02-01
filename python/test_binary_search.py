@@ -18,6 +18,7 @@ def test_upper_bound(ary):
 
 def test_binary_search(ary):
     assert bs.binary_search(ary, 3)
+    assert not bs.binary_search(ary, 0)
     assert not bs.binary_search(ary, 5)
 
 # the return value of equal_range is index instead of value

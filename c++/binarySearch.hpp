@@ -51,7 +51,7 @@ template<typename ForwordIt, typename T, typename Compare>
 bool binary_search(ForwordIt start, ForwordIt end, const T& value, Compare cp)
 {
     start = std::lower_bound(start, end, value, cp);
-    return (!(start == end) && !(cp(value, *start)));
+    return !(start == end) && !cp(value, *start);
 }
 
 template<typename ForwordIt, typename T>
