@@ -1,6 +1,6 @@
 {
   "name": "AlgorithmAndDataStructure",
-  "description": "This repo is written to show the difference among each languages, and how elegant can an implementation be.",
+  "description": "This repo is written to show the difference among each languages",
   "scripts": {
     "test": "gulp test"
   },
@@ -13,9 +13,6 @@
     "url": "git://github.com/spacewander/AlgorithmAndDataStructure.git"
   },
   "license": "WTFL",
-  "dependencies": {
-    "lodash": "~2.4.1"
-  },
   "devDependencies": {
     "gulp": "~3.8.8",
     "gulp-load-plugins": "~0.7.0",

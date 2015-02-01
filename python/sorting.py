@@ -23,12 +23,14 @@ def sort(seq):
     quicksort(seq, 0, len(seq) - 1)
 
 def is_sorted(seq):
+    if len(seq) < 1 : return True
     for i in range(1, len(seq)) :
         if seq[i - 1] > seq[i] :
             return False
     return True
 
 def is_sorted_until(seq):
+    if len(seq) < 1 : return len(seq)
     for i in range(1, len(seq)) :
         if seq[i - 1] > seq[i] :
             return i
