@@ -147,12 +147,29 @@ public class NonModifyingSequenceTest
 		a.add(1);
 		ArrayList<Integer> ary = new ArrayList<Integer>();
 		ary.add(1);
-		assertFalse(NonModifyingSequence.findEnd(a, ary, equals).hasNext());
+		assertEquals(1, NonModifyingSequence.findEnd(a, ary, equals));
+		ary.add(1);
+		assertEquals(0, NonModifyingSequence.findEnd(a, ary, equals));
 	}
 
 	public void testAdjacentFind() throws Exception {
 		a.add(1);
 		a.add(1);
 		assertFalse(NonModifyingSequence.adjacent_find(a, equals).hasNext());
+	}
+
+	public void testSearch() throws Exception {
+		a.add(1);
+		a.add(1);
+		ArrayList<Integer> ary = new ArrayList<Integer>();
+		ary.add(1);
+		assertEquals(0, NonModifyingSequence.search(a, ary, equals));
+	}
+
+	public void testSearchN() throws Exception {
+		a.add(1);
+		a.add(1);
+		assertEquals(1, NonModifyingSequence.searchN(a, 2, Integer.valueOf(1), equals));
+		assertEquals(2, NonModifyingSequence.searchN(a, 3, Integer.valueOf(1), equals));
 	}
 }

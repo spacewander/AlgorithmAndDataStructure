@@ -7,6 +7,7 @@ import functionObjects.UnaryPredicate;
 import java.util.AbstractMap;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Please ignore some Warnings...
@@ -120,14 +121,22 @@ public class NonModifyingSequence {
 		return null;
 	}
 
-	public static Iterator findEnd(Collection a, Collection b, BinaryPredicate f) {
-		for (Iterator i = a.iterator(); i.hasNext();) {
+	// iterator in Java can't be cloned, so I just implement a List version
+	public static int findEnd(List a, List b, BinaryPredicate f) {
+		int result = -1;
+		int aSize = a.size(), bSize = b.size();
+		for (int i = 0; i < aSize; i++) {
+			int start = i;
 			for (Object j : b) {
-				if (f.call(i.next(), j))
-					return i;
+				if (start >= aSize || !f.call(a.get(start), j)) {
+					break;
+				}
+				start++;
 			}
+			if (start - i == bSize)
+				result = i;
 		}
-		return null;
+		return result;
 	}
 
 	public static Iterator adjacent_find(Collection c, BinaryPredicate f) {
@@ -142,5 +151,40 @@ public class NonModifyingSequence {
 			prev = cur;
 		}
 		return null;
+	}
+
+	// only implement the Array version of search*, so we can get rid of iterator
+	public static int search(List a, List b, BinaryPredicate f) {
+		int size = a.size();
+		if (b.size() == 0)
+			return 0;
+		for (int i = 0, j = 0; i < size; i++) {
+			if (!f.call(a.get(i), b.get(j))) {
+				j = 0;
+			}
+			else {
+				j++;
+			}
+			if (j == b.size())
+				return i;
+		}
+		return size;
+	}
+
+	public static int searchN(List a, int count, Object match, BinaryPredicate f) {
+		int size = a.size();
+		if (count <= 0)
+			return 0;
+		for (int i = 0, j = 0; i < size; i++) {
+			if (!f.call(a.get(i), match)) {
+				j = 0;
+			}
+			else {
+				j++;
+			}
+			if (j == count)
+				return i;
+		}
+		return size;
 	}
 }
