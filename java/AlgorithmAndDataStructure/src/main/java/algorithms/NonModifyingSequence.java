@@ -9,15 +9,9 @@ import java.util.Collection;
 import java.util.Iterator;
 
 /**
- * Hello world!
- *
+ * Please ignore some Warnings...
  */
 public class NonModifyingSequence {
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
-    }
-
 	public static boolean anyOf(Collection c, UnaryPredicate f) {
 		for (Object o : c) {
 			if (f.call(o))
@@ -86,5 +80,67 @@ public class NonModifyingSequence {
 		if (it1.hasNext() || it2.hasNext())
 			return false;
 		return true;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static <T extends Object> T find(Collection c, T match) {
+		for (Object o : c) {
+			if (o.equals(match))
+				return (T)o;
+		}
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static <T extends Object> T findIf(Collection c, UnaryPredicate f) {
+		for (Object o : c) {
+			if (f.call(o))
+				return (T)o;
+		}
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static <T extends Object> T findIfNot(Collection c, UnaryPredicate f) {
+		for (Object o : c) {
+			if (!f.call(o))
+				return (T)o;
+		}
+		return null;
+	}
+
+	public static Iterator findFirstOf(Collection a, Collection b, BinaryPredicate f) {
+		for (Iterator i = a.iterator(); i.hasNext();) {
+			Object o = i.next();
+			for (Object j : b) {
+				if (f.call(o, j))
+					return i;
+			}
+		}
+		return null;
+	}
+
+	public static Iterator findEnd(Collection a, Collection b, BinaryPredicate f) {
+		for (Iterator i = a.iterator(); i.hasNext();) {
+			for (Object j : b) {
+				if (f.call(i.next(), j))
+					return i;
+			}
+		}
+		return null;
+	}
+
+	public static Iterator adjacent_find(Collection c, BinaryPredicate f) {
+		if (c.size() < 2)
+			return null;
+		Iterator i = c.iterator();
+		Object prev = i.next();
+		while (i.hasNext()) {
+			Object cur = i.next();
+			if (f.call(prev, cur))
+				return i;
+			prev = cur;
+		}
+		return null;
 	}
 }
