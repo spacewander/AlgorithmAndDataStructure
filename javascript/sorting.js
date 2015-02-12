@@ -78,7 +78,7 @@ var stable_sort = function (seq, func) {
       if (func(seq[j], seq[min]))
         min = j;
     }
-    min_element =  Array.prototype.splice.call(seq, min, 1)[0];
+    min_element = Array.prototype.splice.call(seq, min, 1)[0];
     Array.prototype.splice.call(seq, i, 0, min_element);
   }
 };

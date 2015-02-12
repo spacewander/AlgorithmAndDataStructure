@@ -48,10 +48,7 @@ var includes = function (a, b) {
 };
 
 var aInb = function (a, b) {
-  if (Array.prototype.indexOf.call(b, a) == -1) {
-    return false;
-  }
-  return true;
+  return Array.prototype.indexOf.call(b, a) !== -1;
 };
 
 var union = function (a, b) {
