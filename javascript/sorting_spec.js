@@ -40,13 +40,13 @@ describe('Sorting algorithms', function(){
   });
 
   it('stable_sort', function(){
-    var pairs = [[1, 0], [2, 1], [2, 2], [2, 3], [1, 2], [3, 1]];
+    var pairs = [[1, 0], [2, 1], [2, 3], [2, 2], [1, 2], [3, 1]];
     // the standard Array.sort is not stable
     Algos.stable_sort(pairs, function(a, b) {
       return a[0] < b[0];
     });
     JSON.stringify(pairs).should.be.equal(
-      JSON.stringify([[1, 0], [1, 2], [2, 1], [2, 2], [2, 3], [3, 1]])
+      JSON.stringify([[1, 0], [1, 2], [2, 1], [2, 3], [2, 2], [3, 1]])
     );
   });
 

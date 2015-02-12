@@ -33,7 +33,7 @@ def test_partial_sort_copy(ary):
     assert partial_sort_copy(ary, 2) == [1, 2]
 
 def test_stable_sort():
-    pairs = [(1, 0), (2, 1), (2, 2), (2, 3), (1, 2), (3, 1)]
+    pairs = [(1, 0), (2, 1), (2, 3), (2, 2), (1, 2), (3, 1)]
     sorting.stable_sort(pairs, lambda x, y: x[0] < y[0])
     assert pairs == sorted(pairs, key=lambda x: x[0])
 

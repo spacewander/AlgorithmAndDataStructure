@@ -2,7 +2,7 @@ should = require('chai').should()
 Algos = require './heap'
 
 Ary = ->
-  return [2, 3, 1, 4, 5]
+  [2, 3, 1, 4, 5]
 
 describe 'Heap algorithms', ->
   

@@ -69,7 +69,18 @@ var partial_sort_copy = function (seq, border) {
 };
 
 var stable_sort = function (seq, func) {
-  Heap.sort_heap(seq, func);
+  if (seq.length < 1) return;
+  var size = seq.length - 1;
+  var min_element;
+  for (var i = 0; i < size; i++) {
+    var min = i;
+    for (var j = i + 1; j < seq.length; j++) {
+      if (func(seq[j], seq[min]))
+        min = j;
+    }
+    min_element =  Array.prototype.splice.call(seq, min, 1)[0];
+    Array.prototype.splice.call(seq, i, 0, min_element);
+  }
 };
 
 // Heap.make_heap will construct a min-heap, so we use it to
