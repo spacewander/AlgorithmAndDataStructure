@@ -5,10 +5,7 @@ import functionObjects.UnaryOp;
 import functionObjects.UnaryPredicate;
 
 import javax.swing.text.html.HTMLDocument;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 /**
  * Created by lzx on 15-2-16.
@@ -36,8 +33,8 @@ public class ModifyingSequence {
 
 	public static void copy_backward(List a, List b) {
 		int idxB = b.size() - 1;
-		ListIterator iterA = a.listIterator(a.size() - 1);
-		while (iterA.hasPrevious()) {
+		ListIterator iterA = a.listIterator(a.size());
+		while (iterA.hasPrevious() && idxB >= 0) {
 			b.set(idxB, iterA.previous());
 			idxB--;
 		}
@@ -51,18 +48,16 @@ public class ModifyingSequence {
 		copy_backward(a, b);
 	}
 
-	public static void fill(Collection a, Object value) {
-		for (Object o : a) {
-			o = value;
+	public static <T> void fill(List<T> a, T value) {
+		int len = a.size();
+		for (int i = 0; i < len; i++) {
+			a.set(i, value);
 		}
 	}
 
-	public static void fill_n(Collection a, int count, Object value) {
-		for (Object o : a) {
-			if (count > 0) {
-				o = value;
-				count--;
-			}
+	public static <T> void fill_n(List<T> a, int count, T value) {
+		for (int i = 0; i < count; i++) {
+			a.set(i, value);
 		}
 	}
 
@@ -72,18 +67,16 @@ public class ModifyingSequence {
 		}
 	}
 
-	public static void generate(Collection a, Generator g) {
-		for (Object o : a) {
-			o = g.call();
+	public static void generate(List a, Generator g) {
+		int len = a.size();
+		for (int i = 0; i < len; i++) {
+			a.set(i, g.call());
 		}
 	}
 
-	public static void generate_n(Collection a, int count, Generator g) {
-		for (Object o : a) {
-			if (count > 0) {
-				o = g.call();
-				count--;
-			}
+	public static void generate_n(List a, int count, Generator g) {
+		for (int i = 0; i < count; i++) {
+			a.set(i, g.call());
 		}
 	}
 
@@ -131,5 +124,18 @@ public class ModifyingSequence {
 				b.add(tmp);
 			}
 		}
+	}
+
+	public static <T> boolean replace(List<T> a,  T before, T after) {
+		boolean replaced = false;
+		int len = a.size();
+		for (int i = 0; i < len; i++) {
+			Object tmp = a.get(i);
+			if (before == null ? tmp == null : tmp.equals(before)) {
+				a.set(i, after);
+				replaced = true;
+			}
+		}
+		return replaced;
 	}
 }
