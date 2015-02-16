@@ -12,7 +12,8 @@ public class AppendToList implements UnaryOp {
 		return ary;
 	}
 
-	public void call(Object o) {
+	public Object call(Object o) {
 		ary.add(o);
+		return o;
 	}
 }
