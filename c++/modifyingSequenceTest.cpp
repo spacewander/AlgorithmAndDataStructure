@@ -143,6 +143,16 @@ TEST_F(ModifyingSequence, swaps)
     ASSERT_EQ(replicaV, v2);
 }
 
+TEST_F(ModifyingSequence, reverse)
+{
+    vector<int> reversed{190, 20, 3, 4, 5, 10};
+    my::reverse(v.begin(), v.end());
+    ASSERT_EQ(reversed, v);
+    reverse(reversed.begin(), reversed.end());
+    my::reverse_copy(v.begin(), v.end(), v2.begin());
+    ASSERT_EQ(reversed, v2);
+}
+
 TEST_F(ModifyingSequence, rotates)
 {
     int ary[5] = { 1, 2, 3, 4, 5 };
