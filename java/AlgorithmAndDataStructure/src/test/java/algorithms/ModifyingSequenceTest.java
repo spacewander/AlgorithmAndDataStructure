@@ -6,6 +6,7 @@ import functionObjects.Repeater;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ModifyingSequenceTest extends TestCase {
 	private ArrayList<Integer> a, b;
@@ -109,6 +110,78 @@ public class ModifyingSequenceTest extends TestCase {
 	}
 
 	public void testReplace() throws Exception {
+		ModifyingSequence.replace(a, 3, 1);
+		assertEquals(Integer.valueOf(1), a.get(2));
+	}
 
+	public void testReplaceIf() throws Exception {
+		ModifyingSequence.replaceIf(a, equalThree, 1);
+		assertEquals(Integer.valueOf(1), a.get(2));
+	}
+
+	public void testReplaceCopy() throws Exception {
+		ModifyingSequence.replaceCopy(a, b, 3, 1);
+		assertEquals(Integer.valueOf(1), b.get(2));
+	}
+
+	public void testReplaceCopyIf() throws Exception {
+		ModifyingSequence.replaceCopyIf(a, b, equalThree, 1);
+		assertEquals(Integer.valueOf(1), b.get(2));
+	}
+
+	public void testRange_swap() throws Exception {
+		b.add(3);
+		ModifyingSequence.range_swap(a, b);
+		assertEquals(Integer.valueOf(3), a.get(0));
+		assertEquals(Integer.valueOf(1), b.get(0));
+	}
+
+	public void testReverse() throws Exception {
+		ModifyingSequence.reverse(a);
+		assertEquals(Integer.valueOf(1), a.get(2));
+		assertEquals(Integer.valueOf(3), a.get(0));
+	}
+
+	public void testReverseCopy() throws Exception {
+		ModifyingSequence.reverseCopy(a, b);
+		ModifyingSequence.reverse(a);
+		assertEquals(a, b);
+	}
+
+	public void testRotate() throws Exception {
+		ArrayList<Integer> rotated = new ArrayList<Integer>(a);
+		ModifyingSequence.rotate(a, 1);
+		Collections.rotate(rotated, 1);
+		assertEquals(rotated, a);
+	}
+
+	public void testRotateCopy() throws Exception {
+		ArrayList<Integer> rotated = new ArrayList<Integer>(a);
+		ModifyingSequence.rotateCopy(a, b, 1);
+		Collections.rotate(rotated, 1);
+		Collections.sort(a);
+		assertEquals(rotated, b);
+	}
+
+	public void testShuffle() throws Exception {
+		ModifyingSequence.shuffle(a);
+		assert a.contains(1);
+		assert a.contains(2);
+		assert a.contains(3);
+		assertEquals(3, a.size());
+	}
+
+	public void testUnique() throws Exception {
+		a.add(3);
+		ModifyingSequence.unique(a);
+		assertEquals(3, a.size());
+		assertEquals(Integer.valueOf(3), a.get(2));
+	}
+
+	public void testUniqueCopy() throws Exception {
+		ArrayList<Integer> uniqued = new ArrayList<Integer>(a);
+		a.add(3);
+		ModifyingSequence.uniqueCopy(a, b);
+		assertEquals(uniqued, b);
 	}
 }
