@@ -76,9 +76,9 @@ ForwordIt partition_point(ForwordIt start, ForwordIt end, UnaryPredicate f)
 {
     while (start != end) {
         if (!f(*start)) {
-            ++start;
-            break;
+            return ++start;
         }
+        ++start;
     }
     return start;
 }
