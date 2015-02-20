@@ -71,4 +71,91 @@ public class Sorting {
 		swap(a, i + 1, end);
 		return i + 1;
 	}
+
+	public static <T extends Comparable> void partialSort(List<T> a, int
+			border) {
+		ArrayList<T> tmp = new ArrayList<T>();
+		Heap.makeHeap(a);
+		int bound = a.size();
+		for (int i = 0; i < border && i < bound; i++) {
+			tmp.add(Heap.popHeap(a));
+		}
+		int size = tmp.size();
+		for (int i = size - 1; i >= 0; i--) {
+			a.add(0, tmp.get(i));
+		}
+	}
+
+	public static <T extends Comparable> void partialSortCopy(List<T> a, int
+			border, List<T> b) {
+		ArrayList<T> tmp = new ArrayList<T>(a);
+		Heap.makeHeap(tmp);
+		int bound = a.size();
+		for (int i = 0; i < border && i < bound; i++) {
+			b.add(Heap.popHeap(tmp));
+		}
+	}
+
+	// Heap.make_heap will construct a min-heap, so we use it to
+	// find the nlargest element, which n is one-base.
+	// assume 0 < n < a.size()
+	public static <T extends Comparable> T nthElement(List<T> a, int n) {
+		ArrayList<T> tmp = new ArrayList<T>(a);
+		Heap.makeHeap(tmp);
+		int size = tmp.size();
+		for (int i = n; i < size; i++) {
+			if (a.get(i).compareTo(tmp.get(0)) > 0) {
+				Heap.popHeap(tmp);
+				Heap.pushHeap(tmp, a.get(i));
+			}
+		}
+		return Heap.popHeap(tmp);
+	}
+
+	public static <T> void stableSort(List<T> a,
+	                                                     Comparator<T> cp) {
+		int size = a.size();
+		if (size <= 1)
+			return;
+		ArrayList<Integer> pos = new ArrayList<Integer>(size);
+		for (int i = 0; i < size; i++) {
+			pos.add(i);
+		}
+		stableQuicksort(a, 0, size - 1, cp, pos);
+
+		int from = 0;
+		for (int to = 1; to < size; to++) {
+			if (cp.compare(a.get(from), a.get(to)) != 0) {
+				if (to - from > 0) {
+					Collections.sort(a.subList(from, to), cp);
+				}
+				from = to;
+			}
+		}
+	}
+
+	private static <T> void stableQuicksort(List<T> a, int
+			start, int end, Comparator<T> cp, ArrayList<Integer> pos) {
+		if (start < end) {
+			int pivot = stablePartition(a, start, end, cp, pos);
+			stableQuicksort(a, start, pivot - 1, cp, pos);
+			stableQuicksort(a, pivot + 1, end, cp, pos);
+		}
+	}
+
+	private static <T> int stablePartition(List<T> a, int
+			start, int end, Comparator<T> cp, ArrayList<Integer> pos) {
+		T x = a.get(end);
+		int i = start - 1;
+		for (int j = start; j < end; j++) {
+			if (cp.compare(a.get(j), x) <= 0) {
+				i += 1;
+				swap(a, i, j);
+				swap(pos, i, j);
+			}
+		}
+		swap(a, i + 1, end);
+		swap(pos, i + 1, end);
+		return i + 1;
+	}
 }
