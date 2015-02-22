@@ -35,7 +35,7 @@ is_permutation = (seq1, seq2) ->
     else
       elements[e] = 1
   for i in [0...seq2.length]
-    if elements[seq2[i]]
+    if elements[seq2[i]] and elements[seq2[i]] != 0
       elements[seq2[i]] -= 1
     else
       return false

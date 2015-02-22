@@ -51,9 +51,8 @@ var is_permutation = function (ary1, ary2) {
     }
   });
   for (var i = 0; i < ary2.length; i++) {
-    if (elements[ary2[i]]) {
+    if (elements[ary2[i]] && elements[ary2[i]] > 0) {
       elements[ary2[i]]--;
-      if (elements[ary2[i]]) return false;
     }
     else {
       return false;
