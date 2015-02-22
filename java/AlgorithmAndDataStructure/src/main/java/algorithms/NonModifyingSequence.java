@@ -60,13 +60,14 @@ public class NonModifyingSequence {
 		return num;
 	}
 
-	// unlike other languages, we can't get mismatch data with this mismatch method
-	public static AbstractMap.SimpleImmutableEntry mismatch(Iterable a, Iterable b, BinaryPredicate f) {
+	// Unlike other languages, we can't get mismatch data with this mismatch
+	// method.
+	public static Pair mismatch(Iterable a, Iterable b, BinaryPredicate f) {
 		Iterator it1 = a.iterator();
 		Iterator it2 = b.iterator();
 		while (it1.hasNext() && it2.hasNext()) {
 			if (!f.call(it1.next(), it2.next()))
-				return new AbstractMap.SimpleImmutableEntry(it1, it2);
+				return new Pair(it1, it2);
 		}
 		return null;
 	}

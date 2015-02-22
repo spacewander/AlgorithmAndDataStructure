@@ -30,7 +30,7 @@ var inplace_merge = function (a, b) {
   for (var i = 0; i < a.length; i++) {
     while (a[i] >= b[j] && j < b.length) {
       if (a[i] > b[j])
-        Array.prototype.splice(i, 0, b[j]);
+        Array.prototype.splice.call(a, i, 0, b[j]);
       j++;
     }
   }

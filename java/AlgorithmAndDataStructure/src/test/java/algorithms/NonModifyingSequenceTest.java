@@ -104,9 +104,9 @@ public class NonModifyingSequenceTest
 		ary.add(2);
 		a.add(2);
 		a.add(3);
-		AbstractMap.SimpleImmutableEntry entry = NonModifyingSequence.mismatch(a, ary, equals);
-		assertEquals(3, ((Iterator)(entry.getKey())).next());
-		assertEquals(2, ((Iterator)(entry.getValue())).next());
+		Pair pair = NonModifyingSequence.mismatch(a, ary, equals);
+		assertEquals(3, ((Iterator)(pair.getFirst())).next());
+		assertEquals(2, ((Iterator)(pair.getSecond())).next());
 	}
 
 	public void testEqual() throws Exception {
