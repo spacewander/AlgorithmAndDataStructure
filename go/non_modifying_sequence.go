@@ -105,3 +105,103 @@ func FindIfNot(vi []int, f func(int) bool) int {
 	}
 	return -1
 }
+
+// find first element in sub-scope occurs in given scope
+func FindFirstOf(scope []int, subScope []int,
+	f2 func(int, int) bool) (index int, found bool) {
+
+	for i := range scope {
+		for _, v := range subScope {
+			if f2(scope[i], v) {
+				return i, true
+			}
+		}
+	}
+	return -1, false
+}
+
+func FindEnd(scope []int, subScope []int,
+	f2 func(int, int) bool) (index int, found bool) {
+
+	lenOfScope := len(scope)
+	lenOfSubScope := len(subScope)
+	if lenOfScope < lenOfSubScope {
+		return -1, false
+	}
+	i := lenOfScope - lenOfSubScope
+	for {
+		for j := 0; ; j++ {
+			if j == lenOfSubScope {
+				return i, true
+			}
+			if !f2(scope[i+j], subScope[j]) {
+				if i > 0 {
+					i--
+					break
+				} else {
+					return -1, false
+				}
+			}
+		}
+
+	}
+}
+
+func AdjacentFind(vi []int, f2 func(int, int) bool) (index int, found bool) {
+	boundOfVi := len(vi) - 1
+	for i := 0; i < boundOfVi; i++ {
+		if f2(vi[i], vi[i+1]) {
+			return i, true
+		}
+	}
+	return -1, false
+}
+
+func Search(scope []int, subScope []int, f2 func(int, int) bool) (value int,
+	found bool) {
+	lenOfScope := len(scope)
+	lenOfSubScope := len(subScope)
+	i := 0
+	if i > lenOfScope-lenOfSubScope {
+		return -1, false
+	}
+	for {
+		for j := 0; ; j++ {
+			if j == lenOfSubScope {
+				return i, true
+			}
+			if !f2(scope[i+j], subScope[j]) {
+				if i < lenOfScope-lenOfSubScope {
+					i++
+					break
+				} else {
+					return -1, false
+				}
+			}
+		}
+	}
+}
+
+func SearchN(scope []int, count int, match int, f2 func(int, int) bool) (
+	value int, found bool) {
+	lenOfScope := len(scope)
+	i := 0
+	if i > lenOfScope-count {
+		return -1, false
+	}
+	for {
+		for j := 0; ; j++ {
+			if j == count {
+				return i, true
+			}
+			if !f2(scope[i+j], match) {
+				if i < lenOfScope-count {
+					i++
+					break
+				} else {
+					return -1, false
+				}
+			}
+		}
+	}
+}
