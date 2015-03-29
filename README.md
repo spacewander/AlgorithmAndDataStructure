@@ -39,3 +39,12 @@ cd coffeescript
 make 
 # or make TEST=modifying_sequence to run a specific test file, like modifying_sequence.coffee
 ```
+
+### Go
+
+```
+# please set up GOPATH for yourself
+cd go
+# install onsi/ginkgo and onsi/gomega
+go test
+```
