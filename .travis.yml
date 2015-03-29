@@ -1,0 +1,10 @@
+language: go
+
+go:
+  - tip
+
+before_install:
+    - go get github.com/onsi/ginkgo
+    - go get github.com/onsi/gomega
+
+script: cd go && go test -v .
