@@ -97,3 +97,71 @@ func RemoveIf(src []int, f func(int) bool) []int {
 	}
 	return dest
 }
+
+func RemoveCopy(dest []int, src []int, match int) []int {
+	var tmp []int
+	for _, e := range src {
+		if e != match {
+			tmp = append(tmp, e)
+		}
+	}
+	copy(dest, tmp)
+	return dest
+}
+
+func RemoveCopyIf(dest []int, src []int, f func(int) bool) []int {
+	var tmp []int
+	for _, e := range src {
+		if !f(e) {
+			tmp = append(tmp, e)
+		}
+	}
+	copy(dest, tmp)
+	return dest
+}
+
+func Replace(src []int, before int, after int) {
+	for i := range src {
+		if src[i] == before {
+			src[i] = after
+		}
+	}
+}
+
+func ReplaceIf(src []int, f func(int) bool, after int) {
+	for i, e := range src {
+		if f(e) {
+			src[i] = after
+		}
+	}
+}
+
+func ReplaceCopy(dest []int, src []int, before int, after int) []int {
+	var tmp []int
+	for _, e := range src {
+		if e != before {
+			tmp = append(tmp, e)
+		} else {
+			tmp = append(tmp, after)
+		}
+	}
+	copy(dest, tmp)
+	return dest
+}
+
+func ReplaceCopyIf(dest []int, src []int, f func(int) bool, after int) []int {
+	var tmp []int
+	for _, e := range src {
+		if !f(e) {
+			tmp = append(tmp, e)
+		} else {
+			tmp = append(tmp, after)
+		}
+	}
+	copy(dest, tmp)
+	return dest
+}
+
+func Swap(a *int, b *int) {
+	*a, *b = *b, *a
+}

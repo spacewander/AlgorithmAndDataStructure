@@ -275,5 +275,45 @@ var _ = Describe("AlgorithmAndDataStructure", func() {
 		It("RemoveIf", func() {
 			Expect(Algo.RemoveIf(src, isOdd)).To(Equal([]int{2}))
 		})
+
+		It("RemoveCopy", func() {
+			Algo.RemoveCopy(dest, src, 3)
+			Expect(dest[0]).To(Equal(src[0]))
+			Expect(dest[1]).To(Equal(src[1]))
+			Expect(dest[2]).NotTo(Equal(src[2]))
+		})
+
+		It("RemoveCopyIf", func() {
+			Algo.RemoveCopyIf(dest, src, isOdd)
+			Expect(dest[0]).To(Equal(src[1]))
+		})
+
+		It("Replace", func() {
+			Algo.Replace(src, 1, 2)
+			Expect(src).To(Equal([]int{2, 2, 3}))
+		})
+
+		It("ReplaceIf", func() {
+			Algo.ReplaceIf(src, isOdd, 2)
+			Expect(src).To(Equal([]int{2, 2, 2}))
+		})
+
+		It("ReplaceCopy", func() {
+			Algo.ReplaceCopy(dest, src, 3, 1)
+			Expect(dest).To(Equal([]int{1, 2, 1}))
+		})
+
+		It("ReplaceCopyIf", func() {
+			Algo.ReplaceCopyIf(dest, src, isOdd, 1)
+			Expect(dest).To(Equal([]int{1, 2, 1}))
+		})
+
+		It("Swap", func() {
+			a := 3
+			b := 1
+			Algo.Swap(&a, &b)
+			Expect(a).To(Equal(1))
+			Expect(b).To(Equal(3))
+		})
 	})
 })
