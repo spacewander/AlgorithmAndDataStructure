@@ -9,7 +9,7 @@ import (
 
 var _ = Describe("AlgorithmAndDataStructure", func() {
 
-	Describe("non_modifying_sequence", func() {
+	Describe("non modifying sequence", func() {
 		var a []int
 		var b []int
 		var equal func(int, int) bool
@@ -194,6 +194,86 @@ var _ = Describe("AlgorithmAndDataStructure", func() {
 				_, found := Algo.SearchN(tmp, 4, 1, equal)
 				Expect(found).To(BeFalse())
 			})
+		})
+	})
+
+	Describe("modifying sequence", func() {
+		var src []int
+		var dest []int
+		var isOdd func(int) bool
+
+		BeforeEach(func() {
+			src = []int{1, 2, 3}
+			dest = make([]int, 3)
+			isOdd = func(i int) bool {
+				return i%2 != 0
+			}
+		})
+
+		It("CopyIf", func() {
+			Expect(Algo.CopyIf(dest, src, isOdd)).To(Equal(2))
+			Expect(dest[0]).To(Equal(src[0]))
+			Expect(dest[1]).To(Equal(src[2]))
+		})
+
+		It("CopyN", func() {
+			Algo.CopyN(dest, src, 1)
+			Expect(dest[0]).To(Equal(src[0]))
+			Expect(dest[1]).NotTo(Equal(src[1]))
+		})
+
+		It("CopyBackward", func() {
+			dest = make([]int, 2)
+			Expect(Algo.CopyBackward(dest, src)).To(Equal(2))
+			Expect(dest[0]).To(Equal(src[1]))
+			Expect(dest[1]).To(Equal(src[2]))
+		})
+
+		It("Fill", func() {
+			tmp := []int{1, 1, 1}
+			Algo.Fill(dest, 1)
+			Expect(dest).To(Equal(tmp))
+		})
+
+		It("FillN", func() {
+			tmp := []int{1, 1, 1}
+			Algo.FillN(dest, 3, 1)
+			Expect(dest).To(Equal(tmp))
+			Algo.FillN(dest, len(dest)+1, 1)
+		})
+
+		It("Transform", func() {
+			dest = make([]int, 2)
+			plusOne := func(prev int) int {
+				return prev + 1
+			}
+			Expect(Algo.Transform(dest, src, plusOne)).
+				To(Equal([]int{2, 3}))
+		})
+
+		Context("Generate", func() {
+			allAreOne := func() int {
+				return 1
+			}
+
+			It("Generate", func() {
+				Algo.Generate(dest, allAreOne)
+				Expect(dest).To(Equal([]int{1, 1, 1}))
+			})
+
+			It("GenerateN", func() {
+				dest[2] = 2
+				Algo.GenerateN(dest, 2, allAreOne)
+				Expect(dest).To(Equal([]int{1, 1, 2}))
+			})
+		})
+
+		It("Remove", func() {
+			Expect(Algo.Remove(src, 1)).To(Equal([]int{2, 3}))
+		})
+
+		It("RemoveIf", func() {
+			Expect(Algo.RemoveIf(src, isOdd)).To(Equal([]int{2}))
 		})
 	})
 })
