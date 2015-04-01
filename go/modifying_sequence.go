@@ -1,5 +1,7 @@
 package main
 
+import "math/rand"
+
 func CopyIf(dest []int, src []int, f func(int) bool) int {
 	i := 0
 	endOfDest := len(dest)
@@ -164,4 +166,104 @@ func ReplaceCopyIf(dest []int, src []int, f func(int) bool, after int) []int {
 
 func Swap(a *int, b *int) {
 	*a, *b = *b, *a
+}
+
+func SwapRanges(a []int, b []int, size int) {
+	if size > len(a) || size > len(b) {
+		if len(a) > len(b) {
+			size = len(b)
+		} else {
+			size = len(a)
+		}
+	}
+	for i := 0; i < size; i++ {
+		a[i], b[i] = b[i], a[i]
+	}
+}
+
+func Reverse(src []int) {
+	size := len(src) - 1
+	for i := 0; i < size/2+1; i++ {
+		src[i], src[size-i] = src[size-i], src[i]
+	}
+}
+
+func ReverseCopy(dest []int, src []int) []int {
+	var size int
+	lenOfSrc := len(src)
+	if lenOfSrc > len(dest) {
+		size = len(dest)
+	} else {
+		size = lenOfSrc
+	}
+	lenOfSrc--
+	for i := 0; i < size; i++ {
+		dest[i] = src[lenOfSrc-i]
+	}
+	return dest
+}
+
+func Rotate(dest []int, pivot int) {
+	end := len(dest)
+	if pivot <= 0 || pivot >= end || end <= 0 {
+		return
+	}
+	newStart, newPlace := pivot, pivot
+	start := 0
+	for {
+		dest[start], dest[newPlace] = dest[newPlace], dest[start]
+		start++
+		newPlace++
+		if newPlace == end {
+			newPlace = newStart
+		} else if start == newStart {
+			newStart = newPlace
+		}
+		if start == newPlace {
+			break
+		}
+	}
+}
+
+func RotateCopy(dest []int, src []int, pivot int) []int {
+	n := copy(dest, src[pivot:])
+	copy(dest[n:], src[:pivot])
+	return dest
+}
+
+func Shuffle(dest []int) {
+	end := len(dest)
+	for i := range dest {
+		rd := rand.Intn(end)
+		dest[i], dest[rd] = dest[rd], dest[i]
+	}
+}
+
+func Unique(dest []int) []int {
+	end := len(dest)
+	head := 0
+	for i := 1; i < end; i++ {
+		if dest[head] != dest[i] {
+			head++
+			dest[head] = dest[i]
+		}
+	}
+	return dest[:head+1]
+}
+
+func UniqueCopy(src []int) []int {
+	end := len(src)
+	dest := make([]int, 0)
+	if end <= 0 {
+		return dest
+	}
+	head := 0
+	dest = append(dest, src[head])
+	for i := 1; i < end; i++ {
+		if src[head] != src[i] {
+			head = i
+			dest = append(dest, src[i])
+		}
+	}
+	return dest
 }

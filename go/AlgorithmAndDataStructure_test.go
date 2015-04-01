@@ -315,5 +315,71 @@ var _ = Describe("AlgorithmAndDataStructure", func() {
 			Expect(a).To(Equal(1))
 			Expect(b).To(Equal(3))
 		})
+
+		It("SwapRanges", func() {
+			dest = []int{4, 5, 6}
+			Algo.SwapRanges(dest, src, 2)
+			Expect(src).To(Equal([]int{4, 5, 3}))
+			Expect(dest).To(Equal([]int{1, 2, 6}))
+		})
+
+		Context("Reverse", func() {
+			It("Odd", func() {
+				Algo.Reverse(src)
+				Expect(src).To(Equal([]int{3, 2, 1}))
+			})
+
+			It("Even", func() {
+				even := []int{1, 2, 3, 4}
+				Algo.Reverse(even)
+				Expect(even).To(Equal([]int{4, 3, 2, 1}))
+			})
+		})
+
+		It("ReverseCopy", func() {
+			Expect(Algo.ReverseCopy(dest, src)).To(Equal([]int{3, 2, 1}))
+		})
+
+		Context("Rotate", func() {
+			It("with pivot == 2", func() {
+				Algo.Rotate(src, 2)
+				Expect(src).To(Equal([]int{3, 1, 2}))
+			})
+
+			It("with pivot == 1", func() {
+				Algo.Rotate(src, 1)
+				Expect(src).To(Equal([]int{2, 3, 1}))
+			})
+
+			It("with wrong pivot", func() {
+				Algo.Rotate(src, 3)
+				Expect(src).To(Equal([]int{1, 2, 3}))
+			})
+		})
+
+		It("RotateCopy", func() {
+			Expect(Algo.RotateCopy(dest, src, 2)).To(Equal([]int{3, 1, 2}))
+		})
+
+		It("Shuffle", func() {
+			Algo.Shuffle(src)
+		})
+
+		Context("Unique algorithms", func() {
+			var duplicate []int
+
+			BeforeEach(func() {
+				duplicate = []int{1, 1, 2, 2}
+			})
+
+			It("Unique", func() {
+				Expect(Algo.Unique(duplicate)).To(Equal([]int{1, 2}))
+				Expect(duplicate).NotTo(Equal([]int{1, 1, 2, 2}))
+			})
+
+			It("UniqueCopy", func() {
+				Expect(Algo.UniqueCopy(duplicate)).To(Equal([]int{1, 2}))
+			})
+		})
 	})
 })
