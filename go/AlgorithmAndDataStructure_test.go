@@ -1,6 +1,8 @@
 package main_test
 
 import (
+	"container/heap"
+
 	Algo "AlgorithmAndDataStructure"
 
 	. "github.com/onsi/ginkgo"
@@ -381,5 +383,50 @@ var _ = Describe("AlgorithmAndDataStructure", func() {
 				Expect(Algo.UniqueCopy(duplicate)).To(Equal([]int{1, 2}))
 			})
 		})
+	})
+
+	Describe("Heap", func() {
+		var h *Algo.IntHeap
+		var hp *Algo.IntHeap
+
+		BeforeEach(func() {
+			h = &Algo.IntHeap{2, 1, 5}
+			hp = &Algo.IntHeap{2, 1, 5}
+			heap.Init(hp)
+		})
+
+		It("SortHeap", func() {
+			Algo.SortHeap(h)
+			Expect(*h).To(Equal(Algo.IntHeap{1, 2, 5}))
+		})
+
+		It("isHeap", func() {
+			Expect(Algo.IsHeap(h)).To(BeFalse())
+			heap.Init(h)
+			Expect(Algo.IsHeap(h)).To(BeTrue())
+		})
+
+		It("IsHeapUntil", func() {
+			Expect(Algo.IsHeapUntil(h)).To(Equal(1))
+			heap.Init(h)
+			Expect(Algo.IsHeapUntil(h)).To(Equal(h.Len()))
+		})
+
+		It("PushHeap", func() {
+			x := 3
+			Algo.PushHeap(hp, x)
+			Expect(*hp).To(ContainElement(x))
+			Expect(Algo.IsHeap(hp)).To(BeTrue())
+		})
+
+		It("PopHeap", func() {
+			Expect(Algo.PopHeap(hp)).To(Equal(1))
+		})
+
+		It("MakeHeap", func() {
+			Algo.MakeHeap(h)
+			Expect(h).To(Equal(hp))
+		})
+
 	})
 })
