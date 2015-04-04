@@ -429,4 +429,89 @@ var _ = Describe("AlgorithmAndDataStructure", func() {
 		})
 
 	})
+
+	Describe("BinarySearch", func() {
+		var v1 []int
+		var v2 []int
+
+		BeforeEach(func() {
+			v1 = []int{1, 2, 4, 8, 16}
+			v2 = []int{1, 2, 3, 4}
+		})
+
+		Context("LowerBound", func() {
+			It("v1", func() {
+				idx, _ := Algo.LowerBound(v1, 4)
+				Expect(v1[idx]).To(Equal(4))
+
+				idx, _ = Algo.LowerBound(v1, 1)
+				Expect(v1[idx]).To(Equal(1))
+
+				_, found := Algo.LowerBound(v1, 17)
+				Expect(found).To(BeFalse())
+			})
+
+			It("v1 more", func() {
+				idx, found := Algo.LowerBound(v1, 3)
+				Expect(v1[idx]).To(Equal(4))
+				Expect(found).To(BeTrue())
+			})
+
+			It("v2", func() {
+				idx, _ := Algo.LowerBound(v2, 3)
+				Expect(v2[idx]).To(Equal(3))
+
+				idx, _ = Algo.LowerBound(v2, 2)
+				Expect(v2[idx]).To(Equal(2))
+			})
+		})
+
+		Context("UpperBound", func() {
+			It("v1", func() {
+				idx, _ := Algo.UpperBound(v1, 4)
+				Expect(v1[idx]).To(Equal(8))
+
+				idx, found := Algo.UpperBound(v1, 5)
+				Expect(found).To(BeTrue())
+				Expect(v1[idx]).To(Equal(8))
+
+				_, found = Algo.UpperBound(v1, 16)
+				Expect(found).To(BeFalse())
+
+				idx, _ = Algo.UpperBound(v1, 0)
+				Expect(v1[idx]).To(Equal(1))
+			})
+
+			It("v2", func() {
+				idx, _ := Algo.UpperBound(v2, 3)
+				Expect(v2[idx]).To(Equal(4))
+
+				idx, _ = Algo.UpperBound(v2, 2)
+				Expect(v2[idx]).To(Equal(3))
+			})
+		})
+
+		Context("BinarySearch", func() {
+			It("found", func() {
+				Expect(Algo.BinarySearch(v1, 4)).To(BeTrue())
+			})
+
+			It("Not found", func() {
+				Expect(Algo.BinarySearch(v1, 0)).To(BeFalse())
+			})
+		})
+
+		It("EqualRange", func() {
+			from, to := Algo.EqualRange(v1, 4)
+			Expect(v1[from]).To(Equal(4))
+			Expect(v1[to]).To(Equal(8))
+
+			from, _ = Algo.EqualRange(v1, 0)
+			Expect(from).To(Equal(0))
+
+			from, to = Algo.EqualRange(v1, 17)
+			Expect(from).To(Equal(len(v1)))
+			Expect(to).To(Equal(len(v1)))
+		})
+	})
 })
