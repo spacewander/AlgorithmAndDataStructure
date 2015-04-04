@@ -514,4 +514,59 @@ var _ = Describe("AlgorithmAndDataStructure", func() {
 			Expect(to).To(Equal(len(v1)))
 		})
 	})
+
+	FDescribe("Sorting", func() {
+		var sorted []int
+		var v []int
+		var less func(int, int) bool
+
+		BeforeEach(func() {
+			sorted = []int{1, 2, 3, 4}
+			v = []int{190, 20, 4, 4, 10}
+			less = func(a int, b int) bool {
+				return a < b
+			}
+		})
+
+		It("isSorted", func() {
+			Expect(Algo.IsSorted(sorted, less)).To(BeTrue())
+			Expect(Algo.IsSorted(v, less)).To(BeFalse())
+		})
+
+		It("isSortedUntil", func() {
+			Expect(Algo.IsSortedUntil(sorted, less)).To(Equal(len(sorted)))
+			Expect(Algo.IsSortedUntil(v, less)).To(Equal(1))
+		})
+
+		It("Sort", func() {
+			sortedV := []int{4, 4, 10, 20, 190}
+			Algo.Sort(v, less)
+			Expect(v).To(Equal(sortedV))
+
+			unsorted := []int{3, 4, 2, 1}
+			Algo.Sort(unsorted, less)
+			Expect(unsorted).To(Equal(sorted))
+		})
+
+		It("StableSort", func() {
+			pairLess := func(x *Algo.Pair, y *Algo.Pair) bool {
+				return x.A < y.A
+			}
+
+			Pairs := []Algo.Pair{
+				{8, 20},
+				{10, 9},
+				{8, 10},
+				{20, 10},
+				{10, 11},
+				{10, 10},
+			}
+
+			Algo.StableSort(Pairs, pairLess)
+			Expect(Pairs[0]).To(Equal(Algo.Pair{8, 20}))
+			Expect(Pairs[2]).To(Equal(Algo.Pair{10, 9}))
+			Expect(Pairs[3]).To(Equal(Algo.Pair{10, 11}))
+			Expect(Pairs[5]).To(Equal(Algo.Pair{20, 10}))
+		})
+	})
 })
