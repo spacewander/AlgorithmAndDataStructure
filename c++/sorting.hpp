@@ -90,20 +90,36 @@ void partial_sort_copy(InputIt start, InputIt end,
     }
 }
 
-// FIXME: this is a bad implementation!
+template<typename RandomIt, typename Compare>
+RandomIt quick_select(RandomIt left, RandomIt right, RandomIt border, 
+        Compare cp)
+{
+    std::iter_swap(border, right);
+    RandomIt storeIdx = left;
+    for (RandomIt i = left; i < right; ++i) {
+        if (cp(*i, *right)) {
+            std::iter_swap(storeIdx, i);
+            ++storeIdx;
+        }
+    }
+    std::iter_swap(right, storeIdx);
+    return storeIdx;
+}
+
 template<typename RandomIt, typename Compare>
 void nth_element(RandomIt start, RandomIt nth, RandomIt end, Compare cp)
 {
-    if (nth == end)
-        return ;
-    if (nth - start < (end - start) / 2 ) {
-        for (RandomIt i = start; i <= nth; i++) {
-            std::iter_swap(i, std::min_element(i, end, cp));
+    RandomIt left = start;
+    RandomIt right = std::prev(end);
+    while (left < nth && nth < right) {
+        RandomIt border = quick_select(left, right, nth, cp);
+        if (border == nth)
+            break;
+        if (border < nth) {
+            left = border;
         }
-    }
-    else {
-        for (RandomIt i = end - 1; i >= nth; i--) {
-            std::iter_swap(i, std::max_element(start, i + 1, cp));
+        else {
+            right = border;
         }
     }
 }

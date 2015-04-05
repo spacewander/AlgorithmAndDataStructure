@@ -1,5 +1,8 @@
 package main
 
+import "container/heap"
+import "sort"
+
 type Pair struct {
 	A int
 	B int
@@ -54,6 +57,67 @@ func StableSort(v []Pair, cp func(*Pair, *Pair) bool) {
 				v[j] = v[k]
 			}
 			v[j] = e
+		}
+	}
+}
+
+func PartialSort(in []int, border int) {
+	size := len(in)
+	h := IntHeap(in[:border])
+	heap.Init(&h)
+	for i := border; i < size; i++ {
+		if in[i] < h[0] {
+			in[i], h[0] = h[0], in[i]
+			x := heap.Pop(&h)
+			h = append(h, x.(int))
+		}
+	}
+	SortHeap(&h)
+}
+
+func PartialSortCopy(v []int, border int, out []int) {
+	in := v[:border]
+	inSize := len(in)
+	outSize := len(out)
+	if inSize <= outSize {
+		copy(out, in)
+		sort.Ints(out[:inSize])
+	} else {
+		space := make([]int, inSize)
+		copy(space, in)
+		sort.Ints(space)
+		copy(out, space)
+	}
+}
+
+func quickSelect(v []int, left int, right int, border int) int {
+	borderValue := v[border]
+	v[border], v[right] = v[right], v[border]
+	storeIdx := left
+	for i := left; i < right; i++ {
+		if v[i] < borderValue {
+			v[storeIdx], v[i] = v[i], v[storeIdx]
+			storeIdx++
+		}
+	}
+	v[right], v[storeIdx] = v[storeIdx], v[right]
+	return storeIdx
+}
+
+//The difference between PartialSort and NthElement is PartialSort sorts the
+// elements in [0, border), while NthElement just makes sure that elements in [0, border) are all less than element in border
+func NthElement(v []int, border int) {
+	left := 0
+	right := len(v) - 1
+	for {
+		nth := quickSelect(v, left, right, border)
+		if nth == border { // left <= nth, border <= right
+			break
+		}
+		if nth < border {
+			left = nth
+		} else {
+			right = nth
 		}
 	}
 }

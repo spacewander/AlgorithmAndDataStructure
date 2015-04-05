@@ -76,13 +76,13 @@ TEST_F(Sorting, nth_element)
     // case : nth - start < (end - start) / 2
     my::nth_element(v.begin(), std::next(v.begin(), 2), v.end(), 
             greater<int>());
-    EXPECT_EQ(190, v[0]);
     EXPECT_EQ(20, v[1]);
+    EXPECT_TRUE(greater<int>()(v[0], v[2]));
 
 
     // case : nth - start >= (end - start) / 2
     my::nth_element(v.begin(), std::next(v.begin(), 3), v.end(), 
             greater<int>());
-    EXPECT_EQ(190, v[0]);
-    EXPECT_EQ(20, v[1]);
+    EXPECT_EQ(10, v[2]);
+    EXPECT_TRUE(greater<int>()(v[1], v[3]));
 }

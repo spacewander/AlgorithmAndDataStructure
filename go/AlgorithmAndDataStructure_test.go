@@ -568,5 +568,39 @@ var _ = Describe("AlgorithmAndDataStructure", func() {
 			Expect(Pairs[3]).To(Equal(Algo.Pair{10, 11}))
 			Expect(Pairs[5]).To(Equal(Algo.Pair{20, 10}))
 		})
+
+		It("PartialSort", func() {
+			Algo.PartialSort(v, 2)
+			Expect(v[0]).To(Equal(4))
+			Expect(v[1]).To(Equal(4))
+		})
+
+		Context("PartialSortCopy", func() {
+			It("len(out) >= len(in)", func() {
+				out := []int{0, 0}
+				Algo.PartialSortCopy(v, 2, out)
+				Expect(out).To(Equal([]int{20, 190}))
+			})
+
+			It("len(out) < len(in)", func() {
+				out := []int{0, 0}
+				Algo.PartialSortCopy(v, 3, out)
+				Expect(out).To(Equal([]int{4, 20}))
+			})
+		})
+
+		It("NthElement", func() {
+			Algo.NthElement(v, 3)
+			Expect(v[2]).To(Equal(10))
+			Expect(v[1] <= v[3]).To(BeTrue())
+
+			Algo.NthElement(v, 2)
+			Expect(v[1]).To(Equal(4))
+			Expect(v[0] <= v[2]).To(BeTrue())
+
+			Algo.NthElement(v, 4)
+			Expect(v[3]).To(Equal(20))
+			Expect(v[2] <= v[4]).To(BeTrue())
+		})
 	})
 })
