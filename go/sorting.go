@@ -91,11 +91,10 @@ func PartialSortCopy(v []int, border int, out []int) {
 }
 
 func quickSelect(v []int, left int, right int, border int) int {
-	borderValue := v[border]
 	v[border], v[right] = v[right], v[border]
 	storeIdx := left
 	for i := left; i < right; i++ {
-		if v[i] < borderValue {
+		if v[i] < v[right] {
 			v[storeIdx], v[i] = v[i], v[storeIdx]
 			storeIdx++
 		}
@@ -110,6 +109,9 @@ func NthElement(v []int, border int) {
 	left := 0
 	right := len(v) - 1
 	for {
+		if left >= border || right <= border {
+			break
+		}
 		nth := quickSelect(v, left, right, border)
 		if nth == border { // left <= nth, border <= right
 			break

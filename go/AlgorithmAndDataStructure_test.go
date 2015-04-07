@@ -515,7 +515,7 @@ var _ = Describe("AlgorithmAndDataStructure", func() {
 		})
 	})
 
-	FDescribe("Sorting", func() {
+	Describe("Sorting", func() {
 		var sorted []int
 		var v []int
 		var less func(int, int) bool
@@ -601,6 +601,87 @@ var _ = Describe("AlgorithmAndDataStructure", func() {
 			Algo.NthElement(v, 4)
 			Expect(v[3]).To(Equal(20))
 			Expect(v[2] <= v[4]).To(BeTrue())
+		})
+	})
+
+	FDescribe("Set", func() {
+		var a []int
+		var b []int
+
+		BeforeEach(func() {
+			a = []int{1, 2, 3, 4}
+			b = []int{3, 4, 5, 6}
+		})
+
+		Context("Merge", func() {
+			It("empty sets", func() {
+				empty := []int{}
+				Expect(Algo.Merge(a, empty)).To(Equal(a))
+				Expect(Algo.Merge(empty, a)).To(Equal(a))
+				Expect(Algo.Merge(empty, empty)).To(Equal(empty))
+			})
+
+			It("non-empty sets", func() {
+				ab := []int{1, 2, 3, 3, 4, 4, 5, 6}
+				Expect(Algo.Merge(a, b)).To(Equal(ab))
+			})
+		})
+
+		It("InplaceMerge", func() {
+			pairLess := func(x *Algo.Pair, y *Algo.Pair) bool {
+				return x.A < y.A
+			}
+
+			pairs := []Algo.Pair{
+				{8, 20},
+				{8, 10},
+				{10, 9},
+				{10, 11},
+				{10, 10},
+				{20, 10},
+			}
+
+			merged := []Algo.Pair{
+				{8, 20},
+				{8, 10},
+				{10, 9},
+				{10, 11},
+				{10, 10},
+				{20, 10},
+			}
+			Algo.InplaceMerge(pairs, 3, pairLess)
+			Expect(pairs).To(Equal(merged))
+		})
+
+		It("Includes", func() {
+			Expect(Algo.Includes(a, b)).To(BeFalse())
+			c := []int{1, 2}
+			Expect(Algo.Includes(a, c)).To(BeTrue())
+			d := []int{1, 2, 3, 4, 5}
+			Expect(Algo.Includes(a, d)).To(BeFalse())
+			Expect(Algo.Includes(a, a)).To(BeTrue())
+		})
+
+		It("SetDifference", func() {
+			c := []int{1, 2}
+			Expect(Algo.SetDifference(a, b)).To(Equal(c))
+			d := []int{5, 6}
+			Expect(Algo.SetDifference(b, a)).To(Equal(d))
+		})
+
+		It("SetIntersection", func() {
+			c := []int{3, 4}
+			Expect(Algo.SetIntersection(a, b)).To(Equal(c))
+		})
+
+		It("SetSymmetricDifference", func() {
+			c := []int{1, 2, 5, 6}
+			Expect(Algo.SetSymmetricDifference(a, b)).To(Equal(c))
+		})
+
+		It("SetUnion", func() {
+			c := []int{1, 2, 3, 4, 5, 6}
+			Expect(Algo.SetUnion(a, b)).To(Equal(c))
 		})
 	})
 })
