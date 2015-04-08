@@ -685,7 +685,7 @@ var _ = Describe("AlgorithmAndDataStructure", func() {
 		})
 	})
 
-	FDescribe("MinMax", func() {
+	Describe("MinMax", func() {
 		var v []int
 
 		BeforeEach(func() {
@@ -760,5 +760,40 @@ var _ = Describe("AlgorithmAndDataStructure", func() {
 			Expect(v).To(Equal(copyV))
 		})
 
+	})
+
+	Describe("Numeric", func() {
+		var v []int
+		BeforeEach(func() {
+			v = []int{1, 2, 3, 4}
+		})
+
+		It("Itoa", func() {
+			res := []int{3, 4, 5, 6}
+			Algo.Itoa(v, 3)
+			Expect(v).To(Equal(res))
+		})
+
+		It("Accumulate", func() {
+			Expect(Algo.Accumulate(v, 1, func(a int, b int) int {
+				return a * b
+			})).To(Equal(24))
+		})
+
+		It("InnerProduct", func() {
+			Expect(Algo.InnerProduct(v, v, 0)).To(Equal(30))
+		})
+
+		It("AdjacentDifference", func() {
+			Expect(Algo.AdjacentDifference(v)).To(Equal([]int{1, 1, 1, 1}))
+			Expect(Algo.AdjacentDifference([]int{})).To(Equal([]int{}))
+			Expect(Algo.AdjacentDifference([]int{1})).To(Equal([]int{1}))
+		})
+
+		It("PartialSum", func() {
+			Expect(Algo.PartialSum(v)).To(Equal([]int{1, 3, 6, 10}))
+			Expect(Algo.PartialSum([]int{})).To(Equal([]int{}))
+			Expect(Algo.PartialSum([]int{1})).To(Equal([]int{1}))
+		})
 	})
 })
