@@ -604,7 +604,7 @@ var _ = Describe("AlgorithmAndDataStructure", func() {
 		})
 	})
 
-	FDescribe("Set", func() {
+	Describe("Set", func() {
 		var a []int
 		var b []int
 
@@ -683,5 +683,82 @@ var _ = Describe("AlgorithmAndDataStructure", func() {
 			c := []int{1, 2, 3, 4, 5, 6}
 			Expect(Algo.SetUnion(a, b)).To(Equal(c))
 		})
+	})
+
+	FDescribe("MinMax", func() {
+		var v []int
+
+		BeforeEach(func() {
+			v = []int{1, 2, 4, 5, -1}
+		})
+
+		It("Max", func() {
+			Expect(Algo.Max(-1, 1)).To(Equal(1))
+		})
+
+		It("Min", func() {
+			Expect(Algo.Min(-1, 1)).To(Equal(-1))
+		})
+
+		It("MaxElement", func() {
+			Expect(v[Algo.MaxElement(v)]).To(Equal(5))
+		})
+
+		It("MinElement", func() {
+			Expect(v[Algo.MinElement(v)]).To(Equal(-1))
+		})
+
+		It("MinMaxElement", func() {
+			minIdx, maxIdx := Algo.MinMaxElement(v)
+			Expect(v[minIdx]).To(Equal(-1))
+			Expect(v[maxIdx]).To(Equal(5))
+		})
+
+		Context("LexicographicalCompare", func() {
+			It("different length", func() {
+				a := "abc"
+				b := "abcd"
+				c := "abcde"
+				Expect(Algo.LexicographicalCompare(a, b)).To(BeTrue())
+				Expect(Algo.LexicographicalCompare(b, c)).To(BeTrue())
+				Expect(Algo.LexicographicalCompare(c, b)).To(BeFalse())
+			})
+
+			It("same length", func() {
+				a := "abcd"
+				b := "abce"
+				Expect(Algo.LexicographicalCompare(a, a)).To(BeFalse())
+				Expect(Algo.LexicographicalCompare(a, b)).To(BeTrue())
+			})
+		})
+
+		It("isPermutation", func() {
+			a := []int{1, 2, 5, 4, -1}
+			b := []int{1, 2, 5, 5, -1}
+			Expect(Algo.IsPermutation(v, a)).To(BeTrue())
+			Expect(Algo.IsPermutation(a, b)).To(BeFalse())
+		})
+
+		Context("NextPermutation", func() {
+			It("No permutation", func() {
+				empty := []int{}
+				noPermutation := []int{5, 4, 2, 1, -1}
+				Expect(Algo.NextPermutation(empty)).To(BeFalse())
+				Expect(Algo.NextPermutation(noPermutation)).To(BeFalse())
+			})
+
+			It("permutation", func() {
+				Expect(Algo.NextPermutation(v)).To(BeTrue())
+				Expect(v).To(Equal([]int{1, 2, 5, -1, 4}))
+			})
+		})
+
+		It("PrevPermutation", func() {
+			copyV := append([]int{}, v...)
+			Expect(Algo.PrevPermutation(v)).To(BeTrue())
+			Algo.NextPermutation(v)
+			Expect(v).To(Equal(copyV))
+		})
+
 	})
 })
