@@ -796,4 +796,60 @@ var _ = Describe("AlgorithmAndDataStructure", func() {
 			Expect(Algo.PartialSum([]int{1})).To(Equal([]int{1}))
 		})
 	})
+
+	Describe("Partitioning", func() {
+		var v []int
+		var lessThan20 func(int) bool
+		var notLessThan20 func(int) bool
+
+		BeforeEach(func() {
+			v = []int{10, 20, 5, 4, 3, 190}
+			lessThan20 = func(x int) bool {
+				return x < 20
+			}
+			notLessThan20 = func(x int) bool {
+				return x >= 20
+			}
+		})
+
+		It("IsPartitioned", func() {
+			Expect(Algo.IsPartitioned(v, func(x int) bool {
+				return x < 25
+			})).To(BeTrue())
+
+			Expect(Algo.IsPartitioned(v, lessThan20)).To(BeFalse())
+		})
+
+		It("Partition", func() {
+			falseIdx := Algo.Partition(v, lessThan20)
+			Expect(Algo.AllOf(v[:falseIdx], lessThan20)).To(BeTrue())
+			Expect(Algo.AllOf(v[falseIdx:], notLessThan20)).To(BeTrue())
+		})
+
+		It("PartitionCopy", func() {
+			truePart, falsePart := Algo.PartitionCopy(v, lessThan20)
+			Expect(Algo.AllOf(truePart, lessThan20)).To(BeTrue())
+			Expect(Algo.AllOf(falsePart, notLessThan20)).To(BeTrue())
+		})
+
+		It("StablePartition", func() {
+			even := func(x int) bool {
+				return x%2 == 0
+			}
+
+			before := []int{20, 10, 5, 4, 3, 1, 2}
+			after := []int{20, 10, 4, 2, 5, 3, 1}
+			Algo.StablePartition(before, even)
+			Expect(before).To(Equal(after))
+
+			before2 := []int{10, 2, 5, 4, 1, 3, 20}
+			after2 := []int{10, 2, 4, 20, 5, 1, 3}
+			Algo.StablePartition(before2, even)
+			Expect(before2).To(Equal(after2))
+		})
+
+		It("PartitionPoint", func() {
+			Expect(Algo.PartitionPoint(v, lessThan20)).To(Equal(1))
+		})
+	})
 })
