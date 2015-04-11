@@ -154,31 +154,32 @@ unique_copy = (ary) ->
   return copy
 
 
-module.exports =
-  copy: copy
-  copy_if: copy_if
-  copy_n: copy_n
-  copy_backward: copy_backward
-  move: move
-  move_backward: move_backward
-  fill: fill
-  fill_n: fill_n
-  transform: transform
-  generate: generate
-  generate_n: generate_n
-  remove: remove
-  remove_if: remove_if
-  remove_copy: remove_copy
-  remove_copy_if: remove_copy_if
-  replace: replace
-  replace_if: replace_if
-  replace_copy: replace_copy
-  replace_copy_if: replace_copy_if
-  swap_range: swap_range
-  reverse: reverse
-  reverse_copy: reverse_copy
-  shuffle: shuffle
-  rotate: rotate
-  rotate_copy: rotate_copy
-  unique: unique
-  unique_copy: unique_copy
+module.exports = {
+  copy,
+  copy_if,
+  copy_n,
+  copy_backward,
+  move,
+  move_backward,
+  fill,
+  fill_n,
+  transform,
+  generate,
+  generate_n,
+  remove,
+  remove_if,
+  remove_copy,
+  remove_copy_if,
+  replace,
+  replace_if,
+  replace_copy,
+  replace_copy_if,
+  swap_range,
+  reverse,
+  reverse_copy,
+  shuffle,
+  rotate,
+  rotate_copy,
+  unique,
+  unique_copy
+}

@@ -64,11 +64,12 @@ nth_element = (seq, n) ->
       Heap.push_heap(heap, seq[i])
   return Heap.pop_heap heap
 
-module.exports =
-  sort: sort
-  is_sorted: is_sorted
-  is_sorted_until: is_sorted_until
-  partial_sort: partial_sort
-  partial_sort_copy: partial_sort_copy
-  stable_sort: stable_sort
-  nth_element: nth_element
+module.exports = {
+  sort,
+  is_sorted,
+  is_sorted_until,
+  partial_sort,
+  partial_sort_copy,
+  stable_sort,
+  nth_element
+}

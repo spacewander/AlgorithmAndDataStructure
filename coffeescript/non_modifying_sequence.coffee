@@ -83,19 +83,20 @@ search_n = (ary, n, value, cb) ->
   search ary, sub, cb
 
 
-module.exports =
-  all_of : all_of
-  any_of : any_of
-  none_of : none_of
-  for_each : for_each
-  count_if : count_if
-  count : count
-  mismatch : mismatch
-  equal : equal
-  find_if : find_if
-  find_if_not : find_if_not
-  find : find
-  find_end : find_end
-  find_first_of : find_first_of
-  search : search
-  search_n : search_n
+module.exports = {
+  all_of,
+  any_of,
+  none_of,
+  for_each,
+  count_if,
+  count,
+  mismatch,
+  equal,
+  find_if,
+  find_if_not,
+  find,
+  find_end,
+  find_first_of,
+  search,
+  search_n
+}

@@ -56,11 +56,12 @@ intersection = (a, b) ->
   Array.prototype.filter.call a, (e) ->
     aInb(e, b)
 
-module.exports =
-  merge: merge
-  inplace_merge: inplace_merge
-  includes: includes
-  union: union
-  difference: difference
-  symmetric_difference: symmetric_difference
-  intersection: intersection
+module.exports = {
+  merge,
+  inplace_merge,
+  includes,
+  union,
+  difference,
+  symmetric_difference,
+  intersection
+}

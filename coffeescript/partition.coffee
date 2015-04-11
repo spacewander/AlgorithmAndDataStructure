@@ -36,9 +36,10 @@ stable_partition = (seq, func) ->
       tmp = Array.prototype.splice.call seq, i, 1
       Array.prototype.push.call seq, tmp[0]
 
-module.exports =
-  is_partitioned: is_partitioned
-  partition_point: partition_point
-  parition: parition
-  parition_copy: parition_copy
-  stable_partition: stable_partition
+module.exports = {
+  is_partitioned,
+  partition_point,
+  parition,
+  parition_copy,
+  stable_partition
+}

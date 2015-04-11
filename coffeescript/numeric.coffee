@@ -20,4 +20,10 @@ partial_sum = (seq) ->
   sum = seq[0]
   [seq[0]].concat(sum += seq[i] for i in [1...seq.length])
 
-module.exports = { itoa, accumulate, inner_production, adjacent_difference, partial_sum }
+module.exports = {
+  itoa,
+  accumulate,
+  inner_production,
+  adjacent_difference,
+  partial_sum
+}

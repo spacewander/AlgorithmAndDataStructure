@@ -81,14 +81,15 @@ prev_permutation = (seq) ->
       Array.prototype.reverse.call ary
       return false
 
-module.exports =
-  min: min
-  max: max
-  minmax: minmax
-  min_element: min_element
-  max_element: max_element
-  minmax_element: minmax_element
-  lexicographical_compare: lexicographical_compare
-  is_permutation: is_permutation
-  next_permutation: next_permutation
-  prev_permutation: prev_permutation
+module.exports = {
+  min,
+  max,
+  minmax,
+  min_element,
+  max_element,
+  minmax_element,
+  lexicographical_compare,
+  is_permutation,
+  next_permutation,
+  prev_permutation
+}

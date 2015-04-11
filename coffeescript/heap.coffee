@@ -43,10 +43,11 @@ sort_heap = (seq, func) ->
   res = (pop_heap(seq) for i in [0...size])
   Array.prototype.push.call(seq, res[j]) for j in [0...res.length]
 
-module.exports =
-  is_heap: is_heap
-  is_heap_until: is_heap_until
-  make_heap: make_heap
-  pop_heap: pop_heap
-  push_heap: push_heap
-  sort_heap: sort_heap
+module.exports = {
+  is_heap,
+  is_heap_until,
+  make_heap,
+  pop_heap,
+  push_heap,
+  sort_heap
+}
