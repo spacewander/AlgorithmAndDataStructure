@@ -118,16 +118,22 @@ object NonModifyingSequence {
     val aSize = a.size
     val bSize = b.size
     var j = 0
+    var conflict = false
     if (bSize == 0)
       return 0
-    for (i <- 0 to aSize - bSize - 1; k <- i to aSize - 1) {
-      if (!f(a(k), b(j)))
-        j = 0
-      else {
-        j += 1
-        if (j == bSize)
-          return i
+    for (i <- 0 until aSize - bSize) {
+      for (k <- i until aSize if !conflict) {
+        if (!f(a(k), b(j))) {
+          j = 0
+          conflict = true
+        }
+        else {
+          j += 1
+          if (j == bSize)
+            return i
+        }
       }
+      conflict = false
     }
     return aSize
   }
@@ -138,5 +144,31 @@ object NonModifyingSequence {
         return 0
       val b = Seq.fill(count)(value)
       this.Search(a, b, f)
+  }
+
+  // another Search, find the first range from back to front. If no range 
+  // found, return -1
+  def FindEnd[T](a: Seq[T], b: Seq[T], f: (T, T) => Boolean) : Int = {
+    val aSize = a.size
+    val bSize = b.size
+    var conflict = false
+    var j = 0
+    if (bSize == 0)
+      return 0
+    for (i <- aSize - bSize - 1 to (0, -1)) {
+      for (k <- i to aSize - 1 if !conflict) {
+        if (!f(a(k), b(j))) {
+          j = 0
+          conflict = true
+        }
+        else {
+          j += 1
+          if (j == bSize)
+            return i
+        }
+      }
+      conflict = false
+    }
+    return -1
   }
 }

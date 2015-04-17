@@ -3,7 +3,7 @@ import collection.mutable.ArrayBuffer
 
 import algorithm._
 
-class ExampleSpec extends FlatSpec with Matchers {
+class NonModifyingSequenceSpec extends FlatSpec with Matchers {
 
   def lessThan(x: Int): Int => Boolean = (y: Int) => y < x
   def isEqual(x: Int): Int => Boolean = (y: Int) => y == x
@@ -95,6 +95,15 @@ class ExampleSpec extends FlatSpec with Matchers {
     NonModifyingSequence.FindFirstOf(list, empty, equalEach) should be(None)
   }
 
+  it should "FindEnd OK" in new Fixture {
+    val seq = Seq(1, 2, 1, 2, 1)
+    val target = Seq(1, 2)
+    NonModifyingSequence.FindEnd(seq, target, equalEach) should be(2)
+    val empty : Seq[Int] = Seq()
+    NonModifyingSequence.FindEnd(seq, empty, equalEach) should be(0)
+    val long = Seq(1, 1, 2, 1, 2, 1)
+    NonModifyingSequence.FindEnd(seq, long, equalEach) should be(-1)
+  }
   it should "AdjacentFind OK" in new Fixture {
     NonModifyingSequence.AdjacentFind(list, equalEach) should be(Some(1))
     val empty : Seq[Int] = Seq()
