@@ -1,5 +1,6 @@
 import org.scalatest._
 import collection.mutable.ArrayBuffer
+import collection.mutable.Seq
 
 import algorithm._
 
@@ -121,5 +122,43 @@ class ModifyingSequenceSpec extends FlatSpec with Matchers {
 
   it should "ReverseCopy OK" in new Fixture {
     ModifyingSequence.ReverseCopy(b) should be(ArrayBuffer(3, 2))
+  }
+
+  // the Rotate function works like java.util.Collections.rotate:
+  // After calling this method, the element at index i will be the element 
+  // previously at index (i - distance) mod list.size(), 
+  // for all values of i between 0 and list.size()-1, inclusive
+  it should "Rotate OK" in new Fixture {
+    var c = Seq(0, 1, 2, 3, 4, 5)
+    var d = Seq(0, 1, 2, 3, 4, 5)
+    ModifyingSequence.Rotate(c, 2)
+    c should be(Seq(4, 5, 0, 1, 2, 3))
+    ModifyingSequence.Rotate(d, 3)
+    d should be(Seq(3, 4, 5, 0, 1, 2))
+  }
+
+  it should "RotateCopy OK" in new Fixture {
+    var c = Seq(0, 1, 2, 3, 4)
+    var d = Seq(0, 1, 2, 3, 4)
+    ModifyingSequence.RotateCopy(c, 1) should be(Seq(4, 0, 1, 2, 3))
+    ModifyingSequence.RotateCopy(d, 4) should be(Seq(1, 2, 3, 4, 0))
+  }
+
+  it should "Shuffle OK" in new Fixture {
+    ModifyingSequence.Shuffle(b) should contain only(2, 3)
+  }
+
+  it should "Unique OK" in new Fixture {
+    ModifyingSequence.Unique(a)
+    a should be(ArrayBuffer(1))
+    var long = ArrayBuffer(1, 2, 1, 1, 2, 2)
+    ModifyingSequence.Unique(long)
+    long should be(ArrayBuffer(1, 2, 1, 2))
+  }
+
+  it should "UniqueCopy OK" in new Fixture {
+    ModifyingSequence.UniqueCopy(a) should be(ArrayBuffer(1))
+    var long = ArrayBuffer(1, 2, 1, 1, 2, 2)
+    ModifyingSequence.UniqueCopy(long) should be(ArrayBuffer(1, 2, 1, 2))
   }
 }
