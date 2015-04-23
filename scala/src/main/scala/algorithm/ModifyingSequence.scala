@@ -52,8 +52,7 @@ object ModifyingSequence {
   }
 
   def Generate[T](c: Seq[T], g: () => T) {
-    val size = c.size
-    for (i <- 0 until size)
+    for (i <- 0 until c.size)
       c(i) = g()
   }
 
@@ -61,5 +60,69 @@ object ModifyingSequence {
   // return a new Sequence with size of N
   def GenerateN[T](N: Int, g: () => T) = {
     for (i <- 0 until N) yield g()
+  }
+
+  def Remove[T](c: Iterable[T], value: T) = {
+    c.filter((x: T) => x != value)
+  }
+
+  def RemoveIf[T](c: Iterable[T], f: T => Boolean) = {
+    c.filterNot(f)
+  }
+
+  // return two Iterable, one is elements removed, the other is elements remained
+  def RemoveCopyIf[T](c: Iterable[T], f: T => Boolean) = {
+    c.partition(f)
+  }
+
+  def RemoveCopy[T](c: Iterable[T], value: T) = {
+    this.RemoveCopyIf(c, (x: T) => x == value)
+  }
+
+  def Replace[T](c: Seq[T], before: T, after: T) {
+    for (i <- 0 until c.size) {
+      if (c(i) == before) {
+        c(i) = after
+      }
+    }
+  }
+
+  def ReplaceIf[T](c: Seq[T], f: T => Boolean, after: T) {
+    for (i <- 0 until c.size) {
+      if (f(c(i))) {
+        c(i) = after
+      }
+    }
+  }
+
+  def ReplaceCopy[T](c: Seq[T], before: T, after: T) = {
+    c.map((x: T) => if (x == before) after else x)
+  }
+
+  def ReplaceCopyIf[T](c: Seq[T], f: T => Boolean, after: T) = {
+    c.map((x: T) => if (f(x)) after else x)
+  }
+
+  def RangeSwap[T](a: Seq[T], b: Seq[T]) {
+    var i = 0
+    for ((x, y) <- a.zip(b)) {
+      a(i) = y
+      b(i) = x
+      i += 1
+    }
+  }
+
+  def Reverse[T](c: Seq[T]) {
+    val size = c.size - 1
+    val middle = (size + 1) / 2
+    for (i <- 0 until middle) {
+      val tmp = c(i)
+      c(i) = c(size - i)
+      c(size - i) = tmp
+    }
+  }
+
+  def ReverseCopy[T](c: Seq[T])  = {
+    c.reverseMap((x: T) => x)
   }
 }
