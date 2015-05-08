@@ -61,11 +61,12 @@ public class MinMax {
 		return new Pair(min, max);
 	}
 
+    // return true if a is lexicographically not less than b
 	public static boolean lexicographicalCompare(String a, String b) {
 		char[] ch1 = a.toCharArray();
 		char[] ch2 = b.toCharArray();
-		if (ch2.length < ch1.length)
-			return false;
+		if (ch2.length != ch1.length)
+			return a <= b;
 		int len = ch1.length;
 		for (int i = 0; i < len; i++) {
 			if (ch1[i] < ch2[i]) {
