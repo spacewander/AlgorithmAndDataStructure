@@ -14,8 +14,6 @@ public class Sorting {
 
 	public static <T extends Comparable> boolean isSorted(List<T> a) {
 		int size = a.size();
-		if (size < 1)
-			return true;
 		for (int i = 1; i < size; i++) {
 			if (a.get(i - 1).compareTo(a.get(i)) > 0)
 				return false;
@@ -43,10 +41,7 @@ public class Sorting {
 
 	// Quicksort
 	public static <T extends Comparable> void sort(List<T> a) {
-		int size = a.size();
-		if (size <= 1)
-			return;
-		quicksort(a, 0, size - 1);
+		quicksort(a, 0, a.size() - 1);
 	}
 
 	private static <T extends Comparable> void quicksort(List<T> a, int
@@ -112,8 +107,7 @@ public class Sorting {
 		return Heap.popHeap(tmp);
 	}
 
-	public static <T> void stableSort(List<T> a,
-	                                                     Comparator<T> cp) {
+	public static <T> void stableSort(List<T> a, Comparator<T> cp) {
 		int size = a.size();
 		if (size <= 1)
 			return;
@@ -126,7 +120,7 @@ public class Sorting {
 		int from = 0;
 		for (int to = 1; to < size; to++) {
 			if (cp.compare(a.get(from), a.get(to)) != 0) {
-				if (to - from > 0) {
+				if (to - from > 1) {
 					Collections.sort(a.subList(from, to), cp);
 				}
 				from = to;
