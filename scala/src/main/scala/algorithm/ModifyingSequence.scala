@@ -162,7 +162,7 @@ object ModifyingSequence {
     val rd = new Random()
     val size = c.size
     for (i <- 0 until size) {
-      val randNum = rd.nextInt(size)
+      val randNum = rd.nextInt(i + 1)
       val tmp = c(i)
       c(i) = c(randNum)
       c(randNum) = tmp

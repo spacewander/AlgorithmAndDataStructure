@@ -110,7 +110,7 @@ def rotate_copy(seq, pivot):
 def shuffle(seq):
     length = len(seq)
     for i in range(0, length) :
-        random = randint(0, length - 1)
+        random = randint(0, i)
         seq[i], seq[random] = seq[random], seq[i]
 
 def unique(seq):

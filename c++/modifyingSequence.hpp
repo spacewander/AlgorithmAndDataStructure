@@ -269,7 +269,7 @@ void shuffle(RandomIt start, RandomIt end)
     auto n = end - start;
     std::random_device rd;
     for (int i = n - 1; i > 0; --i) {
-        int randomNum = rd() % n;
+        int randomNum = rd() % (i + 1);
         std::swap(*(start + i), *(start + randomNum));
     }
 }

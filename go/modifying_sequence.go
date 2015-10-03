@@ -232,9 +232,8 @@ func RotateCopy(dest []int, src []int, pivot int) []int {
 }
 
 func Shuffle(dest []int) {
-	end := len(dest)
 	for i := range dest {
-		rd := rand.Intn(end)
+		rd := rand.Intn(i + 1)
 		dest[i], dest[rd] = dest[rd], dest[i]
 	}
 }

@@ -235,7 +235,7 @@ public class ModifyingSequence {
 		int size = a.size();
 		Random rd = new Random();
 		for (int i = 0; i < size; i++) {
-			int randomNum = rd.nextInt(size);
+			int randomNum = rd.nextInt(i + 1);
 			T tmp = a.get(i);
 			a.set(i, a.get(randomNum));
 			a.set(randomNum, tmp);

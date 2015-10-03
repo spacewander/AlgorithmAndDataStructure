@@ -118,7 +118,7 @@ reverse_copy = (ary) ->
 shuffle = (ary) ->
   len = ary.length
   for i in [0...len]
-    random = Math.floor(Math.random() * len)
+    random = Math.floor(Math.random() * (i + 1))
     [ary[i], ary[random]] = [ary[random], ary[i]]
 
 rotate = (ary, pivot) ->
