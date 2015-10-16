@@ -5,17 +5,17 @@
 
 namespace my {
 
-template<typename ForwordIt, typename Compare>
-bool is_sorted(ForwordIt start, ForwordIt end, Compare cp)
+template<typename ForwardIt, typename Compare>
+bool is_sorted(ForwardIt start, ForwardIt end, Compare cp)
 {
     return std::is_sorted_until(start, end, cp) == end;
 }
 
-template<typename ForwordIt, typename Compare>
-ForwordIt is_sorted_until(ForwordIt start, ForwordIt end, Compare cp)
+template<typename ForwardIt, typename Compare>
+ForwardIt is_sorted_until(ForwardIt start, ForwardIt end, Compare cp)
 {
     using namespace std::placeholders;
-    ForwordIt it = std::adjacent_find(start, end, std::bind(cp, _2, _1));
+    ForwardIt it = std::adjacent_find(start, end, std::bind(cp, _2, _1));
     return it == end ? end : std::next(it);
 }
 

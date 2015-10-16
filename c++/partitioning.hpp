@@ -20,13 +20,13 @@ bool is_partitioned(InputIt start, InputIt end, UnaryPredicate f)
 }
 
 // true elements group is ahead of false elements group
-template<typename ForwordIt, typename UnaryPredicate>
-ForwordIt partition(ForwordIt start, ForwordIt end, UnaryPredicate f)
+template<typename ForwardIt, typename UnaryPredicate>
+ForwardIt partition(ForwardIt start, ForwardIt end, UnaryPredicate f)
 {
     while (start != end && f(*start)) {
         ++start;
     }
-    for (ForwordIt pioneer = start;pioneer != end; ++pioneer) {
+    for (ForwardIt pioneer = start;pioneer != end; ++pioneer) {
         if (f(*pioneer)) {
             std::iter_swap(start, pioneer);
             ++start;
@@ -64,15 +64,17 @@ BidirIt stable_partition(BidirIt start, BidirIt end, UnaryPredicate f)
             ++start;
             BidirIt follower = pioneer;
             while (follower != start) {
-                std::iter_swap(follower, --follower);
+                BidirIt prevFollower = follower;
+                --follower;
+                std::iter_swap(prevFollower, follower);
             }
         }
     }
     return start;
 }
 
-template<typename ForwordIt, typename UnaryPredicate>
-ForwordIt partition_point(ForwordIt start, ForwordIt end, UnaryPredicate f)
+template<typename ForwardIt, typename UnaryPredicate>
+ForwardIt partition_point(ForwardIt start, ForwardIt end, UnaryPredicate f)
 {
     while (start != end) {
         if (!f(*start)) {

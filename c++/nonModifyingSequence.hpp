@@ -115,16 +115,16 @@ InputIt find_if_not(InputIt start, InputIt end, UnaryPredicate f)
     return end;
 }
 
-template<typename ForwordIt1, typename ForwordIt2, typename BinaryPredicate>
-ForwordIt1 find_end(ForwordIt1 start, ForwordIt1 end, 
-                    ForwordIt2 subStart, ForwordIt2 subEnd, BinaryPredicate f)
+template<typename ForwardIt1, typename ForwardIt2, typename BinaryPredicate>
+ForwardIt1 find_end(ForwardIt1 start, ForwardIt1 end, 
+                    ForwardIt2 subStart, ForwardIt2 subEnd, BinaryPredicate f)
 {
     if (subStart == subEnd) {
         return end;
     }
-    ForwordIt1 result = end;
+    ForwardIt1 result = end;
     while (true) {
-        ForwordIt1 curResult = std::search(start, end, subStart, subEnd, f);
+        ForwardIt1 curResult = std::search(start, end, subStart, subEnd, f);
         if (curResult == end) {
             return result;
         } 
@@ -136,12 +136,12 @@ ForwordIt1 find_end(ForwordIt1 start, ForwordIt1 end,
     }
 }
 
-template<typename InputIt, typename ForwordIt, typename BinaryPredicate>
-ForwordIt find_first_of(InputIt start, InputIt end, 
-                    ForwordIt subStart, ForwordIt subEnd, BinaryPredicate f)
+template<typename InputIt, typename ForwardIt, typename BinaryPredicate>
+ForwardIt find_first_of(InputIt start, InputIt end, 
+                    ForwardIt subStart, ForwardIt subEnd, BinaryPredicate f)
 {
     for (; start != end; ++start) {
-        for (ForwordIt it = subStart; it != subEnd; ++it) {
+        for (ForwardIt it = subStart; it != subEnd; ++it) {
             if (f(*start, *it)) {
                 return start;
             }
@@ -150,13 +150,13 @@ ForwordIt find_first_of(InputIt start, InputIt end,
     return end;
 }
 
-template<typename ForwordIt, typename BinaryPredicate>
-ForwordIt adjacent_find(ForwordIt start, ForwordIt end, BinaryPredicate f)
+template<typename ForwardIt, typename BinaryPredicate>
+ForwardIt adjacent_find(ForwardIt start, ForwardIt end, BinaryPredicate f)
 {
     if (start == end) {
         return end;
     }
-    for (ForwordIt next = std::next(start); next != end; ++next, ++start) {
+    for (ForwardIt next = std::next(start); next != end; ++next, ++start) {
         if (f(*start, *next)) {
             return start;
         }
@@ -164,13 +164,13 @@ ForwordIt adjacent_find(ForwordIt start, ForwordIt end, BinaryPredicate f)
     return end;
 }
 
-template<typename ForwordIt1, typename ForwordIt2, typename BinaryPredicate>
-ForwordIt1 search(ForwordIt1 start, ForwordIt1 end, 
-                  ForwordIt2 subStart, ForwordIt2 subEnd, BinaryPredicate f)
+template<typename ForwardIt1, typename ForwardIt2, typename BinaryPredicate>
+ForwardIt1 search(ForwardIt1 start, ForwardIt1 end, 
+                  ForwardIt2 subStart, ForwardIt2 subEnd, BinaryPredicate f)
 {
     while (true) {
-        ForwordIt1 it = start;
-        for (ForwordIt2 subIt = subStart;; ++it, ++subIt) {
+        ForwardIt1 it = start;
+        for (ForwardIt2 subIt = subStart;; ++it, ++subIt) {
             if (subIt == subEnd) {
                 return start;
             }
@@ -185,15 +185,15 @@ ForwordIt1 search(ForwordIt1 start, ForwordIt1 end,
     }
 }
 
-template<typename ForwordIt, typename T, typename BinaryPredicate>
-ForwordIt search_n(ForwordIt start, ForwordIt end, const int count, 
+template<typename ForwardIt, typename T, typename BinaryPredicate>
+ForwardIt search_n(ForwardIt start, ForwardIt end, const int count, 
         const T &match, BinaryPredicate f)
 {
     for (; start != end; ++start) {
         if (!f(*start, match)) {
             continue;
         }
-        ForwordIt result = start;
+        ForwardIt result = start;
         int curCount = 0;
         while (++curCount > 0) {
             if (curCount == count) {

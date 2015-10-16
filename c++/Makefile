@@ -1,4 +1,4 @@
-CC := clang++
+CC := g++
 LIBGTEST := ../lib/libgtest.a
 GTESTHEADERS := ../lib
 TARGETS := a.out

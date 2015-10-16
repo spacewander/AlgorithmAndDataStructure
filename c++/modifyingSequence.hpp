@@ -66,8 +66,8 @@ BidirIt2 move_backward(BidirIt1 start, BidirIt1 end, BidirIt2 outEnd)
     return outEnd;
 }
 
-template<typename ForwordIt, typename T>
-void fill(ForwordIt start, ForwordIt end, const T &value)
+template<typename ForwardIt, typename T>
+void fill(ForwardIt start, ForwardIt end, const T &value)
 {
     while (start != end) {
         *start++ = value;
@@ -92,8 +92,8 @@ OutputIt transform(InputIt start, InputIt end, OutputIt outStart,
     return outStart;
 }
 
-template<typename ForwordIt, typename Generator>
-void generate(ForwordIt start, ForwordIt end, Generator g)
+template<typename ForwardIt, typename Generator>
+void generate(ForwardIt start, ForwardIt end, Generator g)
 {
     while (start != end) {
         *start++ = g();
@@ -108,11 +108,11 @@ void generate_n(OutputIt start, const int count, Generator g)
     }
 }
 
-template<typename ForwordIt, typename T>
-ForwordIt remove(ForwordIt start, ForwordIt end, const T& match)
+template<typename ForwardIt, typename T>
+ForwardIt remove(ForwardIt start, ForwardIt end, const T& match)
 {
     if ((start = std::find(start, end, match)) != end) {
-        for (ForwordIt i = start; i != end; ++i) {
+        for (ForwardIt i = start; i != end; ++i) {
             if (!(*i == match)) {
                 *start++ = std::move(*i);
             }
@@ -121,11 +121,11 @@ ForwordIt remove(ForwordIt start, ForwordIt end, const T& match)
     return start;
 }
 
-template<typename ForwordIt, typename UnaryPredicate>
-ForwordIt remove_if(ForwordIt start, ForwordIt end, UnaryPredicate f)
+template<typename ForwardIt, typename UnaryPredicate>
+ForwardIt remove_if(ForwardIt start, ForwardIt end, UnaryPredicate f)
 {
     if ((start = std::find_if(start, end, f)) != end) {
-        for (ForwordIt i = std::next(start); i != end; ++i) {
+        for (ForwardIt i = std::next(start); i != end; ++i) {
             if (!f(*i)) {
                 *start++ = std::move(*i);
             }
@@ -158,8 +158,8 @@ OutputIt remove_copy_if(InputIt start, InputIt end, OutputIt outStart,
     return outStart;
 }
 
-template<typename ForwordIt, typename T>
-void replace(ForwordIt start, ForwordIt end, const T &before, const T &after)
+template<typename ForwardIt, typename T>
+void replace(ForwardIt start, ForwardIt end, const T &before, const T &after)
 {
     for (; start != end; ++start) {
         if (*start == before) {
@@ -168,8 +168,8 @@ void replace(ForwordIt start, ForwordIt end, const T &before, const T &after)
     }
 }
 
-template<typename ForwordIt, typename UnaryPredicate, typename T>
-void replace_if(ForwordIt start, ForwordIt end, UnaryPredicate f, 
+template<typename ForwardIt, typename UnaryPredicate, typename T>
+void replace_if(ForwardIt start, ForwardIt end, UnaryPredicate f, 
                 const T &after)
 {
     for (; start != end; ++start) {
@@ -208,8 +208,8 @@ void swap(T &a, T &b)
     b = std::move(tmp);
 }
 
-template<typename ForwordIt1, typename ForwordIt2>
-ForwordIt2 swap_ranges(ForwordIt1 start1, ForwordIt1 end1, ForwordIt2 start2)
+template<typename ForwardIt1, typename ForwardIt2>
+ForwardIt2 swap_ranges(ForwardIt1 start1, ForwardIt1 end1, ForwardIt2 start2)
 {
     while (start1 != end1) {
         std::iter_swap(start1++, start2++);
@@ -217,8 +217,8 @@ ForwordIt2 swap_ranges(ForwordIt1 start1, ForwordIt1 end1, ForwordIt2 start2)
     return start2;
 }
 
-template<typename ForwordIt1, typename ForwordIt2>
-void iter_swap(ForwordIt1 a, ForwordIt2 b)
+template<typename ForwardIt1, typename ForwardIt2>
+void iter_swap(ForwardIt1 a, ForwardIt2 b)
 {
     std::swap(*a, *b);
 }
@@ -240,10 +240,10 @@ OutputIt reverse_copy(BidirIt start, BidirIt end, OutputIt outStart)
     return outStart;
 }
 
-template<typename ForwordIt>
-void rotate(ForwordIt start, ForwordIt newStart, ForwordIt end)
+template<typename ForwardIt>
+void rotate(ForwardIt start, ForwardIt newStart, ForwardIt end)
 {
-    ForwordIt newPlace = newStart;
+    ForwardIt newPlace = newStart;
     while (start != newPlace) {
         std::iter_swap(start++, newPlace++);
         if (newPlace == end) {
@@ -255,9 +255,9 @@ void rotate(ForwordIt start, ForwordIt newStart, ForwordIt end)
     }
 }
 
-template<typename ForwordIt, typename OutputIt>
-OutputIt rotate_copy(ForwordIt start, ForwordIt newStart, 
-                     ForwordIt end, OutputIt outStart)
+template<typename ForwardIt, typename OutputIt>
+OutputIt rotate_copy(ForwardIt start, ForwardIt newStart, 
+                     ForwardIt end, OutputIt outStart)
 {
     outStart = std::copy(newStart, end, outStart);
     return std::copy(start, newStart, outStart);
@@ -274,13 +274,13 @@ void shuffle(RandomIt start, RandomIt end)
     }
 }
 
-template<typename ForwordIt>
-ForwordIt unique(ForwordIt start, ForwordIt end)
+template<typename ForwardIt>
+ForwardIt unique(ForwardIt start, ForwardIt end)
 {
     if (start == end) {
         return end;
     }
-    ForwordIt result = start;
+    ForwardIt result = start;
     while (++start != end) {
         if (!(*result == *start)) {
             *(++result) = *start;
@@ -289,14 +289,14 @@ ForwordIt unique(ForwordIt start, ForwordIt end)
     return ++result;
 }
 
-template<typename ForwordIt, typename OutputIt>
-OutputIt unique_copy(ForwordIt start, ForwordIt end, OutputIt outStart)
+template<typename ForwardIt, typename OutputIt>
+OutputIt unique_copy(ForwardIt start, ForwardIt end, OutputIt outStart)
 {
     if (start == end) {
         return outStart;
     }
     *outStart = *start;
-    for (ForwordIt head = start++;start != end;++start) {
+    for (ForwardIt head = start++;start != end;++start) {
         if (!(*head == *start)) {
             *(++outStart) = *start;
             head = start;

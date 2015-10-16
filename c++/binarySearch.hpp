@@ -6,10 +6,10 @@
 namespace my {
 
 // return iterator points to the first element which is not less than value
-template<typename ForwordIt, typename T>
-ForwordIt lower_bound(ForwordIt start, ForwordIt end, const T& value)
+template<typename ForwardIt, typename T>
+ForwardIt lower_bound(ForwardIt start, ForwardIt end, const T& value)
 {
-    ForwordIt it;
+    ForwardIt it;
     size_t count = std::distance(start, end);
     size_t step;
     while (count > 0) {
@@ -27,10 +27,10 @@ ForwordIt lower_bound(ForwordIt start, ForwordIt end, const T& value)
 }
 
 // return iterator points to the first element which is greater than value
-template<typename ForwordIt, typename T>
-ForwordIt upper_bound(ForwordIt start, ForwordIt end, const T& value)
+template<typename ForwardIt, typename T>
+ForwardIt upper_bound(ForwardIt start, ForwardIt end, const T& value)
 {
-    ForwordIt it;
+    ForwardIt it;
     size_t count = std::distance(start, end);
     size_t step;
     while (count > 0) {
@@ -47,15 +47,15 @@ ForwordIt upper_bound(ForwordIt start, ForwordIt end, const T& value)
     return start;
 }
 
-template<typename ForwordIt, typename T, typename Compare>
-bool binary_search(ForwordIt start, ForwordIt end, const T& value, Compare cp)
+template<typename ForwardIt, typename T, typename Compare>
+bool binary_search(ForwardIt start, ForwardIt end, const T& value, Compare cp)
 {
     start = std::lower_bound(start, end, value, cp);
     return !(start == end) && !cp(value, *start);
 }
 
-template<typename ForwordIt, typename T>
-std::pair<ForwordIt, ForwordIt> equal_range(ForwordIt start, ForwordIt end, 
+template<typename ForwardIt, typename T>
+std::pair<ForwardIt, ForwardIt> equal_range(ForwardIt start, ForwardIt end, 
         const T& value)
 {
     return std::make_pair(std::lower_bound(start, end, value),

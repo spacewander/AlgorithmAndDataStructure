@@ -17,11 +17,11 @@ const T& min(const T& a, const T& b)
     return (a < b) ? a : b;
 }
 
-template<typename ForwordIt>
-ForwordIt max_element(ForwordIt start, ForwordIt end)
+template<typename ForwardIt>
+ForwardIt max_element(ForwardIt start, ForwardIt end)
 {
     if (start == end) return end;
-    ForwordIt largest = start;
+    ForwardIt largest = start;
     ++start;
     for (; start != end; ++start) {
         if (*largest < *start)
@@ -30,11 +30,11 @@ ForwordIt max_element(ForwordIt start, ForwordIt end)
     return largest;
 }
 
-template<typename ForwordIt>
-ForwordIt min_element(ForwordIt start, ForwordIt end)
+template<typename ForwardIt>
+ForwardIt min_element(ForwardIt start, ForwardIt end)
 {
     if (start == end) return end;
-    ForwordIt smallest = start;
+    ForwardIt smallest = start;
     ++start;
     for (; start != end; ++start) {
         if (*smallest > *start)
@@ -50,10 +50,10 @@ std::pair<const T&, const T&> minmax(const T& a, const T& b)
                    : std::pair<const T&, const T&>(b, a);
 }
 
-template<typename ForwordIt>
-std::pair<ForwordIt, ForwordIt> minmax_element(ForwordIt start, ForwordIt end)
+template<typename ForwardIt>
+std::pair<ForwardIt, ForwardIt> minmax_element(ForwardIt start, ForwardIt end)
 {
-    std::pair<ForwordIt, ForwordIt> result(start, start);
+    std::pair<ForwardIt, ForwardIt> result(start, start);
     if (start == end) return result;
     while (++start != end) {
         if (*start < *result.first)
@@ -76,15 +76,15 @@ bool lexicographical_compare(InputIt1 start1, InputIt1 end1,
     return start1 == end1 && start2 != end2;
 }
 
-template<typename ForwordIt1, typename ForwordIt2>
-bool is_permutation(ForwordIt1 start1, ForwordIt1 end1,
-        ForwordIt2 start2, ForwordIt2 end2)
+template<typename ForwardIt1, typename ForwardIt2>
+bool is_permutation(ForwardIt1 start1, ForwardIt1 end1,
+        ForwardIt2 start2, ForwardIt2 end2)
 {
    if (std::distance(start1, end1) != std::distance(start2, end2))
        return false;
    std::tie(start1, start2) = std::mismatch(start1, end1, start2);
    if (start1 != end1) {
-       for (ForwordIt1 i = start1; i != end1; ++i) {
+       for (ForwardIt1 i = start1; i != end1; ++i) {
            if (i != std::find(start1, i, *i))
                continue;
            size_t match = std::count(start2, end2, *i);

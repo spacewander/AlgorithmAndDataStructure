@@ -5,8 +5,8 @@
 
 namespace my {
 
-template<typename ForwordIt, typename T>
-void itoa(ForwordIt start, ForwordIt end, T v)
+template<typename ForwardIt, typename T>
+void itoa(ForwardIt start, ForwardIt end, T v)
 {
     while (start != end) {
         *start++ = v;
