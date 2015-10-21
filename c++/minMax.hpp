@@ -99,13 +99,13 @@ template<typename BidirIt>
 bool next_permutation(BidirIt start, BidirIt end)
 {
     if (start == end || start + 1 == end) return false;
-    BidirIt i = end - 1;
+    BidirIt i = std::prev(end);
     while (true) {
         BidirIt i1 = i, i2;
         if (*--i < *i1) {
-            i2 = end - 1;
+            i2 = std::prev(end);
             while (!(*i < *i2))
-                i2--;
+                --i2;
             std::iter_swap(i, i2);
             std::reverse(i1, end);
             return true;
@@ -121,13 +121,13 @@ template<typename BidirIt>
 bool prev_permutation(BidirIt start, BidirIt end)
 {
     if (start == end || start + 1 == end) return false;
-    BidirIt i = end - 1;
+    BidirIt i = std::prev(end);
     while (true) {
         BidirIt i1 = i, i2;
         if (*i1 < *--i) {
-            i2 = end - 1;
+            i2 = std::prev(end);
             while (!(*i2 < *i))
-                i2--;
+                --i2;
             std::iter_swap(i, i2);
             std::reverse(i1, end);
             return true;

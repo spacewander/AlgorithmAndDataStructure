@@ -25,18 +25,17 @@ void sort(RandomIt start, RandomIt end, Compare cp)
 {
     if (std::distance(start, end) <= 1) 
         return;
-    using T = typename std::iterator_traits<RandomIt>::value_type;
     RandomIt pivot = std::next(start, std::distance(start, end) / 2);
-    T x = *pivot;
-    std::iter_swap(pivot, std::prev(end));
+    RandomIt e = std::prev(end);
+    std::iter_swap(pivot, e);
     RandomIt j = start;
-    for (RandomIt i = start, e = std::prev(end); i != e; ++i) {
-        if (cp(*i, x)) {
+    for (RandomIt i = start; i != e; ++i) {
+        if (cp(*i, *e)) {
             std::iter_swap(j, i);
             ++j;
         }
     }
-    std::iter_swap(std::prev(end), j);
+    std::iter_swap(e, j);
     my::sort(start, j, cp);
     my::sort(j + 1, end, cp);
 }
@@ -96,7 +95,7 @@ RandomIt quick_select(RandomIt left, RandomIt right, RandomIt border,
 {
     std::iter_swap(border, right);
     RandomIt storeIdx = left;
-    for (RandomIt i = left; i < right; ++i) {
+    for (RandomIt i = left; i != right; ++i) {
         if (cp(*i, *right)) {
             std::iter_swap(storeIdx, i);
             ++storeIdx;
