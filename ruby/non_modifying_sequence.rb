@@ -62,8 +62,8 @@ def find_if_not(iterable)
 end
 
 def find_end(iter1, iter2, &func)
-  func = Proc.new{|x, y| x == y} unless block_given?
   return nil if iter2.size == 0 || iter1.size < iter2.size
+  func = Proc.new{|x, y| x == y} unless block_given?
   idx = nil
   (0..(iter1.size - iter2.size)).each do |i|
     j = i
@@ -82,4 +82,22 @@ def find_first_of(iter1, iter2, &func)
     iter2.each{|v| return i if func.call(iter1[i], v)}
   end
   nil
+end
+
+def search(iter1, iter2, &func)
+  return nil if iter2.size == 0 || iter1.size < iter2.size
+  func = Proc.new{|x, y| x == y} unless block_given?
+  (0..(iter1.size - iter2.size)).each do |i|
+    j = i
+    iter2.each do |v|
+      break if !func.call(iter1[j], v)
+      j += 1
+    end
+    return i if j == (i + iter2.size)
+  end
+  nil
+end
+
+def search_n(iterable, n, match, &func)
+  search(iterable, Array.new(n, match), &func)
 end

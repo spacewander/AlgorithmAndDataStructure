@@ -82,4 +82,21 @@ class TestNonModifyingSequence < MiniTest::Test
     assert_equal nil, find_first_of(@ary, ary3)
     assert_equal 0, find_first_of(@ary, ary3){|x, y| x != y}
   end
+
+  def test_search
+    ary2 = [2, 3, 4]
+    assert_equal 1, search(@ary, ary2)
+    ary3 = [3, 5]
+    assert_equal nil, search(@ary, ary3)
+    ary4 = [1, 2, 3, 4, 5]
+    assert_equal 0, search(@ary, ary4)
+    ary5 = [1, 2, 3, 4, 5, 6]
+    assert_equal nil, search(@ary, ary5)
+  end
+
+  def test_search_n
+    ary = [1, 1, 2, 3]
+    assert_equal nil, search_n(ary, 3, 1)
+    assert_equal 0, search_n(ary, 2, 1)
+  end
 end

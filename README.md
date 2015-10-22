@@ -48,3 +48,11 @@ cd go
 # install onsi/ginkgo and onsi/gomega
 go test
 ```
+
+### Ruby
+
+```
+cd ruby
+rake
+# or rake TEST=non_modifying_sequence
+```
