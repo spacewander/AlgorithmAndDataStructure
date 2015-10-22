@@ -66,10 +66,9 @@ def find_end(iter1, iter2, func=lambda x, y: x == y):
     return find_end
 
 def find_first_of(iter1, iter2, func=lambda x, y: x == y):
-    for index, _ in  enumerate(iter1) :
-        for value in iter2 :
-            if func(iter1[index], value) :
-                return index
+    for index, value1 in  enumerate(iter1) :
+        for value2 in iter2 :
+            if func(value1, value2) : return index
     return None
 
 def search(iter1, iter2, func=lambda x, y: x == y):
