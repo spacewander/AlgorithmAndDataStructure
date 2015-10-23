@@ -40,7 +40,7 @@ def test_fill(ary):
     assert ary == [3, 3, 3, 3, 3]
 
 def test_fill_n(ary):
-    fill_n(ary, 3, 2)
+    fill_n(ary, 3, 3)
     assert ary == [3, 3, 3, 4, 5]
 
 def test_transform(ary, dict_x):

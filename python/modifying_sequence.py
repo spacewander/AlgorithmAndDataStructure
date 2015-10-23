@@ -27,6 +27,7 @@ def fill(seq, value):
         seq[i] = value
 
 def fill_n(seq, value, count):
+    count = min(count, len(seq))
     for i in range(0, count) :
         seq[i] = value
 

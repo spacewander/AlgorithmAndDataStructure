@@ -1,4 +1,5 @@
 # Implementations of non-modifying sequence algorithms
+module NonModifyingSequence
 
 def all_of(iterable)
   iterable.all?{|value| yield value}
@@ -100,4 +101,6 @@ end
 
 def search_n(iterable, n, match, &func)
   search(iterable, Array.new(n, match), &func)
+end
+
 end

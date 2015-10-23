@@ -2,6 +2,8 @@ require 'minitest/autorun'
 require_relative 'non_modifying_sequence'
 
 class TestNonModifyingSequence < MiniTest::Test
+  include NonModifyingSequence
+
   def setup
     @ary = [1, 2, 3, 4, 5]
   end
