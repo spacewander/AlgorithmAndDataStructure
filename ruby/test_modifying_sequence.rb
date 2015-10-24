@@ -73,4 +73,50 @@ class TestModifyingSequence < MiniTest::Test
   def test_remove_copy_if
     assert_equal [3, 4, 5], remove_copy_if(@ary){|x| x < 3}
   end
+
+  def test_replace
+    assert_equal [1, 2, 3, 5, 5], replace(@ary, 4, 5)
+    assert_equal Set.new([1, 2, 4]), Set.new(replace(@set, 3, 4))
+  end
+
+  def test_replace_if
+    assert_equal [1, 1, 3, 4, 5], replace_if(@ary, 1){|x| x < 3}
+  end
+
+  def test_swap
+    another_ary = [5, 4, 3, 2, 1]
+    after_swap_ary = Array.new(another_ary)
+    after_swap_another_ary = Array.new(@ary)
+    @ary, another_ary = swap(@ary, another_ary)
+    assert_equal after_swap_ary, @ary
+    assert_equal after_swap_another_ary, another_ary
+  end
+
+  def test_swap_range
+    another_ary = [5, 4, 3]
+    swap_range(@ary, another_ary, 0, 3)
+    assert_equal [5, 4, 3, 4, 5], @ary
+    assert_equal [1, 2, 3], another_ary
+  end
+
+  def test_reverse
+    reverse(@ary)
+    assert_equal [5, 4, 3, 2, 1], @ary
+  end
+
+  def test_rotate
+    assert_equal [4, 5, 1, 2, 3], rotate(@ary, 3)
+  end
+
+  def test_rotate_copy
+    assert_equal [4, 5, 1, 2, 3], rotate_copy(@ary, 3)
+  end
+
+  def test_shuffle
+    shuffle @ary
+  end
+
+  def test_unique
+    assert_equal [1, 2, 4], unique(@duplicate_ary)
+  end
 end

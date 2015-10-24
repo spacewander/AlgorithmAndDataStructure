@@ -90,7 +90,7 @@ def iter_swap(a, b):
 # require __setitem__ is implemented
 def reverse(seq):
     end = len(seq) - 1
-    for i in range(0, end / 2) :
+    for i in range(0, int(end / 2)) :
         seq[i], seq[end - i] = seq[end - i], seq[i]
 
 def reverse_copy(iter):
@@ -115,8 +115,10 @@ def shuffle(seq):
         seq[i], seq[random] = seq[random], seq[i]
 
 def unique(seq):
-    current = None
-    for i in range(0, len(seq)) :
+    if len(seq) <= 0: return
+    yield seq[0]
+    current = seq[0]
+    for i in range(1, len(seq)) :
         if current != seq[i] :
             current = seq[i]
             yield seq[i]
