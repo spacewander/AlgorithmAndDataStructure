@@ -41,8 +41,10 @@ def is_permutation(seq1, seq2):
     for j in seq2 :
         if j in pair :
             pair[j] -= 1
-            if pair[j] < 0 : return False
         else :
+            return False
+    for v in pair.values():
+        if v != 0:
             return False
     return True
 

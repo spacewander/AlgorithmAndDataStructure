@@ -84,7 +84,7 @@ def swap_range(a, b, start, stop)
   (start...stop).each{|i| a[i], b[i] = b[i], a[i]}
 end
 
-def _reverse(seq, start, stop)
+def reverse_in_place(seq, start, stop)
   (start..((start+stop)/2).to_i).each{
     |i| seq[i], seq[start+stop-i] = seq[start+stop-i], seq[i]
   }
@@ -92,16 +92,16 @@ end
 
 def reverse(seq)
   stop = seq.size - 1
-  _reverse(seq, 0, stop)
+  reverse_in_place(seq, 0, stop)
 end
 
 # implement reverse_copy as reverse
 alias_method :reverse_copy, :reverse
 
 def rotate(seq, pivot)
-  _reverse(seq, 0, pivot-1)
-  _reverse(seq, pivot, seq.length-1)
-  _reverse(seq, 0, seq.length-1)
+  reverse_in_place(seq, 0, pivot-1)
+  reverse_in_place(seq, pivot, seq.length-1)
+  reverse_in_place(seq, 0, seq.length-1)
   seq
 end
 
