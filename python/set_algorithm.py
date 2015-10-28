@@ -1,7 +1,7 @@
 # Implementations of set algorithms.
 
 # Both merge and inplace_merge require seq1 and seq2 are sorted.
-# And result they returned is sortrf too.
+# And result they returned is sorted too.
 def merge(seq1, seq2):
     res = []
     i = j = 0
