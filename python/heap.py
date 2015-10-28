@@ -9,14 +9,12 @@ def sort_heap(seq):
     return [heappop(h) for i in range(len(h))]
 
 def is_heap(seq):
-    if len(seq) == 0 : return True
     for i in range(1, len(seq)) :
         if seq[i] < seq[int((i - 1)/ 2)] :
             return False
     return True
 
 def is_heap_until(seq):
-    if len(seq) == 0 : return 0
     for i in range(1, len(seq)) :
         if seq[i] < seq[int((i - 1)/ 2)] :
             return i
