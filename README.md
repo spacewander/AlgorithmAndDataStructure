@@ -56,3 +56,10 @@ cd ruby
 rake
 # or rake TEST=non_modifying_sequence
 ```
+
+### Lua
+
+```
+cd lua
+busted # run all *_spec.lua tests
+```
