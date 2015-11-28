@@ -12,6 +12,7 @@ languages[javascript]=$(find javascript -name '*.js' -not -iname '*spec.js' -exe
 languages[python]=$(find python -name '*.py' -not -iname 'test_*.py' -exec wc -l {} + | tail -1 | awk '{print $1}')
 languages[scala]=$(find scala/src/main/scala/algorithm/ -name '*.scala' -exec wc -l {} + | tail -1 | awk '{print $1}')
 languages[ruby]=$(find ruby -name '*.rb' -not -iname 'test_*.rb' -exec wc -l {} + | tail -1 | awk '{print $1}')
+languages[lua]=$(find lua -name '*.lua' -not -iname 'test_*.lua' -exec wc -l {} + | tail -1 | awk '{print $1}')
 
 printf '%-15s    %-5s\n' language lines
 base="${languages[c++]}"
