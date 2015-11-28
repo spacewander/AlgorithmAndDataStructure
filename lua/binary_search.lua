@@ -1,5 +1,7 @@
 local Bs = {}
 
+-- return index of the first element which is not less than given value
+-- remember lua starts its index from 1
 function Bs.lowerBound(seq, value)
     local count = #seq
     local start = 1
@@ -9,7 +11,7 @@ function Bs.lowerBound(seq, value)
         i = i + step
         if seq[i] < value then
             start = i + 1
-            count = count - step + 1
+            count = count - step - 1
         else
             count = step
         end
@@ -26,7 +28,7 @@ function Bs.upperBound(seq, value)
         i = i + step
         if seq[i] <= value then
             start = i + 1
-            count = count - step + 1
+            count = count - step - 1
         else
             count = step
         end
@@ -36,10 +38,10 @@ end
 
 function Bs.binarySearch(seq, value)
     local i = Bs.lowerBound(seq, value)
-    return i ~= #seq && seq[i] == value
+    return i ~= #seq and seq[i] == value
 end
 
-function equalRange(seq, value)
+function Bs.equalRange(seq, value)
     return Bs.lowerBound(seq, value), Bs.upperBound(seq, value)
 end
 
