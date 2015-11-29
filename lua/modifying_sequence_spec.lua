@@ -72,11 +72,105 @@ describe('modifying sequence algorithms', function()
         assert.are.same({3, 3, 1}, dest)
     end)
 
+    it('remove', function()
+        local ary = {1, 2, 3}
+        Algos.remove(ary, 3)
+        assert.are.same({1, 2}, ary)
+    end)
+
     it('removeIf', function()
         local ary = {1, 2, 3}
         Algos.removeIf(ary, function (v)
             return v < 2
         end)
         assert.are.same({2, 3}, ary)
+    end)
+
+    it('removeCopy', function()
+        local ary = {1, 2, 3}
+        assert.are.same({3}, Algos.removeCopy(ary, 3))
+    end)
+
+    it('removeCopyIf', function()
+        local ary = {1, 2, 3}
+        ary = Algos.removeCopyIf(ary, function (v)
+            return v < 2
+        end)
+    end)
+
+    it('replace', function()
+        local ary = {1, 2, 3, 3}
+        Algos.replace(ary, 3, 2)
+        assert.are.same({1, 2, 2, 2}, ary)
+    end)
+
+    it('replaceIf', function()
+        local ary = {1, 2, 3}
+        Algos.replaceIf(ary, function (v)
+            return v < 2
+        end, 2)
+        assert.are.same({2, 2, 3}, ary)
+    end)
+
+    it('replaceCopy', function()
+        local ary = {1, 2, 3, 3}
+        ary = Algos.replaceCopy(ary, 3, 2)
+        assert.are.same({1, 2, 2, 2}, ary)
+    end)
+
+    it('replaceCopyIf', function()
+        local ary = {1, 2, 3}
+        ary = Algos.replaceCopyIf(ary, function (v)
+            return v < 2
+        end, 2)
+        assert.are.same({2, 2, 3}, ary)
+    end)
+
+    it('swapRange', function()
+        local a = {1, 2, 3, 4}
+        local b = {4, 3, 2, 1}
+        -- unlike other implementation, 
+        -- the range here is double side closed([start, end])
+        Algos.swapRange(a, b, 1, 3)
+        assert.are.same({4, 3, 2, 4}, a)
+        assert.are.same({1, 2, 3, 1}, b)
+    end)
+
+    it('reverse', function()
+        local ary = {1, 2, 3}
+        Algos.reverse(ary)
+        assert.are.same({3, 2, 1}, ary)
+    end)
+
+    it('reverseCopy', function()
+        local ary1 = {1, 2, 3}
+        local ary2 = {3, 2, 1}
+        assert.are.same(ary2, Algos.reverseCopy(ary1))
+    end)
+
+    it('shuffle', function()
+        Algos.shuffle({1, 2, 3})
+        Algos.shuffle({1, 2, 3, 4})
+    end)
+
+    it('rotate', function()
+        local ary = {1, 2, 3, 4}
+        Algos.rotate(ary, 2)
+        assert.are.same({3, 4, 1, 2}, ary)
+    end)
+
+    it('rotateCopy', function()
+        assert.are.same({3, 4, 5, 1, 2}, Algos.rotateCopy(ary, 2))
+    end)
+
+    it('unique', function()
+        local duplicate = {1, 1, 2, 3, 3}
+        Algos.unique(duplicate)
+        assert.are.same({1, 2, 3}, duplicate)
+    end)
+
+    it('uniqueCopy', function()
+        local duplicate = {1, 2, 2, 3}
+        assert.are.same({1, 2, 3}, Algos.uniqueCopy(duplicate))
     end)
 end)
