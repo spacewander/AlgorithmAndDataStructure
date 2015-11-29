@@ -80,7 +80,7 @@ describe('modifying sequence algorithms', function()
 
     it('removeIf', function()
         local ary = {1, 2, 3}
-        Algos.removeIf(ary, function (v)
+        Algos.removeIf(ary, function (k, v)
             return v < 2
         end)
         assert.are.same({2, 3}, ary)
@@ -93,9 +93,10 @@ describe('modifying sequence algorithms', function()
 
     it('removeCopyIf', function()
         local ary = {1, 2, 3}
-        ary = Algos.removeCopyIf(ary, function (v)
+        ary = Algos.removeCopyIf(ary, function (k, v)
             return v < 2
         end)
+        assert.are.same({1}, ary)
     end)
 
     it('replace', function()
@@ -106,7 +107,7 @@ describe('modifying sequence algorithms', function()
 
     it('replaceIf', function()
         local ary = {1, 2, 3}
-        Algos.replaceIf(ary, function (v)
+        Algos.replaceIf(ary, function (k, v)
             return v < 2
         end, 2)
         assert.are.same({2, 2, 3}, ary)
@@ -120,7 +121,7 @@ describe('modifying sequence algorithms', function()
 
     it('replaceCopyIf', function()
         local ary = {1, 2, 3}
-        ary = Algos.replaceCopyIf(ary, function (v)
+        ary = Algos.replaceCopyIf(ary, function (k, v)
             return v < 2
         end, 2)
         assert.are.same({2, 2, 3}, ary)
@@ -155,12 +156,12 @@ describe('modifying sequence algorithms', function()
 
     it('rotate', function()
         local ary = {1, 2, 3, 4}
-        Algos.rotate(ary, 2)
+        Algos.rotate(ary, 3)
         assert.are.same({3, 4, 1, 2}, ary)
     end)
 
     it('rotateCopy', function()
-        assert.are.same({3, 4, 5, 1, 2}, Algos.rotateCopy(ary, 2))
+        assert.are.same({3, 4, 5, 1, 2}, Algos.rotateCopy(ary, 3))
     end)
 
     it('unique', function()
