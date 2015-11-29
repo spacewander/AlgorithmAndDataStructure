@@ -1,9 +1,5 @@
 var is_partitioned = function(seq, func) {
-  for (var i = 0; i < seq.length; i++) {
-    if (!func(seq[i])) {
-      break;
-    }
-  }
+  var i = partition_point(seq, func);
   for (; i < seq.length; i++)
     if (func(seq[i])) return false;
   return true;
@@ -12,11 +8,11 @@ var is_partitioned = function(seq, func) {
 var partition_point = function(seq, func) {
   for (var i = 0; i < seq.length; i++)
     if (!func(seq[i])) return i;
-  return i;
+  return seq.length;
 };
 
 var partition = function(seq, func) {
-  pivot = partition_point(seq, func);
+  var pivot = partition_point(seq, func);
   var tmp;
   for (var i = pivot; i < seq.length; i++) {
     if (func(seq[i])) {
@@ -29,7 +25,7 @@ var partition = function(seq, func) {
 };
 
 var partition_copy = function(seq, func) {
-  res = [];
+  var res = [];
   var len = seq.length;
   for (var i = 0; i < len; i++) {
     if (func(seq[i])) {

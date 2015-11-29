@@ -17,6 +17,8 @@ var inner_production = function (ary1, ary2, init) {
 };
 
 var adjacent_difference = function (ary) {
+  if (ary.length === 0)
+    return [];
   var res = [ary[0]];
   for (var i = 1; i < ary.length; i++)
     res.push(ary[i] - ary[i - 1]);
@@ -24,6 +26,8 @@ var adjacent_difference = function (ary) {
 };
 
 var partial_sum = function (ary) {
+  if (ary.length === 0)
+    return [];
   var res = [ary[0]];
   var sum = function (prev, cur) {
     res.push(prev + cur);

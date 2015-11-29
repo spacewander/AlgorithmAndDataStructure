@@ -9,6 +9,7 @@ var merge = function (a, b) {
     }
     else if (a[i] == b[j]) {
       res.push(a[i]);
+      res.push(b[j]);
       i++;
       j++;
     }
@@ -29,9 +30,9 @@ var inplace_merge = function (a, b) {
   var j = 0;
   for (var i = 0; i < a.length; i++) {
     while (a[i] >= b[j] && j < b.length) {
-      if (a[i] > b[j])
-        Array.prototype.splice.call(a, i, 0, b[j]);
+      Array.prototype.splice.call(a, i, 0, b[j]);
       j++;
+      i++;
     }
   }
   while (j < b.length)

@@ -22,7 +22,7 @@ var sort = function (seq) {
 
   var quicksort = function (seq, start, end) {
     if (start < end) {
-      pivot = partition(seq, start, end);
+      var pivot = partition(seq, start, end);
       quicksort(seq, start, pivot - 1);
       quicksort(seq, pivot + 1, end);
     }
@@ -32,7 +32,6 @@ var sort = function (seq) {
 };
 
 var is_sorted = function (seq) {
-  if (seq.length < 1) return true;
   for (var i = 1; i < seq.length; i++) {
     if (seq[i - 1] > seq[i]) return false;
   }
@@ -40,7 +39,6 @@ var is_sorted = function (seq) {
 };
 
 var is_sorted_until = function (seq) {
-  if (seq.length < 1) return seq.length;
   for (var i = 1; i < seq.length; i++) {
     if (seq[i - 1] > seq[i]) return i;
   }
@@ -69,7 +67,6 @@ var partial_sort_copy = function (seq, border) {
 };
 
 var stable_sort = function (seq, func) {
-  if (seq.length < 1) return;
   var size = seq.length - 1;
   var min_element;
   for (var i = 0; i < size; i++) {

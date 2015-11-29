@@ -57,8 +57,10 @@ describe 'Non-modifying Sequence', ->
       .should.be.equal 1
 
   it 'mismatch', ->
+    ary1 = Ary()
     ary2 = [1, 3, 4]
-    Algos.mismatch(Ary(), ary2).should.be.equal 1
+    Algos.mismatch(ary1, ary2).should.be.equal 1
+    Algos.mismatch(ary1, ary1).should.be.equal ary1.length
 
   it 'equal', ->
     Algos.equal(Ary(), [1, 2, 3, 4, 5]).should.be.equal true

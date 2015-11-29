@@ -58,6 +58,7 @@ var mismatch = function(ary1, ary2) {
       return i;
     }
   }
+  return ary1.length;
 };
 
 var equal = function(collection1, collection2) {

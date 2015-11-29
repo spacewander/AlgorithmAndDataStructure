@@ -1,5 +1,4 @@
 var is_heap = function (seq) {
-  if (seq.length === 0) return true;
   for (var i = 1; i < seq.length; i++) {
     if (seq[i] < seq[Math.floor((i - 1) / 2)])
       return false;
@@ -8,7 +7,6 @@ var is_heap = function (seq) {
 };
 
 var is_heap_until = function (seq) {
-  if (seq.length === 0) return 0;
   for (var i = 1; i < seq.length; i++) {
     if (seq[i] < seq[Math.floor((i - 1) / 2)])
       return i;

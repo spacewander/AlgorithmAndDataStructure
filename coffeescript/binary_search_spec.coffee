@@ -2,7 +2,7 @@ should = require('chai').should()
 Algos = require './binary_search'
 
 Ary = ->
-  [1, 2, 3, 4]
+  [1, 2, 3, 4, 4.5]
 
 describe 'Binary search algorithms', ->
   
@@ -10,7 +10,7 @@ describe 'Binary search algorithms', ->
     Algos.lower_bound(Ary(), 3).should.be.equal 2
     Algos.lower_bound(Ary(), 2.5).should.be.equal 2
     Algos.lower_bound(Ary(), 1).should.be.equal 0
-    Algos.lower_bound(Ary(), 5).should.be.equal 4
+    Algos.lower_bound(Ary(), 5).should.be.equal 5
 
   it 'upper_bound', ->
     Algos.upper_bound(Ary(), 3).should.be.equal 3

@@ -1,9 +1,6 @@
 is_partitioned = (seq, func) ->
-  i = 0
+  i = partition_point(seq, func)
   len = seq.length
-  while i < len
-    break unless func seq[i]
-    i += 1
   while i < len
     return false if func seq[i]
     i += 1

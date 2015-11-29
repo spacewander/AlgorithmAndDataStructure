@@ -63,7 +63,7 @@ var is_permutation = function (ary1, ary2) {
 
 var next_permutation = function (ary) {
   if (ary.length <= 1) return false;
-  var pos1, pos2, tmp, part;
+  var pos1, pos2, tmp;
   var i = ary.length - 1;
   while (true) {
     pos1 = i--;
@@ -91,7 +91,7 @@ var next_permutation = function (ary) {
 
 var prev_permutation = function (ary) {
   if (ary.length <= 1) return false;
-  var pos1, pos2, tmp, part;
+  var pos1, pos2, tmp;
   var i = ary.length - 1;
   while (true) {
     pos1 = i--;

@@ -11,11 +11,11 @@ describe 'Set algorithms', ->
 
   it 'merge', ->
     JSON.stringify(Algos.merge(Ary1(), Ary2()))
-      .should.be.equal JSON.stringify([1, 2, 3, 4, 5, 6])
+      .should.be.equal JSON.stringify([1, 2, 3, 3, 4, 4, 5, 6])
 
   it 'inplace_merge', ->
     JSON.stringify(Algos.inplace_merge(Ary1(), Ary2()))
-      .should.be.equal JSON.stringify([1, 2, 3, 4, 5, 6])
+      .should.be.equal JSON.stringify([1, 2, 3, 3, 4, 4, 5, 6])
 
   it 'includes', ->
     Algos.includes(Ary1(), [1, 2]).should.be.equal true

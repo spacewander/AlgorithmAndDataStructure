@@ -21,14 +21,12 @@ sort = (seq) ->
 
 # ascending order
 is_sorted = (seq) ->
-  return true if seq.length < 1
   for i in [0...(seq.length - 1)]
     return false if seq[i] > seq[i + 1]
   return true
 
 # return an index of the first unordered element
 is_sorted_until = (seq) ->
-  return seq.length if seq.length < 1
   for i in [0...(seq.length - 1)]
     return i + 1 if seq[i] > seq[i + 1]
   return seq.length
@@ -45,7 +43,6 @@ partial_sort_copy = (seq, border) ->
   return (Heap.pop_heap(heap) for i in [0...border])
 
 stable_sort = (seq, func) ->
-  return if seq.length < 1
   size = seq.length - 1
   for i in [0...size]
     min = i

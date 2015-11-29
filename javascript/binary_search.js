@@ -4,7 +4,7 @@ var lower_bound = function (seq, value) {
   var start = 0;
   while (count > 0) {
     var i = start;
-    var step = count / 2;
+    var step = Math.floor(count / 2);
     i += step;
     if (seq[i] < value) {
       start = i + 1;
@@ -22,7 +22,7 @@ var upper_bound = function (seq, value) {
   var start = 0;
   while (count > 0) {
     var i = start;
-    var step = count / 2;
+    var step = Math.floor(count / 2);
     i += step;
     if (seq[i] <= value) {
       start = i + 1;

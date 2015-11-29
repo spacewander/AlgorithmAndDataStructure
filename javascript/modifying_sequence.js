@@ -18,10 +18,11 @@ var copy_n = function(dest, n, value) {
   }
 };
 
+// don't copy and fail if length of src > length of dest
 var copy_backward = function(src, dest) {
-  var gap = src.length - dest.length;
-  for (var i = 0; gap >= 0 && i < dest.length; i++)
-    src[i + gap] = dest[i];
+  var gap = dest.length - src.length;
+  for (var i = 0; gap >= 0 && i < src.length; i++)
+    dest[i + gap] = src[i];
   return gap < 0 ? -1 : gap;
 };
 
@@ -190,7 +191,6 @@ var reverse = function(ary) {
 
 var reverse_copy = function(ary) {
   var length = ary.length;
-  if (length <= 1) return ary;
   var res = new Array(length);
   for (var i = length - 1; i >= 0; i--) {
     res[length - i - 1] = ary[i];
@@ -201,7 +201,7 @@ var reverse_copy = function(ary) {
 var shuffle = function(ary) {
   var length = ary.length;
   for (var i = 0; i < length; i++) {
-    random = Math.floor(Math.random() * (i + 1));
+    var random = Math.floor(Math.random() * (i + 1));
     var tmp = ary[i];
     ary[i] = ary[random];
     ary[random] = ary[i];
@@ -236,9 +236,9 @@ var unique = function(ary) {
 
 var unique_copy = function(ary) {
   var copy = ary.constructor();
-  var i, j = 1;
-  var preValue = copy[0] = ary[0];
-  for (i = 1; i < ary.length; i++) {
+  var j = 0;
+  var preValue;
+  for (i = 0; i < ary.length; i++) {
     if (ary[i] != preValue) {
       preValue = copy[j] = ary[i];
       j++;

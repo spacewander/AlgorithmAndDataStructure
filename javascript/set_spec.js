@@ -13,12 +13,12 @@ describe('Set algorithms', function(){
   
   it('merge', function(){
     JSON.stringify(Algos.merge(Ary1(), Ary2()))
-      .should.be.equal(JSON.stringify([1, 2, 3, 4, 5, 6]));
+      .should.be.equal(JSON.stringify([1, 2, 3, 3, 4, 4, 5, 6]));
   });
 
   it('inplace_merge', function(){
     JSON.stringify(Algos.inplace_merge(Ary1(), Ary2()))
-      .should.be.equal(JSON.stringify([1, 2, 3, 4, 5, 6])); 
+      .should.be.equal(JSON.stringify([1, 2, 3, 3, 4, 4, 5, 6])); 
   });
 
   it('includes', function(){

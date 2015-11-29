@@ -32,6 +32,7 @@ count = (coll, match) ->
 mismatch = (a, b) ->
   for i in [0...a.length]
     return i if a[i] != b[i]
+  return a.length
 
 equal = (a, b) ->
   JSON.stringify(a) == JSON.stringify(b)

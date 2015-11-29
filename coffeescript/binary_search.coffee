@@ -3,7 +3,7 @@ lower_bound = (seq, value) ->
   start = 0
   while count > 0
     i = start
-    step = count / 2
+    step = Math.floor(count / 2)
     i += step
     if seq[i] < value
       start = i + 1
@@ -17,7 +17,7 @@ upper_bound = (seq, value) ->
   start = 0
   while count > 0
     i = start
-    step = count / 2
+    step = Math.floor(count / 2)
     i += step
     if seq[i] <= value
       start = i + 1

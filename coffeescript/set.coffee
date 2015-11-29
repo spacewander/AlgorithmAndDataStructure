@@ -7,6 +7,7 @@ merge = (a, b) ->
       i += 1
     else if a[i] == b[j]
       res.push a[i]
+      res.push b[j]
       i += 1
       j += 1
     else
@@ -21,8 +22,8 @@ inplace_merge = (a, b) ->
   j = 0
   for i in [0...a.length]
     while a[i] >= b[j] and j < b.length
-      if a[i] > b[j]
-        Array.prototype.splice(i, 0, b[j])
+      Array.prototype.splice.call(a, i, 0, b[j])
+      i += 1
       j += 1
   while j < b.length
     Array.prototype.push.call(a, b[j])

@@ -11,9 +11,9 @@ copy_n = (dest, n, value) ->
   dest[i] = value for i in [0...n]
 
 copy_backward = (src, dest) ->
-  gap = src.length - dest.length
+  gap = dest.length - src.length
   return -1 if gap < 0
-  src[i + gap] = dest[i] for i in [0...dest.length]
+  dest[i + gap] = src[i] for i in [0...src.length]
   gap
 
 move = (src, dest) ->
@@ -145,9 +145,8 @@ unique = (ary) ->
 
 unique_copy = (ary) ->
   copy = ary.constructor()
-  j = 1
-  preValue = copy[0] = ary[0]
-  for i in [1...ary.length]
+  j = 0
+  for i in [0...ary.length]
     if ary[i] isnt preValue
       preValue = copy[j] = ary[i]
       j++

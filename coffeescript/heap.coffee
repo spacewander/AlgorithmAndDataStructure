@@ -1,11 +1,9 @@
 is_heap = (seq) ->
-  return true if seq.length is 0
   for i in [1...seq.length]
     return false if seq[i] < seq[Math.floor((i - 1) / 2)]
   return true
 
 is_heap_until = (seq) ->
-  return 0 if seq.length is 0
   for i in [1...seq.length]
     return i if seq[i] < seq[Math.floor((i - 1) / 2)]
   return seq.length

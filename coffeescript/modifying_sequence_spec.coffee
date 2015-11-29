@@ -27,22 +27,14 @@ describe 'Modifying sequence algorithms', ->
 
   it 'copy_backward', ->
     ary = new Array(3)
-    Algos.copy_backward(ary, Ary()).should.be.equal -1
+    Algos.copy_backward(Ary(), ary).should.be.equal -1
     ary = new Array(5)
-    Algos.copy_backward(ary, Ary()).should.be.equal 0
+    Algos.copy_backward(Ary(), ary).should.be.equal 0
     JSON.stringify(ary).should.be.equal JSON.stringify([1, 2, 3, 4, 5])
-
-  it 'move', ->
-    hash = {}
-    Algos.move Hash(), hash
-    JSON.stringify(hash).should.be.equal JSON.stringify({'a': 1, 'b': 2})
-
-  it 'mov_backward', ->
-    ary = new Array(3)
-    Algos.copy_backward(ary, Ary()).should.be.equal -1
-    ary = new Array(5)
-    Algos.copy_backward(ary, Ary()).should.be.equal 0
-    JSON.stringify(ary).should.be.equal JSON.stringify([1, 2, 3, 4, 5])
+    ary = new Array(6)
+    ary[0] = 1
+    Algos.copy_backward(Ary(), ary).should.be.equal 1
+    JSON.stringify(ary).should.be.equal JSON.stringify([1, 1, 2, 3, 4, 5])
 
   it 'transform', ->
     emptyAry = []
@@ -163,6 +155,8 @@ describe 'Modifying sequence algorithms', ->
     JSON.stringify(duplicate).should.be.equal JSON.stringify([1, 2, 3])
 
   it 'unique_copy', ->
+    JSON.stringify(Algos.unique_copy([])).should.be.equal JSON.stringify([])
+
     duplicate = [1, 1, 2, 2, 3]
     JSON.stringify(Algos.unique_copy(duplicate)).
       should.be.equal JSON.stringify([1, 2, 3])
