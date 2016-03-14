@@ -101,5 +101,53 @@ class NonModifyingSequenceTest extends \PHPUnit_Framework_TestCase
             return $x > 6;
         }));
     }
+
+    public function testFindIfNot()
+    {
+        $this->assertEquals(2, findIfNot($this->ary, function($x) {
+            return $x < 3;
+        }));
+    }
+
+    public function testFindEnd()
+    {
+        $ary = [1, 2, 1, 2, 3];
+        $ary2 = [1, 2];
+        $ary3 = [1, 2, 3];
+        $ary4 = [1, 2, 3, 4];
+        $idxOfAry2LastOccursInAry = findEnd($ary, $ary2);
+        $this->assertEquals(2, $idxOfAry2LastOccursInAry);
+        $this->assertEquals(2, findEnd($ary, $ary3));
+        $this->assertNull(findEnd($ary, $ary4));
+    }
+
+    public function testFindFirstOf()
+    {
+        $ary2 = [10, 8, 2];
+        $idxOfFirstAryElementInAry2 = findFirstOf($this->ary, $ary2);
+        $this->assertEquals(1, $idxOfFirstAryElementInAry2);
+        $ary3 = [10, 8];
+        $this->assertNull(findFirstOf($this->ary, $ary3));
+    }
+
+    public function testSearch()
+    {
+        $ary2 = [2, 3, 4];
+        $idxOfAry2InAry = search($this->ary, $ary2);
+        $this->assertEquals(1, $idxOfAry2InAry);
+        $aryNotConsistent = [2, 2, 4];
+        $this->assertNull(search($this->ary, $aryNotConsistent));
+
+        $this->assertEquals(0, search($this->ary, $this->ary));
+        $aryTooLarge = range(1, 6);
+        $this->assertNull(search($this->ary, $aryTooLarge));
+    }
+
+    public function testSearchN()
+    {
+        $ary = [1, 2, 2, 3];
+        $this->assertNull(searchN($ary, 3, 2));
+        $this->assertEquals(1, searchN($ary, 2, 2));
+    }
 }
 ?>

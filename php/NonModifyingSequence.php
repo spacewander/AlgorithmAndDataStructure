@@ -67,4 +67,47 @@ function findIf($ary, $func) {
         if ($func($v))
             return $k;
 }
+
+function findIfNot($ary, $func) {
+    foreach ($ary as $k => $v)
+        if (!$func($v))
+            return $k;
+}
+
+function findEnd($outer, $inner) {
+    $outerLength = \count($outer);
+    $innerLength = \count($inner);
+    for ($i = $outerLength - $innerLength; $i >= 0; $i--) {
+        $mismatch = false;
+        for ($j = 0; !$mismatch && $j < $innerLength; $j++)
+            $mismatch = ($outer[$i+$j] !== $inner[$j]);
+        if (!$mismatch)
+            return $i;
+    }
+    return null;
+}
+
+function findFirstOf($candidates, $scope) {
+    foreach ($candidates as $idx => $v)
+        if (in_array($v, $scope))
+            return $idx;
+    return null;
+}
+
+function search($outer, $inner) {
+    $outerLength = \count($outer);
+    $innerLength = \count($inner);
+    for ($i = 0; $i < $outerLength - $innerLength; $i++) {
+        $mismatch = false;
+        for ($j = 0; !$mismatch && $j < $innerLength; $j++)
+            $mismatch = ($outer[$i+$j] !== $inner[$j]);
+        if (!$mismatch)
+            return $i;
+    }
+    return null;
+}
+
+function searchN($outer, $n, $value) {
+    return search($outer, array_pad([], $n, $value));
+}
 ?>
