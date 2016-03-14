@@ -63,3 +63,10 @@ rake
 cd lua
 busted # run all *_spec.lua tests
 ```
+
+### PHP
+
+```
+cd php
+phpunit --bootstrap autoload.php .
+```
