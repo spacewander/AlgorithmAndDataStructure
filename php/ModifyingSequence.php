@@ -146,7 +146,7 @@ function reverseCopy($ary) {
 
 function shuffle(&$ary) {
     for ($i = 0; $i < \count($ary); $i++) {
-        $rd = random_int(0, $i);
+        $rd = rand(0, $i);
         swap($ary[$i], $ary[$rd]);
     }
 }
