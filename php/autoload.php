@@ -4,4 +4,5 @@ require './ModifyingSequence.php';
 require './BinarySearch.php';
 require './Heap.php';
 require './MinMax.php';
+require './Numeric.php';
 ?>
