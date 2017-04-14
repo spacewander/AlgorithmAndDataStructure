@@ -1,11 +1,11 @@
 <?php
 namespace Algorithm;
 
-function copy($ary, $start, $end) {
+function copy(array $ary, $start, $end) {
     return array_slice($ary, $start, $end - $start);
 }
 
-function copyIf($ary, $func) {
+function copyIf(array $ary, $func) {
     $res = [];
     foreach ($ary as $e)
         if ($func($e))
@@ -13,44 +13,44 @@ function copyIf($ary, $func) {
     return $res;
 }
 
-function copyN($ary, $n, $value) {
+function copyN(array $ary, $n, $value) {
     return generateN($ary, $n, function() use ($value) {
         return $value;
     });
 }
 
-function copyBackward(&$dest, $src) {
+function copyBackward(array &$dest, array $src) {
     $bound = max(0, \count($dest)-\count($src));
     for ($i = \count($dest)-1, $j = \count($src)-1; $i >= $bound; $i--, $j--)
         $dest[$i] = $src[$j];
 }
 
-function fill($ary, $value) {
+function fill(array $ary, $value) {
     return array_pad([], \count($ary), $value);
 }
 
-function fillN($ary, $n, $value) {
+function fillN(array $ary, $n, $value) {
     if ($n < \count($ary))
         return copyN($ary, $n, $value);
     else
         return array_pad([], $n, $value);
 }
 
-function transform($ary, $func) {
+function transform(array $ary, $func) {
     $res = $ary;
     foreach ($res as $k => $v)
         $res[$k] = $func($v);
     return $res;
 }
 
-function generate($ary, $func) {
+function generate(array $ary, $func) {
     $res = $ary;
     foreach ($res as $k => $v)
         $res[$k] = $func();
     return $res;
 }
 
-function generateN($ary, $n, $func) {
+function generateN(array $ary, $n, $func) {
     $res = $ary;
     $bound = min(\count($ary), $n);
     for ($i = 0; $i < $bound; $i++)
@@ -58,26 +58,26 @@ function generateN($ary, $n, $func) {
     return $res;
 }
 
-function remove(&$ary, $value) {
+function remove(array &$ary, $value) {
     removeIf($ary, function($x) use ($value) {
         return $x === $value;
     });
 }
 
-function removeIf(&$ary, $func) {
+function removeIf(array &$ary, $func) {
     foreach ($ary as $k => $v)
         if ($func($v))
             unset($ary[$k]);
     $ary = array_values($ary);
 }
 
-function removeCopy(&$ary, $value) {
+function removeCopy(array &$ary, $value) {
     return removeCopyIf($ary, function($x) use ($value) {
         return $x === $value;
     });
 }
 
-function removeCopyIf(&$ary, $func) {
+function removeCopyIf(array &$ary, $func) {
     $res = [];
     foreach ($ary as $k => $v)
         if ($func($v)) {
@@ -88,25 +88,25 @@ function removeCopyIf(&$ary, $func) {
     return $res;
 }
 
-function replace(&$ary, $before, $after) {
+function replace(array &$ary, $before, $after) {
     replaceIf($ary, function($x) use ($before) {
         return $x === $before;
     }, $after);
 }
 
-function replaceIf(&$ary, $func, $after) {
+function replaceIf(array &$ary, $func, $after) {
     foreach ($ary as $k => $v)
         if ($func($v))
             $ary[$k] = $after;
 }
 
-function replaceCopy($ary, $before, $after) {
+function replaceCopy(array $ary, $before, $after) {
     return replaceCopyIf($ary, function($x) use ($before) {
         return $x === $before;
     }, $after);
 }
 
-function replaceCopyIf($ary, $func, $after) {
+function replaceCopyIf(array $ary, $func, $after) {
     $res = [];
     foreach ($ary as $k => $v)
         array_push($res, $func($v) ? $after : $v);
@@ -119,32 +119,32 @@ function swap(&$a, &$b) {
     $b = $tmp;
 }
 
-function swapRange(&$a, &$b, $start, $end) {
+function swapRange(array &$a, array &$b, $start, $end) {
     $bound = min(\count($a), \count($b), $end);
     if ($bound <= $start) return;
     for ($i = $start; $i < $bound; $i++)
         swap($a[$i], $b[$i]);
 }
 
-function _reverse(&$ary, $start, $end) {
+function _reverse(array &$ary, $start, $end) {
     $end--;
     for ($i = $start; $i < ($end+$start) / 2; $i++)
         swap($ary[$i], $ary[$end+$start-$i]);
 }
 
-function reverse(&$ary) {
+function reverse(array &$ary) {
     $length = \count($ary);
     _reverse($ary, 0, $length);
 }
 
-function reverseCopy($ary) {
+function reverseCopy(array $ary) {
     $res = [];
     for ($i = \count($ary) - 1; $i >= 0; $i--)
         array_push($res, $ary[$i]);
     return $res;
 }
 
-function shuffle(&$ary) {
+function shuffle(array &$ary) {
     for ($i = 0; $i < \count($ary); $i++) {
         $rd = rand(0, $i);
         swap($ary[$i], $ary[$rd]);
@@ -157,7 +157,7 @@ function correctPivot($pivot, $length) {
     return $pivot;
 }
 
-function rotate(&$ary, $pivot) {
+function rotate(array &$ary, $pivot) {
     $length = \count($ary);
     if ($length === 0) return $ary;
     $pivot = correctPivot($pivot, $length);
@@ -166,7 +166,7 @@ function rotate(&$ary, $pivot) {
     _reverse($ary, 0, $length);
 }
 
-function rotateCopy($ary, $pivot) {
+function rotateCopy(array $ary, $pivot) {
     $length = \count($ary);
     if ($length === 0) return $ary;
     $pivot = correctPivot($pivot, $length);
@@ -174,7 +174,7 @@ function rotateCopy($ary, $pivot) {
                        array_slice($ary, 0, $pivot));
 }
 
-function unique(&$ary) {
+function unique(array &$ary) {
     $set = [];
     foreach ($ary as $k => $v)
         if (in_array($v, $set))
@@ -184,7 +184,7 @@ function unique(&$ary) {
     $ary = $set;
 }
 
-function uniqueCopy($ary) {
+function uniqueCopy(array $ary) {
     $res = [];
     foreach ($ary as $e)
         if (!in_array($e, $res))

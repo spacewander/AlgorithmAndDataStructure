@@ -1,19 +1,19 @@
 <?php
 namespace Algorithm;
 
-function isHeap($ary) {
+function isHeap(array $ary) {
     for ($i = 1; $i < \count($ary); $i++)
         if ($ary[$i] < $ary[\floor(($i-1)/2)]) return false;
     return true;
 }
 
-function isHeapUntil($ary) {
+function isHeapUntil(array $ary) {
     for ($i = 1; $i < \count($ary); $i++)
         if ($ary[$i] < $ary[\floor(($i-1)/2)]) return $i;
     return null;
 }
 
-function makeHeap(&$ary, $func = null) {
+function makeHeap(array &$ary, $func = null) {
     if (!isset($func))
         $func = function($a, $b){
             return $a < $b;
@@ -38,13 +38,13 @@ function makeHeap(&$ary, $func = null) {
     }
 }
 
-function popHeap(&$ary, $func = null) {
+function popHeap(array &$ary, $func = null) {
     $head = array_shift($ary);
     makeHeap($ary, $func);
     return $head;
 }
 
-function pushHeap(&$ary, $value, $func = null) {
+function pushHeap(array &$ary, $value, $func = null) {
     if (!isset($value)) {
         return;
     }
@@ -52,7 +52,7 @@ function pushHeap(&$ary, $value, $func = null) {
     makeHeap($ary, $func);
 }
 
-function sortHeap(&$ary, $func = null) {
+function sortHeap(array &$ary, $func = null) {
     makeHeap($ary, $func);
     $tmp = [];
     $len = \count($ary);

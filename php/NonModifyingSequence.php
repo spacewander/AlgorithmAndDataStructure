@@ -1,21 +1,21 @@
 <?php
 namespace Algorithm;
 
-function allOf($ary, $func) {
+function allOf(array $ary, $func) {
     foreach ($ary as $e)
         if (!$func($e))
             return false;
     return true;
 }
 
-function anyOf($ary, $func) {
+function anyOf(array $ary, $func) {
     foreach ($ary as $e)
         if ($func($e))
             return true;
     return false;
 }
 
-function noneOf($ary, $func) {
+function noneOf(array $ary, $func) {
     foreach ($ary as $e)
         if ($func($e))
             return false;
@@ -23,18 +23,18 @@ function noneOf($ary, $func) {
 }
 
 // Both foreach and forEach are php keyword
-function for_each(&$ary, $func) {
+function for_each(array &$ary, $func) {
     foreach ($ary as $k => $v)
         $ary[$k] = $func($v);
 }
 
-function count($ary, $value) {
+function count(array $ary, $value) {
     return countIf($ary, function($x) use ($value) {
         return $x === $value;
     });
 }
 
-function countIf($ary, $func) {
+function countIf(array $ary, $func) {
     $counter = 0;
     foreach ($ary as $e)
         if ($func($e))
@@ -42,39 +42,39 @@ function countIf($ary, $func) {
     return $counter;
 }
 
-function mismatch($a, $b) {
+function mismatch(array $a, array $b) {
     foreach ($a as $k => $v)
         if ($b[$k] !== $v)
             return $k;
     return null;
 }
 
-function equal($a, $b, $func) {
+function equal(array $a, array $b, $func) {
     foreach ($a as $k => $v)
         if (!$func($v, $b[$k]))
             return false;
     return true;
 }
 
-function find($ary, $value) {
+function find(array $ary, $value) {
     return findIf($ary, function($x) use ($value) {
         return $x === $value;
     });
 }
 
-function findIf($ary, $func) {
+function findIf(array $ary, $func) {
     foreach ($ary as $k => $v)
         if ($func($v))
             return $k;
 }
 
-function findIfNot($ary, $func) {
+function findIfNot(array $ary, $func) {
     foreach ($ary as $k => $v)
         if (!$func($v))
             return $k;
 }
 
-function findEnd($outer, $inner) {
+function findEnd(array $outer, array $inner) {
     $outerLength = \count($outer);
     $innerLength = \count($inner);
     for ($i = $outerLength - $innerLength; $i >= 0; $i--) {
@@ -87,14 +87,14 @@ function findEnd($outer, $inner) {
     return null;
 }
 
-function findFirstOf($candidates, $scope) {
+function findFirstOf(array $candidates, array $scope) {
     foreach ($candidates as $idx => $v)
         if (in_array($v, $scope))
             return $idx;
     return null;
 }
 
-function search($outer, $inner) {
+function search(array $outer, array $inner) {
     $outerLength = \count($outer);
     $innerLength = \count($inner);
     for ($i = 0; $i < $outerLength - $innerLength; $i++) {
@@ -107,7 +107,7 @@ function search($outer, $inner) {
     return null;
 }
 
-function searchN($outer, $n, $value) {
+function searchN(array $outer, $n, $value) {
     return search($outer, array_pad([], $n, $value));
 }
 ?>

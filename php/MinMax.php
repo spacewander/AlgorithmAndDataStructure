@@ -11,21 +11,21 @@ function minMax($a, $b) {
     return $a < $b ? [$a, $b] : [$b, $a];
 }
 
-function minElement($ary) {
+function minElement(array $ary) {
     $reduceMin = function($min, $cur) {
         return (isset($min) && $min < $cur) ? $min : $cur;
     };
     return array_reduce($ary, $reduceMin);
 }
 
-function maxElement($ary) {
+function maxElement(array $ary) {
     $reduceMax = function($max, $cur) {
         return $max > $cur ? $max : $cur;
     };
     return array_reduce($ary, $reduceMax);
 }
 
-function minMaxElement($ary) {
+function minMaxElement(array $ary) {
     $reduceMinMax = function($minMax, $cur) {
         list($min, $max) = $minMax;
         $min = (isset($min) && $min < $cur) ? $min : $cur;
@@ -47,7 +47,7 @@ function lexicographicalCompare($s1, $s2) {
     return $len1 < $len2;
 }
 
-function isPermutation($ary1, $ary2) {
+function isPermutation(array $ary1, array $ary2) {
     $len1 = count($ary1);
     $len2 = count($ary2);
     if ($len1 != $len2) return false;
@@ -62,7 +62,7 @@ function isPermutation($ary1, $ary2) {
     return true;
 }
 
-function nextPermutation(&$ary) {
+function nextPermutation(array &$ary) {
     $len = count($ary) - 1;
     if ($len <= 0) return false;
     $i = $len;
@@ -92,7 +92,7 @@ function nextPermutation(&$ary) {
     }
 }
 
-function prevPermutation(&$ary) {
+function prevPermutation(array &$ary) {
     $len = count($ary) - 1;
     if ($len <= 0) return false;
     $i = $len;

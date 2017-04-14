@@ -1,7 +1,7 @@
 <?php
 namespace Algorithm;
 
-function lowerBound($ary, $value) {
+function lowerBound(array $ary, $value) {
     $len = \count($ary);
     $gap = $len;
     $start = 0;
@@ -22,7 +22,7 @@ function lowerBound($ary, $value) {
     return $start;
 }
 
-function upperBound($ary, $value) {
+function upperBound(array $ary, $value) {
     $len = \count($ary);
     $gap = $len;
     $start = 0;
@@ -43,12 +43,12 @@ function upperBound($ary, $value) {
     return $start;
 }
 
-function binarySearch($ary, $value) {
+function binarySearch(array $ary, $value) {
     $bound = lowerBound($ary, $value);
     return $bound != null && $ary[$bound] === $value;
 }
 
-function equalRange($ary, $value) {
+function equalRange(array $ary, $value) {
     return [lowerBound($ary, $value), upperBound($ary, $value)];
 }
 ?>

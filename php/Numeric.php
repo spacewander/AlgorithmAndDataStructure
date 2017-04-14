@@ -7,20 +7,20 @@ function itoa($init) {
     };
 }
 
-function accumulate($ary, $init, $func) {
+function accumulate(array $ary, $init, $func) {
     foreach($ary as $e) {
         $init = $func($init, $e);
     }
     return $init;
 }
 
-function innerProduction($ary1, $ary2, $init) {
+function innerProduction(array $ary1, array $ary2, $init) {
     for ($i = 0; $i < count($ary1); $i++)
         $init += $ary1[$i] * $ary2[$i];
     return $init;
 }
 
-function adjacentDifference($ary) {
+function adjacentDifference(array $ary) {
     $len = count($ary);
     if ($len <= 1) return $ary;
     $res = [$ary[0]];
@@ -29,7 +29,7 @@ function adjacentDifference($ary) {
     return $res;
 }
 
-function partialSum($ary) {
+function partialSum(array $ary) {
     $res = [];
     array_reduce($ary, function($init, $cur) use (&$res) {
         $init += $cur;
