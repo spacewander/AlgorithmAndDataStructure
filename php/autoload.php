@@ -5,4 +5,6 @@ require './BinarySearch.php';
 require './Heap.php';
 require './MinMax.php';
 require './Numeric.php';
+require './Set.php';
+require './Partition.php';
 ?>
