@@ -1,0 +1,32 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended"
+    ],
+    "jsRules": {},
+    "rules": {
+        "no-console": {
+            "severity": "warn"
+        },
+        "indent": [ true, "spaces", 4 ],
+        "linebreak-style": [ true, "LF" ],
+        "new-parens": true,
+        "quotemark": [ true, "double", "avoidEscape" ],
+        "semicolon": [ true, "never" ],
+        "no-string-throw": true,
+        "no-unused-variable": [true, {"ignore-pattern": "^_$"}],
+        "no-empty": true,
+        "prefer-const": true,
+        "variable-name": {
+            "severity": "warn",
+            "options": [
+                "ban-keywords",
+                "check-format",
+                "allow-leading-underscore"
+            ]
+        },
+        "curly": true,
+        "cyclomatic-complexity": [true, 20]
+    },
+    "rulesDirectory": []
+}
