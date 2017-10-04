@@ -5,7 +5,9 @@
         "allowJs": true,
         "strict": true,
         "removeComments": true,
-        "preserveConstEnums": true
+        "preserveConstEnums": true,
+        // For Map/Set
+        "lib": [ "es2015" ]
     },
     "include": [
         "src/**/*"
