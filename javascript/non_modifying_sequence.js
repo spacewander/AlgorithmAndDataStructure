@@ -101,22 +101,21 @@ var find_end = function(ary, sub) {
 };
 
 var find_first_of = function(ary, sub) {
-  var meet = -1;
-  for (var i = 0; i < sub.length; i++) {
-    if ((meet = Array.prototype.indexOf.call(ary, sub[i])) != -1) {
-      return meet;
+  for (var i = 0; i < ary.length; i++) {
+    if (Array.prototype.indexOf.call(sub, ary[i]) != -1) {
+      return i;
     }
   }
-  return meet;
+  return -1;
 };
 
 var search = function(ary, sub, cb) {
   if (sub.length === 0)
     return 0;
   var start = Array.prototype.indexOf.call(ary, sub[0]);
-  var mismatch = false;
   while (start != -1) {
-    for (var i = 0; i < sub.length; i++) {
+    var mismatch = false;
+    for (var i = 1; i < sub.length; i++) {
       if (!cb(ary[start + i], sub[i])) {
         mismatch = true;
         break;
