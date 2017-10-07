@@ -106,15 +106,17 @@ describe('Modifying sequence algorithms', function(){
 
   it('removeCopyIf', function(){
     var ary = [1, 2, 3];
-    ary = Algos.removeCopyIf(ary, function(e){
+    var new_ary = Algos.removeCopyIf(ary, function(e){
       return e < 2;
     });
-    JSON.stringify(ary).should.be.equal(JSON.stringify([1]));
+    JSON.stringify(ary).should.be.equal(JSON.stringify([1, 2, 3]));
+    JSON.stringify(new_ary).should.be.equal(JSON.stringify([1]));
     var hash = {'a': 1, 'b': 2};
-    hash = Algos.removeCopyIf(hash, function(e){
+    var new_hash = Algos.removeCopyIf(hash, function(e){
       return e != 1;
     });
-    JSON.stringify(hash).should.be.equal(JSON.stringify({'b': 2}));
+    JSON.stringify(hash).should.be.equal(JSON.stringify({'a': 1, 'b': 2}));
+    JSON.stringify(new_hash).should.be.equal(JSON.stringify({'b': 2}));
   });
 
   it('replace', function(){
