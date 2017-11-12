@@ -21,9 +21,7 @@ var merge = function (a, b) {
   if (i == a.length) {
     return res.concat(Array.prototype.slice.call(b, j));
   }
-  else {
-    return res.concat(Array.prototype.slice.call(a, i));
-  }
+  return res.concat(Array.prototype.slice.call(a, i));
 };
 
 var inplace_merge = function (a, b) {
