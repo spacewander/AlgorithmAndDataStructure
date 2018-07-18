@@ -130,7 +130,7 @@ describe('modifying sequence algorithms', function()
     it('swapRange', function()
         local a = {1, 2, 3, 4}
         local b = {4, 3, 2, 1}
-        -- unlike other implementation, 
+        -- unlike other implementation,
         -- the range here is double side closed([start, end])
         Algos.swapRange(a, b, 1, 3)
         assert.are.same({4, 3, 2, 4}, a)

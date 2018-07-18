@@ -1,8 +1,9 @@
 local Algos = require('./binary_search')
 
 local ary = {1, 2, 3, 4}
+
 describe('Binary search algorithms', function()
-    
+
     it('lowerBound', function()
         assert.are.same(Algos.lowerBound(ary, 3), 3)
         assert.are.same(Algos.lowerBound(ary, 2.5), 3)

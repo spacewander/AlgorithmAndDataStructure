@@ -1,4 +1,4 @@
-function itoa(v)
+local function itoa(v)
     local value = v
     return function()
         value = value + 1
@@ -6,7 +6,7 @@ function itoa(v)
     end
 end
 
-function accumulate(seq, init, func)
+local function accumulate(seq, init, func)
     local sum = init
     for i = 1, #seq do
         sum = func(sum, seq[i])
@@ -15,7 +15,7 @@ function accumulate(seq, init, func)
 end
 
 -- require #s1 == #s2
-function innerProduction(s1, s2, init)
+local function innerProduction(s1, s2, init)
     local sum = init
     for i = 1, #s1 do
         sum = sum + s1[i] * s2[i]
@@ -23,7 +23,7 @@ function innerProduction(s1, s2, init)
     return sum
 end
 
-function adjacentDifference(seq)
+local function adjacentDifference(seq)
     if #seq == 0 then return {} end
     local res = {seq[1]}
     for i = 2, #seq do
@@ -32,7 +32,7 @@ function adjacentDifference(seq)
     return res
 end
 
-function partialSum(seq)
+local function partialSum(seq)
     if #seq == 0 then return {} end
     local res = {seq[1]}
     for i = 2, #seq do

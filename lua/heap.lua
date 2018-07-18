@@ -1,11 +1,11 @@
-function is_heap(seq)
+local function is_heap(seq)
     for i = 2, #seq do
         if seq[i] < seq[math.floor(i/2)] then return false end
     end
     return true
 end
 
-function is_heap_until(seq)
+local function is_heap_until(seq)
     for i = 2, #seq do
         if seq[i] < seq[math.floor(i/2)] then return i end
     end
@@ -13,7 +13,7 @@ function is_heap_until(seq)
 end
 
 -- min heap
-function make_heap(seq, func)
+local function make_heap(seq, func)
     for i = math.floor(#seq/2), 1, -1 do
         while true do
             local left = 2 * i
@@ -33,19 +33,19 @@ function make_heap(seq, func)
     end
 end
 
-function pop_heap(seq, func)
+local function pop_heap(seq, func)
     local tmp = seq[1]
     table.remove(seq, 1)
     make_heap(seq, func)
     return tmp
 end
 
-function push_heap(seq, value, func)
+local function push_heap(seq, value, func)
     table.insert(seq, value)
     make_heap(seq, func)
 end
 
-function sort_heap(seq, func)
+local function sort_heap(seq, func)
     make_heap(seq, func)
     local tmp = {}
     for i = 1, #seq do

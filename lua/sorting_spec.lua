@@ -1,5 +1,7 @@
 local Algos = require('./sorting')
 
+local ary
+
 describe('sorting algorithms', function()
     setup(function()
         ary = {1, 2, 3, 5, 2}

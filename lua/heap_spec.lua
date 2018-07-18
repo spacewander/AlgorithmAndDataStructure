@@ -1,5 +1,7 @@
 local Algos = require('./heap')
 
+local ary
+
 describe('heap algorithms', function()
     setup(function()
         ary = {2, 3, 1, 4, 5}

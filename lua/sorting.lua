@@ -1,7 +1,7 @@
 local Heap = require('./heap')
 
-function sort(seq)
-    function partition(seq, startAt, endAt)
+local function sort(seq)
+    local function partition(seq, startAt, endAt)
         local i = startAt - 1
         for j = startAt, endAt-1 do
             if seq[j] <= seq[endAt] then
@@ -13,7 +13,7 @@ function sort(seq)
         return i + 1
     end
 
-    function quicksort(seq, startAt, endAt)
+    local function quicksort(seq, startAt, endAt)
         if startAt < endAt then
             local pivot = partition(seq, startAt, endAt)
             quicksort(seq, startAt, pivot-1)
@@ -25,14 +25,14 @@ function sort(seq)
 end
 
 -- from smallest to largest
-function is_sorted(seq)
+local function is_sorted(seq)
     for i = 1, #seq-1 do
         if seq[i] > seq[i+1] then return false end
     end
     return true
 end
 
-function is_sorted_until(seq)
+local function is_sorted_until(seq)
     for i = 1, #seq-1 do
         if seq[i] > seq[i+1] then return i+1 end
     end
@@ -40,7 +40,7 @@ function is_sorted_until(seq)
 end
 
 -- assume border <= #seq
-function partial_sort(seq, border)
+local function partial_sort(seq, border)
     local partition = {}
     Heap.make_heap(seq, function (a, b)
         return a < b
@@ -55,7 +55,7 @@ function partial_sort(seq, border)
     end
 end
 
-function partial_sort_copy(seq, border)
+local function partial_sort_copy(seq, border)
     local partition = {}
     local heap = {}
     for i = 1, #seq do
@@ -73,7 +73,7 @@ function partial_sort_copy(seq, border)
 end
 
 -- insert-sort
-function stable_sort(seq, func)
+local function stable_sort(seq, func)
     for i = 1, #seq-1 do
         local min = i
         for j = i+1, #seq do
@@ -86,7 +86,7 @@ function stable_sort(seq, func)
 end
 
 -- find the nth smallest element, which n is one-base
-function nth_element(seq, n)
+local function nth_element(seq, n)
     local greater = function (a, b)
         return a > b
     end

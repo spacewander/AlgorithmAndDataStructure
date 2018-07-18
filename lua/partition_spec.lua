@@ -1,6 +1,7 @@
 local Algos = require('./partition')
 
-function less_than_3(num)
+local seq
+local function less_than_3(num)
     return num < 3
 end
 

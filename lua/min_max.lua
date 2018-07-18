@@ -1,17 +1,17 @@
-function min(a, b)
+local function min(a, b)
     return a < b and a or b
 end
 
-function max(a, b)
+local function max(a, b)
     return a > b and a or b
 end
 
-function minmax(a, b)
+local function minmax(a, b)
     if a < b then return a, b end
     return b, a
 end
 
-function maxElement(seq)
+local function maxElement(seq)
     local max = #seq == 0 and nil or seq[1]
     for i = 2, #seq do
         max = max > seq[i] and max or seq[i]
@@ -19,7 +19,7 @@ function maxElement(seq)
     return max
 end
 
-function minElement(seq)
+local function minElement(seq)
     local min = #seq == 0 and nil or seq[1]
     for i = 2, #seq do
         min = min < seq[i] and min or seq[i]
@@ -27,7 +27,7 @@ function minElement(seq)
     return min
 end
 
-function minmaxElement(seq)
+local function minmaxElement(seq)
     local min = #seq == 0 and nil or seq[1]
     local max = #seq == 0 and nil or seq[1]
     for i = 1, #seq do
@@ -37,7 +37,7 @@ function minmaxElement(seq)
     return min, max
 end
 
-function lexicographicalCompare(s1, s2)
+local function lexicographicalCompare(s1, s2)
     if #s1 > #s2 then return false end
     for i = 1, #s1 do
         local ch1 = s1:sub(i, i)
@@ -51,9 +51,9 @@ function lexicographicalCompare(s1, s2)
     return true
 end
 
-function isPermutation(s1, s2)
+local function isPermutation(s1, s2)
     if #s1 ~= #s2 then return false end
-    elements = {}
+    local elements = {}
     for _, i in ipairs(s1) do
         elements[i] = elements[i] == nil and 1 or (elements[i] + 1)
     end
@@ -67,7 +67,7 @@ function isPermutation(s1, s2)
     return true
 end
 
-function nextPermutation(seq)
+local function nextPermutation(seq)
     if #seq <= 1 then return false end
     local i = #seq
     while true do
@@ -94,7 +94,7 @@ function nextPermutation(seq)
     end
 end
 
-function prevPermutation(seq)
+local function prevPermutation(seq)
     if #seq <= 1 then return false end
     local i = #seq
     while true do

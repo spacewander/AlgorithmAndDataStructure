@@ -1,4 +1,11 @@
-function is_partitioned(seq, func)
+local function partition_point(seq, func)
+    for i = 1, #seq do
+        if not func(seq[i]) then return i end
+    end
+    return #seq + 1
+end
+
+local function is_partitioned(seq, func)
     local pivot = partition_point(seq, func)
     for i = pivot, #seq do
         if func(seq[i]) then return false end
@@ -6,14 +13,7 @@ function is_partitioned(seq, func)
     return true
 end
 
-function partition_point(seq, func)
-    for i = 1, #seq do
-        if not func(seq[i]) then return i end
-    end
-    return #seq + 1
-end
-
-function partition(seq, func)
+local function partition(seq, func)
     local pivot = partition_point(seq, func)
     for i = pivot, #seq do
         if func(seq[i]) then
@@ -23,7 +23,7 @@ function partition(seq, func)
     end
 end
 
-function partition_copy(seq, func)
+local function partition_copy(seq, func)
     local copy = {}
     for i = 1, #seq do
         if func(seq[i]) then
@@ -35,7 +35,7 @@ function partition_copy(seq, func)
     return copy
 end
 
-function stable_partition(seq, func)
+local function stable_partition(seq, func)
     local seq_size = #seq
     local idx = 1
     for time = 1, seq_size do

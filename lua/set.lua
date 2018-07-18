@@ -1,4 +1,4 @@
-function merge(a, b)
+local function merge(a, b)
     local res = {}
     local i = 1
     local j = 1
@@ -25,7 +25,7 @@ function merge(a, b)
     return res
 end
 
-function inplaceMerge(a, b)
+local function inplaceMerge(a, b)
     local i = 1
     local j = 1
     while i <= #a do
@@ -42,7 +42,7 @@ function inplaceMerge(a, b)
 end
 
 -- a and b is sorted
-function includes(a, b)
+local function includes(a, b)
     if #a < #b then return false end
     local i = 1
     local j = 1
@@ -59,7 +59,7 @@ function includes(a, b)
     return j == #b + 1
 end
 
-function union(a, b)
+local function union(a, b)
     local res = {}
     local i = 1
     local j = 1
@@ -85,7 +85,7 @@ function union(a, b)
     return res
 end
 
-function difference(a, b)
+local function difference(a, b)
     local res = {}
     local i = 1
     local j = 1
@@ -106,11 +106,11 @@ function difference(a, b)
     return res
 end
 
-function symmetricDifference(a, b)
+local function symmetricDifference(a, b)
     return union(difference(a, b), difference(b, a))
 end
 
-function intersection(a, b)
+local function intersection(a, b)
     return difference(union(a, b), symmetricDifference(a, b))
 end
 
