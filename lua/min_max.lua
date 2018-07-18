@@ -79,14 +79,14 @@ function nextPermutation(seq)
                 pos2 = pos2 - 1
             end
             seq[i], seq[pos2] = seq[pos2], seq[i]
-            local pivot = math.floor((#seq - pos1) / 2)
+            local pivot = (#seq - pos1) / 2
             for j = 0, pivot do
                 seq[#seq-j], seq[pos1+j] = seq[pos1+j], seq[#seq-j]
             end
             return true
         end
         if i == 1 then
-            for j = 1, math.floor(#seq / 2) do
+            for j = 1, #seq / 2 do
                 seq[j], seq[#seq-j] = seq[#seq-j], seq[j]
             end
             return false
@@ -106,14 +106,14 @@ function prevPermutation(seq)
                 pos2 = pos2 - 1
             end
             seq[i], seq[pos2] = seq[pos2], seq[i]
-            local pivot = math.floor((#seq - pos1) / 2)
+            local pivot = (#seq - pos1) / 2
             for j = 0, pivot do
                 seq[#seq-j], seq[pos1+j] = seq[pos1+j], seq[#seq-j]
             end
             return true
         end
         if i == 1 then
-            for j = 1, math.floor(#seq / 2) do
+            for j = 1, #seq / 2 do
                 seq[j], seq[#seq-j] = seq[#seq-j], seq[j]
             end
             return false

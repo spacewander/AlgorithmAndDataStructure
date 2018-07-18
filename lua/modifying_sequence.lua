@@ -121,8 +121,7 @@ function swapRange(a, b, startAt, endAt)
 end
 
 function reverseRange(seq, startAt, endAt)
-    local pivot = math.floor((endAt + startAt) / 2)
-    for i = startAt, pivot do
+    for i = startAt, (endAt + startAt) / 2 do
         seq[i], seq[startAt+endAt-i] = seq[startAt+endAt-i], seq[i]
     end
 end
