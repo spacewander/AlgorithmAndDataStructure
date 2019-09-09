@@ -140,7 +140,7 @@ end
 
 local function shuffle(seq)
     for i = 1, #seq do
-        local rd = math.floor(math.random() * (i + 1))
+        local rd = math.floor(math.random() * i) + 1
         seq[rd], seq[i] = seq[i], seq[rd]
     end
 end
