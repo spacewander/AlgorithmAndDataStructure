@@ -70,3 +70,10 @@ busted # run all *_spec.lua tests
 cd php
 phpunit --bootstrap autoload.php .
 ```
+
+### Rust
+
+```
+cd rust
+cargo test
+```
